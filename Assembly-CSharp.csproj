@@ -62,7 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\MyScriptable.cs" />
+    <Compile Include="Assets\Script\Boss_1.cs" />
+    <Compile Include="Assets\Script\Boss_2.cs" />
+    <Compile Include="Assets\Script\MonsterStatus.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
