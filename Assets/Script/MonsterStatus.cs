@@ -6,6 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="MonsterStatus",menuName="Scriptable Object Asset/MonsterStatus")]
 public class MonsterStatus : ScriptableObject
 {
+    void Awake()
+    {
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+    }
+    public Transform playerTransform; 
     public int moveSpeed = 1;
     public int view = 3;//시야범위
 }
