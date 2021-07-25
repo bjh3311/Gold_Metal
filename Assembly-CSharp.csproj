@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Boss_1.cs" />
     <Compile Include="Assets\Script\Boss_2.cs" />
+    <Compile Include="Assets\Script\Camera.cs" />
     <Compile Include="Assets\Script\MonsterStatus.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Reference Include="UnityEngine">
