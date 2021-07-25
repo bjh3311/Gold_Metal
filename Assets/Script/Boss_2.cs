@@ -15,7 +15,11 @@ public class Boss_2 : MonoBehaviour
     public CurrentState curState = CurrentState.idle;
 
     private int walkOridle = 1;//1이면 idle -1이면 walk
+    private int leftOrright = -1;//-1이면 왼쪽 1이면 오른쪽 소리이다.
+    private bool isWall = false;//true면 벽에 붙어있다는 소리이다.
 
+    public Transform wallCheck;
+    public LayerMask wallLayers;
     private float maxtime = 3.0f;
     private float delaytime;
     // Start is called before the first frame update
@@ -28,12 +32,18 @@ public class Boss_2 : MonoBehaviour
         StartCoroutine(CheckState());
         StartCoroutine(CheckStateForAction());
     }
+
     IEnumerator CheckState()
     {
         while (true)
         {
             MoveTime();
             float dist = Vector2.Distance(playerTransform.position, transform.position);
+            isWall = Physics2D.OverlapCircle(wallCheck.position, 0.8f, wallLayers);
+            if (isWall)
+            {
+                leftOrright = leftOrright * -1;
+            }
             if (dist <= stat.view && Input.GetButtonDown("Fire1"))//거리가 view안에 있고 마우스 좌클릭하면 curState는 walk
             {
                 curState = CurrentState.warn;
@@ -64,15 +74,7 @@ public class Boss_2 : MonoBehaviour
                     }
                     break;
                 case CurrentState.walk:
-                    if (playerTransform.position.x - transform.position.x < 0)//타겟이 왼쪽에 있다면
-                    {
-                        rend.flipX = true;
-                    }
-                    else//타겟이 오른쪽에 있다면
-                    {
-                        rend.flipX = false;
-                    }
-                    MoveToTarget();
+                    MoveToWall();
                     animator.SetBool("isMoving", true);
                     if (delaytime > maxtime)
                     {
@@ -93,10 +95,18 @@ public class Boss_2 : MonoBehaviour
     {
         delaytime += Time.deltaTime;
     }
-    public void MoveToTarget()
+    public void MoveToWall()
     {
-        float dir = playerTransform.position.x - transform.position.x;
-        dir = (dir < 0) ? -1 : 1;
-        transform.Translate(new Vector2(dir, 0) * stat.moveSpeed * Time.deltaTime);
+        if (leftOrright == -1)//왼쪽을 본다면
+        {
+            rend.flipX = true;
+            transform.Translate(new Vector2(-1, 0) * stat.moveSpeed * Time.deltaTime);
+        }
+        else//오른쪽을 본다면
+        {
+            rend.flipX = false;
+            transform.Translate(new Vector2(1, 0) * stat.moveSpeed * Time.deltaTime);
+        }
+
     }
 }

@@ -11,11 +11,15 @@ public class Boss_1 : MonoBehaviour
     private SpriteRenderer rend;
     private Transform transform;
     private Transform playerTransform;
-    public enum CurrentState { idle, walk ,warn };
+    public enum CurrentState { idle, walk, warn };
     public CurrentState curState = CurrentState.idle;
 
     private int walkOridle = 1;//1이면 idle -1이면 walk
+    private int leftOrright = -1;//-1이면 왼쪽 1이면 오른쪽 소리이다.
+    private bool isWall = false;//true면 벽에 붙어있다는 소리이다.
 
+    public Transform wallCheck;
+    public LayerMask wallLayers;
     private float maxtime = 3.0f;
     private float delaytime;
     // Start is called before the first frame update
@@ -24,25 +28,31 @@ public class Boss_1 : MonoBehaviour
         transform = this.gameObject.GetComponent<Transform>();
         rend = this.gameObject.GetComponent<SpriteRenderer>();
         animator = this.gameObject.GetComponent<Animator>();
-        playerTransform =GameObject.FindWithTag("Player").GetComponent<Transform>();
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         StartCoroutine(CheckState());
         StartCoroutine(CheckStateForAction());
     }
+
     IEnumerator CheckState()
     {
-        while(true)
+        while (true)
         {
             MoveTime();
             float dist = Vector2.Distance(playerTransform.position, transform.position);
-            if (dist <= stat.view&&Input.GetButtonDown("Fire1"))//거리가 view안에 있고 마우스 좌클릭하면 curState는 walk
+            isWall = Physics2D.OverlapCircle(wallCheck.position, 0.5f, wallLayers);
+            if (isWall)
+            {
+                leftOrright = leftOrright * -1;
+            }
+            if (dist <= stat.view && Input.GetButtonDown("Fire1"))//거리가 view안에 있고 마우스 좌클릭하면 curState는 walk
             {
                 curState = CurrentState.warn;
             }
-            else if(walkOridle==1)
+            else if (walkOridle == 1)
             {
                 curState = CurrentState.idle;
             }
-            else if(walkOridle==-1)
+            else if (walkOridle == -1)
             {
                 curState = CurrentState.walk;
             }
@@ -51,30 +61,22 @@ public class Boss_1 : MonoBehaviour
     }
     IEnumerator CheckStateForAction()
     {
-        while(true)
+        while (true)
         {
             switch (curState)
             {
                 case CurrentState.idle:
                     animator.SetBool("isMoving", false);
-                    if(delaytime>maxtime)
+                    if (delaytime > maxtime)
                     {
                         delaytime = 0;
                         walkOridle = walkOridle * -1;
                     }
                     break;
                 case CurrentState.walk:
-                    if (playerTransform.position.x - transform.position.x < 0)//타겟이 왼쪽에 있다면
-                    {
-                        rend.flipX = false;
-                    }
-                    else//타겟이 오른쪽에 있다면
-                    {
-                        rend.flipX = true;
-                    }
-                    MoveToTarget();
+                    MoveToWall();
                     animator.SetBool("isMoving", true);
-                    if(delaytime>maxtime)
+                    if (delaytime > maxtime)
                     {
                         delaytime = 0;
                         walkOridle = walkOridle * -1;
@@ -91,12 +93,20 @@ public class Boss_1 : MonoBehaviour
     }
     public void MoveTime()
     {
-        delaytime +=Time.deltaTime;
+        delaytime += Time.deltaTime;
     }
-    public void MoveToTarget()
+    public void MoveToWall()
     {
-        float dir = playerTransform.position.x - transform.position.x;
-        dir = (dir < 0) ? -1 : 1;
-        transform.Translate(new Vector2(dir, 0) * stat.moveSpeed * Time.deltaTime);
+        if (leftOrright == -1)//왼쪽을 본다면
+        {
+            rend.flipX = false;
+            transform.Translate(new Vector2(-1, 0) * stat.moveSpeed * Time.deltaTime);
+        }
+        else//오른쪽을 본다면
+        {
+            rend.flipX = true;
+            transform.Translate(new Vector2(1, 0) * stat.moveSpeed * Time.deltaTime);
+        }
+
     }
 }
