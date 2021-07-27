@@ -22,6 +22,8 @@ public class Boss_1 : MonoBehaviour
     public LayerMask wallLayers;
     private float maxtime = 3.0f;
     private float delaytime;
+
+    private float dist;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,13 +40,13 @@ public class Boss_1 : MonoBehaviour
         while (true)
         {
             MoveTime();
-            float dist = Vector2.Distance(playerTransform.position, transform.position);
-            isWall = Physics2D.OverlapCircle(wallCheck.position, 0.5f, wallLayers);
-            if (isWall)
+            dist = (playerTransform.position.x- transform.position.x);
+            isWall = Physics2D.OverlapCircle(wallCheck.position, 1.0f, wallLayers);
+            if (isWall)//벽을 마주치면 방향 전환
             {
                 leftOrright = leftOrright * -1;
             }
-            if (dist <= stat.view && Input.GetButtonDown("Fire1"))//거리가 view안에 있고 마우스 좌클릭하면 curState는 walk
+            if (Mathf.Abs(dist) <= stat.view && Input.GetButtonDown("Fire1"))//x 좌표차가 view안에 있고 마우스 좌클릭하면 curState는 walk
             {
                 curState = CurrentState.warn;
             }
@@ -71,6 +73,7 @@ public class Boss_1 : MonoBehaviour
                     {
                         delaytime = 0;
                         walkOridle = walkOridle * -1;
+                        leftOrright = stat.random[Random.Range(0, 2)];//idle가 끝나고 walk할때는 랜덤한 방향
                     }
                     break;
                 case CurrentState.walk:
@@ -83,15 +86,24 @@ public class Boss_1 : MonoBehaviour
                     }
                     break;
                 case CurrentState.warn:
-                    Debug.Log("경고상태_1!!");
+                    Debug.Log("경고상태!!");
+                    if(dist<0)//플레이어가 왼쪽에 있으면 왼쪽을 바라본다.
+                    {
+                        rend.flipX = false;
+                    }
+                    else//플레이어가 오른쪽에 있으면 오른쪽을 바라본다.
+                    {
+                        rend.flipX = true;
+                    }
                     yield return new WaitForSeconds(1.0f);
-                    break;
-
+                    walkOridle = 1;//warn상태가 끝나면 idle상태여야 한다
+                    delaytime = 0;//idle상태가 된후 타이머를 처음부터 시작
+                    break;          
             }
             yield return null;
         }
     }
-    public void MoveTime()
+    public void MoveTime()//walk와 idle
     {
         delaytime += Time.deltaTime;
     }
@@ -107,6 +119,5 @@ public class Boss_1 : MonoBehaviour
             rend.flipX = true;
             transform.Translate(new Vector2(1, 0) * stat.moveSpeed * Time.deltaTime);
         }
-
     }
 }

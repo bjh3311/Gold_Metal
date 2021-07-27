@@ -32,7 +32,6 @@ public class Boss_2 : MonoBehaviour
         StartCoroutine(CheckState());
         StartCoroutine(CheckStateForAction());
     }
-
     IEnumerator CheckState()
     {
         while (true)

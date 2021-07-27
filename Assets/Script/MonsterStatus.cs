@@ -8,4 +8,5 @@ public class MonsterStatus : ScriptableObject
 {
     public int moveSpeed = 1;
     public int view = 3;//시야범위
+    public int[] random = { -1, 1 };//-1,1의 랜덤
 }
