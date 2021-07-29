@@ -8,15 +8,18 @@ public class Player : MonoBehaviour
     public float jumpPower = 5f;
     // Start is called before the first frame update
     Rigidbody2D rigid;
-
+    SpriteRenderer rend;
     Animator animator;
 
     Vector3 movement;
     bool isJumping = false;
+    public GameObject bulletObj;
+    
     void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponentInChildren<Animator>();
+        rend = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,28 @@ public class Player : MonoBehaviour
     {
         Move();
         Jump();
+        Fire();
+    }
+    void Fire()
+    {
+        if(!Input.GetButtonDown("Fire2"))//마우스 오른쪽버튼이 안눌려있다면 종료
+        {
+            return;
+        }
+       if(rend.flipX)//왼쪽을 본다면
+       {
+            GameObject bullet = Instantiate(bulletObj, transform.position + Vector3.left * 2.0f + Vector3.up * 0.1f, transform.rotation);
+            //현재 위치보다 오른쪽위에 총알생성 
+            Rigidbody2D rigid_bullet = bullet.GetComponent<Rigidbody2D>();
+            rigid_bullet.AddForce(Vector2.left * 15, ForceMode2D.Impulse);
+        }
+       else
+       {
+            GameObject bullet = Instantiate(bulletObj, transform.position + Vector3.right * 2.0f + Vector3.up * 0.1f, transform.rotation);
+            //현재 위치보다 오른쪽위에 총알생성 
+            Rigidbody2D rigid_bullet = bullet.GetComponent<Rigidbody2D>();
+            rigid_bullet.AddForce(Vector2.right * 15, ForceMode2D.Impulse);
+        }
     }
     void Move()
     {
@@ -38,14 +63,14 @@ public class Player : MonoBehaviour
         if(Input.GetAxisRaw("Horizontal")<0)
         {
             moveVelocity = Vector3.left;
-            transform.localScale = new Vector3(-1, 1, 1);//Left Flip
+            rend.flipX=true;//Left Flip
             animator.SetBool("isMoving", true);
             
         }
         else if(Input.GetAxisRaw("Horizontal")>0)
         {
             moveVelocity = Vector3.right;
-            transform.localScale = new Vector3(1, 1, 1);
+            rend.flipX = false; 
             animator.SetBool("isMoving", true);
         }
         else

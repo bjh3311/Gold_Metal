@@ -11,12 +11,14 @@ public class Boss_1 : MonoBehaviour
     private SpriteRenderer rend;
     private Transform transform;
     private Transform playerTransform;
-    public enum CurrentState { idle, walk, warn };
+    public enum CurrentState { idle, walk, warn ,faint};
     public CurrentState curState = CurrentState.idle;
 
     private int walkOridle = 1;//1이면 idle -1이면 walk
     private int leftOrright = -1;//-1이면 왼쪽 1이면 오른쪽 소리이다.
     private bool isWall = false;//true면 벽에 붙어있다는 소리이다.
+
+    private bool dragonBall = false;
 
     public Transform wallCheck;
     public LayerMask wallLayers;
@@ -34,7 +36,13 @@ public class Boss_1 : MonoBehaviour
         StartCoroutine(CheckState());
         StartCoroutine(CheckStateForAction());
     }
-
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag=="bullet")
+        {
+            dragonBall = true;//여의주와 충돌하면 dragonBall을 true로 만들어주어 faint상태로 변경
+        }
+    }
     IEnumerator CheckState()
     {
         while (true)
@@ -46,13 +54,18 @@ public class Boss_1 : MonoBehaviour
             {
                 leftOrright = leftOrright * -1;
             }
-            if (Mathf.Abs(dist) <= stat.view && Input.GetButtonDown("Fire1"))//x 좌표차가 view안에 있고 마우스 좌클릭하면 curState는 walk
+            if(dragonBall)//아무 상태에서나 바로 faint상태로 접근 가능해야함.
             {
-                curState = CurrentState.warn;
+                curState = CurrentState.faint;
+                yield return null;
             }
-            else if (walkOridle == 1)
+            if(walkOridle==1)
             {
                 curState = CurrentState.idle;
+            }
+            else if (Mathf.Abs(dist) <= stat.view && Input.GetButtonDown("Fire1"))//x 좌표차가 view안에 있고 마우스 좌클릭하면 curState는 walk
+            {
+                curState = CurrentState.warn;
             }
             else if (walkOridle == -1)
             {
@@ -98,7 +111,14 @@ public class Boss_1 : MonoBehaviour
                     yield return new WaitForSeconds(1.0f);
                     walkOridle = 1;//warn상태가 끝나면 idle상태여야 한다
                     delaytime = 0;//idle상태가 된후 타이머를 처음부터 시작
-                    break;          
+                    break;
+                case CurrentState.faint:
+                    Debug.Log("Faint상태!!");
+                    yield return new WaitForSeconds(1.5f);
+                    walkOridle = 1;//faint상태가 끝나면 idle상태여야 한다.
+                    delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
+                    dragonBall = false;
+                    break;
             }
             yield return null;
         }
