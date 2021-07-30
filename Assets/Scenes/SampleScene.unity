@@ -1252,6 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stat: {fileID: 11400000, guid: 99a8ab9468541a841b15ee79867659fd, type: 2}
+  player: {fileID: 1009650773}
   curState: 0
   wallCheck: {fileID: 1571220695}
   wallLayers:
@@ -1310,6 +1311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stat: {fileID: 11400000, guid: 99a8ab9468541a841b15ee79867659fd, type: 2}
+  player: {fileID: 1009650773}
   curState: 0
   wallCheck: {fileID: 1711917604}
   wallLayers:

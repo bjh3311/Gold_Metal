@@ -14,12 +14,14 @@ public class Player : MonoBehaviour
     Vector3 movement;
     bool isJumping = false;
     public GameObject bulletObj;
+    private Transform transform;
     
     void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponentInChildren<Animator>();
         rend = gameObject.GetComponent<SpriteRenderer>();
+        transform = this.gameObject.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -30,12 +32,16 @@ public class Player : MonoBehaviour
             isJumping = true;
         }
     }
+    public void Detected()
+    {
+        Debug.Log("주인공이 시야에 들어왔습니다!!");
+    }
     private void FixedUpdate()
     {
         Move();
         Jump();
-        Fire();
-    }
+        Fire();    
+    }  
     void Fire()
     {
         if(!Input.GetButtonDown("Fire2"))//마우스 오른쪽버튼이 안눌려있다면 종료

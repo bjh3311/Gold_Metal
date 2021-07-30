@@ -11,6 +11,10 @@ public class Boss_1 : MonoBehaviour
     private SpriteRenderer rend;
     private Transform transform;
     private Transform playerTransform;
+    public GameObject player;
+    private Player p;
+    private RaycastHit2D hit;
+
     public enum CurrentState { idle, walk, warn ,faint};
     public CurrentState curState = CurrentState.idle;
 
@@ -33,6 +37,7 @@ public class Boss_1 : MonoBehaviour
         rend = this.gameObject.GetComponent<SpriteRenderer>();
         animator = this.gameObject.GetComponent<Animator>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        p = player.GetComponent<Player>();
         StartCoroutine(CheckState());
         StartCoroutine(CheckStateForAction());
     }
@@ -41,6 +46,27 @@ public class Boss_1 : MonoBehaviour
         if(col.gameObject.tag=="bullet")
         {
             dragonBall = true;//여의주와 충돌하면 dragonBall을 true로 만들어주어 faint상태로 변경
+        }
+    }
+    private void FixedUpdate()
+    {
+        if(leftOrright==-1)
+        {
+            Debug.DrawRay(transform.position+Vector3.left*1.0f, new Vector3(-1, 0, 0) * 3.0f, new Color(0, 1, 0));
+            hit = Physics2D.Raycast(transform.position, new Vector3(-1, 0, 0) * 3.0f);
+            if (hit.transform.tag=="Player")//플레이어가 시야에 들어오면
+            {
+                p.Detected();
+            }
+        }
+        else
+        {
+            Debug.DrawRay(transform.position + Vector3.right*1.0f, new Vector3(1, 0, 0) * 3.0f, new Color(0, 1, 0));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(1, 0, 0) * 3.0f);
+            if (hit.transform.tag=="Player")//플레이어가 시야에 들어오면
+            {
+                p.Detected();
+            }
         }
     }
     IEnumerator CheckState()
@@ -78,6 +104,10 @@ public class Boss_1 : MonoBehaviour
     {
         while (true)
         {
+            if(leftOrright==-1)//왼쪽이면
+            {
+
+            }
             switch (curState)
             {
                 case CurrentState.idle:
