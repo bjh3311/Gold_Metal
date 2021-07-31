@@ -53,8 +53,8 @@ public class Boss_1 : MonoBehaviour
         if(leftOrright==-1)
         {
             Debug.DrawRay(transform.position+Vector3.left*1.0f, new Vector3(-1, 0, 0) * 3.0f, new Color(0, 1, 0));
-            hit = Physics2D.Raycast(transform.position, new Vector3(-1, 0, 0) * 3.0f);
-            if (hit.transform.tag=="Player")//플레이어가 시야에 들어오면
+            hit = Physics2D.Raycast(transform.position+Vector3.left*1.0f, new Vector3(-1, 0, 0) * 3.0f);
+            if (hit.collider.name=="Player")//플레이어가 시야에 들어오면
             {
                 p.Detected();
             }
@@ -62,8 +62,8 @@ public class Boss_1 : MonoBehaviour
         else
         {
             Debug.DrawRay(transform.position + Vector3.right*1.0f, new Vector3(1, 0, 0) * 3.0f, new Color(0, 1, 0));
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(1, 0, 0) * 3.0f);
-            if (hit.transform.tag=="Player")//플레이어가 시야에 들어오면
+            RaycastHit2D hit = Physics2D.Raycast(transform.position+Vector3.right*1.0f, new Vector3(1, 0, 0) * 3.0f);
+            if (hit.collider.name=="Player")//플레이어가 시야에 들어오면
             {
                 p.Detected();
             }
