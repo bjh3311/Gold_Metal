@@ -53,14 +53,14 @@ public class Player : MonoBehaviour
             GameObject bullet = Instantiate(bulletObj, transform.position + Vector3.left * 2.0f + Vector3.up * 0.1f, transform.rotation);
             //현재 위치보다 오른쪽위에 총알생성 
             Rigidbody2D rigid_bullet = bullet.GetComponent<Rigidbody2D>();
-            rigid_bullet.AddForce(Vector2.left * 15, ForceMode2D.Impulse);
+            rigid_bullet.AddForce(Vector2.left * 2, ForceMode2D.Impulse);
         }
        else
        {
             GameObject bullet = Instantiate(bulletObj, transform.position + Vector3.right * 2.0f + Vector3.up * 0.1f, transform.rotation);
             //현재 위치보다 오른쪽위에 총알생성 
             Rigidbody2D rigid_bullet = bullet.GetComponent<Rigidbody2D>();
-            rigid_bullet.AddForce(Vector2.right * 15, ForceMode2D.Impulse);
+            rigid_bullet.AddForce(Vector2.right * 2, ForceMode2D.Impulse);
         }
     }
     void Move()
