@@ -15,7 +15,7 @@ public class Boss_1 : MonoBehaviour
     private Player p;
     private RaycastHit2D hit;
 
-    public enum CurrentState { idle, walk, warn ,faint};
+    public enum CurrentState { idle, walk, warn ,faint,question};
     public CurrentState curState = CurrentState.idle;
 
     private int walkOridle = 1;//1이면 idle -1이면 walk
@@ -80,7 +80,7 @@ public class Boss_1 : MonoBehaviour
             {
                 leftOrright = leftOrright * -1;
             }
-            if(dragonBall)//아무 상태에서나 바로 faint상태로 접근 가능해야함.
+            if(dragonBall)//여의주를 맞으면 아무 상태에서나 바로 faint상태로 접근 가능해야함.
             {
                 curState = CurrentState.faint;
                 yield return null;
@@ -148,6 +148,12 @@ public class Boss_1 : MonoBehaviour
                     walkOridle = 1;//faint상태가 끝나면 idle상태여야 한다.
                     delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
                     dragonBall = false;
+                    break;
+                case CurrentState.question:
+                    Debug.Log("Question상태!!");
+                    yield return new WaitForSeconds(1.5f);//
+                    walkOridle = 1;//question상태가 끝나면 idle상태여야 한다.
+                    delaytime = 0;
                     break;
             }
             yield return null;
