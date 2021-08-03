@@ -17,10 +17,11 @@ public class Boss_1 : MonoBehaviour
     private RaycastHit2D dragonballHit;//여의주감지를 위한 변수
 
     public enum CurrentState { idle, walk, warn ,faint,question};
-    public CurrentState curState = CurrentState.idle;
+    public CurrentState curState = CurrentState.idle;//시작은 idle상태
 
-    private int walkOridle = 1;//1이면 idle -1이면 walk
+    private int walkOridle = 1;//1이면 idle -1이면 walk ,그 이외의 경우에는 0
     private int leftOrright = -1;//-1이면 왼쪽 1이면 오른쪽 소리이다.
+    private int layerMask1;
 
     private bool isWall = false;//true면 벽에 붙어있다는 소리이다.
     private bool isHit = false;//여의주에 맞았는지 아닌지 판별해주는 bool변수
@@ -44,16 +45,17 @@ public class Boss_1 : MonoBehaviour
         StartCoroutine(CheckState());
         StartCoroutine(CheckStateForAction());
     }
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)//여의주에 맞으면 faint상태로 변경
     {
         if(col.gameObject.tag=="dragonBall")
         {
-            isHit = true;//여의주와 충돌하면 dragonBall을 true로 만들어주어 faint상태로 변경
+            walkOridle = 0;
+            curState = CurrentState.faint;
         }
     }
     private void FixedUpdate()
     {
-        int layerMask1 = (-1) - (1 << LayerMask.NameToLayer("dragonBall"));//여의주를 제외한 충돌감지 위함
+        layerMask1 = (-1) - (1 << LayerMask.NameToLayer("dragonBall"));//여의주를 제외한 충돌감지 위함
         if(leftOrright==-1)//왼쪽을 바라 보고 있을때는 왼쪽으로 ray를 쏜다
         {
             playerHit = Physics2D.Raycast(transform.position+Vector3.left*1.0f, new Vector3(-1, 0, 0),Mathf.Infinity,layerMask1);
@@ -64,9 +66,10 @@ public class Boss_1 : MonoBehaviour
             {
                 p.Detected();
             }
-            if(dragonballHit.collider.CompareTag("dragonBall"))
+            if (dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
             {
-                isdragonBall = true;
+                walkOridle = 0;
+                curState = CurrentState.question;
             }
         }
         else//오른쪽을 바라 보고 있을때는 오른쪽으로 ray를 쏜다
@@ -79,9 +82,10 @@ public class Boss_1 : MonoBehaviour
             {
                 p.Detected();
             }
-            if (dragonballHit.collider.CompareTag("dragonBall"))
+            if (dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
             {
-                isdragonBall = true;
+                walkOridle = 0;
+                curState = CurrentState.question;
             }
         }
     }
@@ -96,23 +100,14 @@ public class Boss_1 : MonoBehaviour
             {
                 leftOrright = leftOrright * -1;
             }
-            if(isdragonBall)//여의주가 시야에 들어오면 바로 question상태로 접근 가능해야함.
+            if (Mathf.Abs(dist) <= stat.view && Input.GetButtonDown("Fire1")&&walkOridle!=0)//x 좌표차가 view안에 있고 마우스 좌클릭하면 curState는 walk
             {
-                curState = CurrentState.question;
-                yield return null;
+                walkOridle = 0;
+                curState = CurrentState.warn;
             }
-            if(isHit)//여의주를 맞으면 아무 상태에서나 바로 faint상태로 접근 가능해야함.
-            {
-                curState = CurrentState.faint;
-                yield return null;
-            }
-            if(walkOridle==1)
+            else if (walkOridle == 1)
             {
                 curState = CurrentState.idle;
-            }
-            else if (Mathf.Abs(dist) <= stat.view && Input.GetButtonDown("Fire1"))//x 좌표차가 view안에 있고 마우스 좌클릭하면 curState는 walk
-            {
-                curState = CurrentState.warn;
             }
             else if (walkOridle == -1)
             {
@@ -157,23 +152,27 @@ public class Boss_1 : MonoBehaviour
                         leftOrright = 1;
                         rend.flipX = true;
                     }
-                    yield return new WaitForSeconds(1.0f);
-                    walkOridle = 1;//warn상태가 끝나면 idle상태여야 한다
-                    delaytime = 0;//idle상태가 된후 타이머를 처음부터 시작
+                    if(delaytime>maxtime)
+                    {
+                        walkOridle = 1;//warn상태가 끝나면 idle상태여야 한다
+                        delaytime = 0;//idle상태가 된후 타이머를 처음부터 시작
+                    }
                     break;
                 case CurrentState.faint:
                     Debug.Log("Faint상태!!");
-                    yield return new WaitForSeconds(1.5f);
-                    walkOridle = 1;//faint상태가 끝나면 idle상태여야 한다.
-                    delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
-                    isHit = false;//faint상태가 끝난후 isHit를 다시 false로 초기화해줘야한다.
+                    if(delaytime>maxtime)//타이머
+                    {
+                        walkOridle = 1;//faint상태가 끝나면 idle상태여야 한다.
+                        delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
+                    }
                     break;
                 case CurrentState.question:
                     Debug.Log("Question상태!!");
-                    yield return new WaitForSeconds(1.5f);
-                    walkOridle = 1;//question상태가 끝나면 idle상태여야 한다.
-                    delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
-                    isdragonBall = false;//question상태가 끝난 후 isdragonBall을 다시 false로 초기화해줘야한다.
+                    if(delaytime>maxtime)//타이머
+                    {
+                        walkOridle = 1;//question상태가 끝나면 idle상태여야 한다.
+                        delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
+                    }
                     break;
             }
             yield return null;
