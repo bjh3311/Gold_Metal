@@ -45,7 +45,7 @@ public class Boss_1 : MonoBehaviour
         StartCoroutine(CheckState());
         StartCoroutine(CheckStateForAction());
     }
-    private void OnTriggerEnter2D(Collider2D col)//여의주에 맞으면 faint상태로 변경
+    private void OnCollisionEnter2D(Collision2D col)//여의주에 맞으면 faint상태로 변경
     {
         if(col.gameObject.tag=="dragonBall")
         {
@@ -55,12 +55,13 @@ public class Boss_1 : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        layerMask1 = (-1) - (1 << LayerMask.NameToLayer("dragonBall"));//여의주를 제외한 충돌감지 위함
+        layerMask1 = (-1) - (1 << LayerMask.NameToLayer("Yeouiju"));//여의주를 제외한 충돌감지 위함
         if(leftOrright==-1)//왼쪽을 바라 보고 있을때는 왼쪽으로 ray를 쏜다
         {
             playerHit = Physics2D.Raycast(transform.position+Vector3.left*1.0f, new Vector3(-1, 0, 0),Mathf.Infinity,layerMask1);
             //시야는 무한으로 여의주제외하고 감지
             dragonballHit = Physics2D.Raycast(transform.position + Vector3.left * 1.0f, new Vector3(-1, 0, 0));
+            Debug.DrawRay(transform.position + Vector3.left * 1.0f, new Vector3(-10, 0, 0),new Color(0,1,0));
             //시야는 무한으로 
             if(playerHit.collider.CompareTag("Player"))
             {
@@ -78,6 +79,7 @@ public class Boss_1 : MonoBehaviour
             //시야는 무한으로 여의주제외하고 감지
             dragonballHit = Physics2D.Raycast(transform.position + Vector3.right * 1.0f, new Vector3(1, 0, 0));
             //시야는 무한으로 플레이어 제외하고 감지
+            Debug.DrawRay(transform.position + Vector3.right * 1.0f, new Vector3(10, 0, 0),new Color(0,1,0));
             if (playerHit.collider.CompareTag("Player"))
             {
                 p.Detected();
