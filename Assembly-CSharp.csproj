@@ -67,6 +67,7 @@
     <Compile Include="Assets\Script\Camera.cs" />
     <Compile Include="Assets\Script\MonsterStatus.cs" />
     <Compile Include="Assets\Script\Player.cs" />
+    <Compile Include="Assets\Script\dragonBall.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - bullet
   - dragonBall
+  - Boss
   layers:
   - Default
   - TransparentFX
