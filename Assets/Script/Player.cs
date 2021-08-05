@@ -63,8 +63,7 @@ public class Player : MonoBehaviour
         else
         {
             scanObject = null;
-        }
-        
+        }     
     }  
     void Fire()
     {
