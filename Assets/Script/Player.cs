@@ -15,7 +15,9 @@ public class Player : MonoBehaviour
     bool isJumping = false;
     public GameObject bulletObj;
     private Transform transform;
-    
+
+    public TalkManager manager;
+    GameObject scanObject;
     void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
@@ -31,6 +33,10 @@ public class Player : MonoBehaviour
         {
             isJumping = true;
         }
+        if (Input.GetKey(KeyCode.Z) && scanObject != null)
+        {
+            manager.Action(scanObject);
+        }
     }
     public void Detected()
     {
@@ -40,7 +46,25 @@ public class Player : MonoBehaviour
     {
         Move();
         Jump();
-        Fire();    
+        Fire();
+        RaycastHit2D rayHit;
+        if(rend.flipX)//왼쪽
+        {
+            rayHit = Physics2D.Raycast(transform.position, new Vector3(-1, 0, 0), 10, LayerMask.GetMask("TalkNpc"));
+        }
+        else//오른쪽
+        {
+            rayHit = Physics2D.Raycast(transform.position, new Vector3(1, 0, 0), 10, LayerMask.GetMask("TalkNpc"));
+        }
+        if(rayHit.collider!=null)
+        {
+            scanObject = rayHit.collider.gameObject;
+        }
+        else
+        {
+            scanObject = null;
+        }
+        
     }  
     void Fire()
     {

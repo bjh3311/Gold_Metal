@@ -26,7 +26,6 @@ public class Boss_1 : MonoBehaviour
 
     public Transform wallCheck;
     public LayerMask wallLayers;//벽에 붙었는지 아닌지 확인하기 위한 변수들
-    private float maxtime = 3.0f;
     private float delaytime;//walk와 idle간 상태 변화를 위한 타이머
 
     private float dist;
@@ -47,7 +46,7 @@ public class Boss_1 : MonoBehaviour
         if(col.gameObject.tag=="dragonBall")
         {
             walkOridle = 0;
-            delaytime = 0;
+            delaytime = 0;//타이머 초기화
             curState = CurrentState.faint;
         }
     }
@@ -125,7 +124,7 @@ public class Boss_1 : MonoBehaviour
             {
                 case CurrentState.idle:
                     animator.SetBool("isMoving", false);
-                    if (delaytime > maxtime)
+                    if (delaytime > stat.maxTime)
                     {
                         delaytime = 0;
                         walkOridle = walkOridle * -1;
@@ -135,7 +134,7 @@ public class Boss_1 : MonoBehaviour
                 case CurrentState.walk:
                     MoveToWall();
                     animator.SetBool("isMoving", true);
-                    if (delaytime > maxtime)
+                    if (delaytime > stat.maxTime)
                     {
                         delaytime = 0;
                         walkOridle = walkOridle * -1;
@@ -151,7 +150,7 @@ public class Boss_1 : MonoBehaviour
                     {
                         rend.flipX = true;
                     }
-                    if(delaytime>maxtime)
+                    if(delaytime>stat.maxTime)
                     {
                         walkOridle = 1;//warn상태가 끝나면 idle상태여야 한다
                         delaytime = 0;//idle상태가 된후 타이머를 처음부터 시작
@@ -159,7 +158,7 @@ public class Boss_1 : MonoBehaviour
                     break;
                 case CurrentState.faint:
                     Debug.Log("Faint상태!!");
-                    if(delaytime>maxtime)//타이머
+                    if(delaytime>stat.maxTime)//타이머
                     {
                         walkOridle = 1;//faint상태가 끝나면 idle상태여야 한다.
                         delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
@@ -167,7 +166,7 @@ public class Boss_1 : MonoBehaviour
                     break;
                 case CurrentState.question:
                     Debug.Log("Question상태!!");
-                    if(delaytime>maxtime)//타이머
+                    if(delaytime>stat.maxTime)//타이머
                     {
                         walkOridle = 1;//question상태가 끝나면 idle상태여야 한다.
                         delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
