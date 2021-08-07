@@ -43,7 +43,7 @@ public class Boss_1 : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)//여의주에 맞으면 faint상태로 변경
     {
-        if(col.gameObject.tag=="dragonBall")
+        if(col.gameObject.tag=="dragonBall"&&curState!=CurrentState.faint)//faint상태가 아닐때만
         {
             walkOridle = 0;
             delaytime = 0;//타이머 초기화
@@ -60,7 +60,7 @@ public class Boss_1 : MonoBehaviour
             dragonballHit = Physics2D.Raycast(transform.position + Vector3.left * 1.0f, new Vector3(-1, 0, 0));
             Debug.DrawRay(transform.position + Vector3.left * 1.0f, new Vector3(-10, 0, 0),new Color(0,1,0));
             //시야는 무한으로 
-            if(playerHit.collider.CompareTag("Player"))
+            if(playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
             {
                 p.Detected();
             }
@@ -77,7 +77,7 @@ public class Boss_1 : MonoBehaviour
             dragonballHit = Physics2D.Raycast(transform.position + Vector3.right * 1.0f, new Vector3(1, 0, 0));
             //시야는 무한으로 플레이어 제외하고 감지
             Debug.DrawRay(transform.position + Vector3.right * 1.0f, new Vector3(10, 0, 0),new Color(0,1,0));
-            if (playerHit.collider.CompareTag("Player"))
+            if (playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
             {
                 p.Detected();
             }
@@ -93,13 +93,13 @@ public class Boss_1 : MonoBehaviour
         while (true)
         {
             MoveTime();//타이머
-            dist = (playerTransform.position.x- transform.position.x);
+            dist = (playerTransform.position- transform.position).sqrMagnitude;//반원식으로 
             isWall = Physics2D.OverlapCircle(wallCheck.position, 0.5f, wallLayers);//벽과의 거리
             if (isWall)//벽을 마주치면 방향 전환
             {
                 rend.flipX = !rend.flipX;
             }
-            if (Mathf.Abs(dist) <= stat.view && Input.GetButtonDown("Fire1")&&walkOridle!=0)//x 좌표차가 view안에 있고 마우스 좌클릭하면 curState는 walk
+            if (dist <= stat.view*stat.view && Input.GetButtonDown("Fire1")&&walkOridle!=0)//x 좌표차가 view안에 있고 마우스 좌클릭하면 curState는 walk
             {
                 walkOridle = 0;
                 delaytime = 0;
@@ -126,7 +126,7 @@ public class Boss_1 : MonoBehaviour
                     animator.SetBool("isMoving", false);
                     if (delaytime > stat.maxTime)
                     {
-                        delaytime = 0;
+                        delaytime = 0;//타이머 초기화
                         walkOridle = walkOridle * -1;
                         rend.flipX = stat.random[Random.Range(0, 2)];//idle가 끝나고 walk할때는 랜덤한 방향
                     }
@@ -142,7 +142,7 @@ public class Boss_1 : MonoBehaviour
                     break;
                 case CurrentState.warn:
                     Debug.Log("경고상태!!");
-                    if(dist<0)//플레이어가 왼쪽에 있으면 왼쪽을 바라본다.
+                    if(playerTransform.position.x-transform.position.x<0)//플레이어가 왼쪽에 있으면 왼쪽을 바라본다.
                     {
                         rend.flipX = false;
                     }
@@ -158,11 +158,9 @@ public class Boss_1 : MonoBehaviour
                     break;
                 case CurrentState.faint:
                     Debug.Log("Faint상태!!");
-                    if(delaytime>stat.maxTime)//타이머
-                    {
-                        walkOridle = 1;//faint상태가 끝나면 idle상태여야 한다.
-                        delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
-                    }
+                    yield return new WaitForSeconds(stat.maxTime);
+                    walkOridle = 1;//faint상태가 끝나면 idle상태여야 한다.
+                    delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.  
                     break;
                 case CurrentState.question:
                     Debug.Log("Question상태!!");

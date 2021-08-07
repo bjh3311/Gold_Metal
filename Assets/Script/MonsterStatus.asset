@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   view: 6
+  random: 0001
+  maxTime: 3

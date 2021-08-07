@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using LitJson;
 using System.IO;
 using Newtonsoft.Json;
-
 class Data
 {
     public string id;
@@ -29,8 +28,6 @@ public class TalkManager : MonoBehaviour
         {
             string JsonString = File.ReadAllText(Application.dataPath + "/Text/npc정보.json");
             data = JsonConvert.DeserializeObject<Data>(JsonString);
-            Debug.Log(data.id);
-            Debug.Log(data.id);
             isAction = true;
             index++;
         }
