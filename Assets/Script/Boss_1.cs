@@ -13,14 +13,17 @@ public class Boss_1 : MonoBehaviour
     private Transform playerTransform;
     public GameObject player;
     private Player p;
+
     private RaycastHit2D playerHit;//player감지를 위한 변수
     private RaycastHit2D dragonballHit;//여의주감지를 위한 변수
+    private RaycastHit2D groundHit;//낭떠러지인지 확인을 위한 변수
 
     public enum CurrentState { idle, walk, warn ,faint,question};
     public CurrentState curState = CurrentState.idle;//시작은 idle상태
 
     private int walkOridle = 1;//1이면 idle -1이면 walk ,그 이외의 경우에는 0
     private int layerMask1;
+    private int layerGround;//낭떠러지인지 확인을 위한 layer변수
 
     private bool isWall = false;//true면 벽에 붙어있다는 소리이다.
 
@@ -53,13 +56,17 @@ public class Boss_1 : MonoBehaviour
     private void FixedUpdate()
     {
         layerMask1 = (-1) - (1 << LayerMask.NameToLayer("Yeouiju"));//여의주를 제외한 충돌감지 위함
+        layerGround = 1 << LayerMask.NameToLayer("Ground");//Ground Layer만 체크한다.
+        Vector2 frontVec;
         if(!rend.flipX)//왼쪽을 바라 보고 있을때는 왼쪽으로 ray를 쏜다
         {
             playerHit = Physics2D.Raycast(transform.position+Vector3.left*1.0f, new Vector3(-1, 0, 0),Mathf.Infinity,layerMask1);
             //시야는 무한으로 여의주제외하고 감지
             dragonballHit = Physics2D.Raycast(transform.position + Vector3.left * 1.0f, new Vector3(-1, 0, 0));
-            Debug.DrawRay(transform.position + Vector3.left * 1.0f, new Vector3(-10, 0, 0),new Color(0,1,0));
             //시야는 무한으로 
+            frontVec = new Vector2(transform.position.x - 3.0f, transform.position.y);
+            groundHit = Physics2D.Raycast(frontVec, Vector3.down, Mathf.Infinity, layerGround);
+            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
             if(playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
             {
                 p.Detected();
@@ -69,6 +76,10 @@ public class Boss_1 : MonoBehaviour
                 walkOridle = 0;
                 curState = CurrentState.question;
             }
+            if(groundHit.collider==null)
+            {
+                rend.flipX = !rend.flipX;
+            }
         }
         else//오른쪽을 바라 보고 있을때는 오른쪽으로 ray를 쏜다
         {
@@ -76,7 +87,9 @@ public class Boss_1 : MonoBehaviour
             //시야는 무한으로 여의주제외하고 감지
             dragonballHit = Physics2D.Raycast(transform.position + Vector3.right * 1.0f, new Vector3(1, 0, 0));
             //시야는 무한으로 플레이어 제외하고 감지
-            Debug.DrawRay(transform.position + Vector3.right * 1.0f, new Vector3(10, 0, 0),new Color(0,1,0));
+            frontVec = new Vector2(transform.position.x + 3.0f, transform.position.y);
+            groundHit = Physics2D.Raycast(frontVec, Vector3.down, Mathf.Infinity, layerGround);
+            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
             if (playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
             {
                 p.Detected();
@@ -85,6 +98,10 @@ public class Boss_1 : MonoBehaviour
             {
                 walkOridle = 0;
                 curState = CurrentState.question;
+            }
+            if(groundHit.collider==null)
+            {
+                rend.flipX = !rend.flipX;
             }
         }
     }
