@@ -49,7 +49,6 @@ public class Boss_1 : MonoBehaviour
         if(col.gameObject.tag=="dragonBall"&&curState!=CurrentState.faint)//faint상태가 아닐때만
         {
             walkOridle = 0;
-            delaytime = 0;//타이머 초기화
             curState = CurrentState.faint;
         }
     }
@@ -64,19 +63,19 @@ public class Boss_1 : MonoBehaviour
             //시야는 무한으로 여의주제외하고 감지
             dragonballHit = Physics2D.Raycast(transform.position + Vector3.left * 1.0f, new Vector3(-1, 0, 0));
             //시야는 무한으로 
-            frontVec = new Vector2(transform.position.x - 3.0f, transform.position.y);
-            groundHit = Physics2D.Raycast(frontVec, Vector3.down, Mathf.Infinity, layerGround);
-            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-            if(playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
+            frontVec = new Vector2(transform.position.x -stat.groundView, transform.position.y);
+            groundHit = Physics2D.Raycast(frontVec, Vector3.down, stat.groundDepth, layerGround);
+            Debug.DrawRay(frontVec, Vector3.down*stat.groundDepth, new Color(0, 1, 0));
+            if(playerHit.collider!=null&&playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
             {
                 p.Detected();
             }
-            if (dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
+            if (dragonballHit.collider!=null&&dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
             {
                 walkOridle = 0;
                 curState = CurrentState.question;
             }
-            if(groundHit.collider==null)
+            if(groundHit.collider==null)//절벽 체크
             {
                 rend.flipX = !rend.flipX;
             }
@@ -86,20 +85,20 @@ public class Boss_1 : MonoBehaviour
             playerHit = Physics2D.Raycast(transform.position + Vector3.right * 1.0f, new Vector3(1, 0, 0), Mathf.Infinity, layerMask1);
             //시야는 무한으로 여의주제외하고 감지
             dragonballHit = Physics2D.Raycast(transform.position + Vector3.right * 1.0f, new Vector3(1, 0, 0));
-            //시야는 무한으로 플레이어 제외하고 감지
-            frontVec = new Vector2(transform.position.x + 3.0f, transform.position.y);
-            groundHit = Physics2D.Raycast(frontVec, Vector3.down, Mathf.Infinity, layerGround);
-            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-            if (playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
+            //시야는 무한으로 
+            frontVec = new Vector2(transform.position.x + stat.groundView, transform.position.y);
+            groundHit = Physics2D.Raycast(frontVec, Vector3.down, stat.groundDepth, layerGround);
+            Debug.DrawRay(frontVec, Vector3.down*stat.groundDepth, new Color(0, 1, 0));
+            if (playerHit.collider!=null&&playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
             {
                 p.Detected();
             }
-            if (dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
+            if (dragonballHit.collider!=null&&dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
             {
                 walkOridle = 0;
                 curState = CurrentState.question;
             }
-            if(groundHit.collider==null)
+            if(groundHit.collider==null)//절벽 체크
             {
                 rend.flipX = !rend.flipX;
             }
@@ -151,11 +150,7 @@ public class Boss_1 : MonoBehaviour
                 case CurrentState.walk:
                     MoveToWall();
                     animator.SetBool("isMoving", true);
-                    if (delaytime > stat.maxTime)
-                    {
-                        delaytime = 0;
-                        walkOridle = walkOridle * -1;
-                    }
+                    Init();
                     break;
                 case CurrentState.warn:
                     Debug.Log("경고상태!!");
@@ -167,11 +162,7 @@ public class Boss_1 : MonoBehaviour
                     {
                         rend.flipX = true;
                     }
-                    if(delaytime>stat.maxTime)
-                    {
-                        walkOridle = 1;//warn상태가 끝나면 idle상태여야 한다
-                        delaytime = 0;//idle상태가 된후 타이머를 처음부터 시작
-                    }
+                    Init();
                     break;
                 case CurrentState.faint:
                     Debug.Log("Faint상태!!");
@@ -181,15 +172,25 @@ public class Boss_1 : MonoBehaviour
                     break;
                 case CurrentState.question:
                     Debug.Log("Question상태!!");
-                    if(delaytime>stat.maxTime)//타이머
-                    {
-                        walkOridle = 1;//question상태가 끝나면 idle상태여야 한다.
-                        delaytime = 0;//idle상태가 된 후 타이머를 처음부터 시작.
-                    }
+                    Init();
                     break;
             }
             yield return null;
         }
+    }
+    private void Init()//각 상태가 타이머에 의해서 만료될 때 취할 행동
+    {
+        if(delaytime>stat.maxTime&&(walkOridle==-1||walkOridle==1))//idle나 walk일때 타이머가 만료되면
+        {
+            walkOridle = walkOridle*-1;
+            delaytime = 0;
+        }
+        else if(delaytime>stat.maxTime)//faint를 제외한 나머지 경우에서 타이머가 만료되면
+        {
+            walkOridle = 1;
+            delaytime = 0;
+        }
+        
     }
     public void MoveTime()//walk와 idle
     {
