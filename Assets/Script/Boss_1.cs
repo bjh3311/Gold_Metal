@@ -17,6 +17,7 @@ public class Boss_1 : MonoBehaviour
     private RaycastHit2D playerHit;//player감지를 위한 변수
     private RaycastHit2D dragonballHit;//여의주감지를 위한 변수
     private RaycastHit2D groundHit;//낭떠러지인지 확인을 위한 변수
+    private RaycastHit2D wallHit;//벽인지 확인을 위한 변수
 
     public enum CurrentState { idle, walk, warn ,faint,question};
     public CurrentState curState = CurrentState.idle;//시작은 idle상태
@@ -24,8 +25,6 @@ public class Boss_1 : MonoBehaviour
     private int walkOridle = 1;//1이면 idle -1이면 walk ,그 이외의 경우에는 0
     private int layerMask1;
     private int layerGround;//낭떠러지인지 확인을 위한 layer변수
-
-    private bool isWall = false;//true면 벽에 붙어있다는 소리이다.
 
     public Transform wallCheck;
     public LayerMask wallLayers;//벽에 붙었는지 아닌지 확인하기 위한 변수들
@@ -65,6 +64,7 @@ public class Boss_1 : MonoBehaviour
             //시야는 무한으로 
             frontVec = new Vector2(transform.position.x -stat.groundView, transform.position.y);
             groundHit = Physics2D.Raycast(frontVec, Vector3.down, stat.groundDepth, layerGround);
+            wallHit = Physics2D.Raycast(frontVec, Vector3.left, 0.1f, layerGround);
             Debug.DrawRay(frontVec, Vector3.down*stat.groundDepth, new Color(0, 1, 0));
             if(playerHit.collider!=null&&playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
             {
@@ -79,6 +79,12 @@ public class Boss_1 : MonoBehaviour
             {
                 rend.flipX = !rend.flipX;
             }
+            if(wallHit.collider!=null)//벽 체크
+            {
+                rend.flipX = !rend.flipX;//방향 전환
+            }
+
+     
         }
         else//오른쪽을 바라 보고 있을때는 오른쪽으로 ray를 쏜다
         {
@@ -88,6 +94,7 @@ public class Boss_1 : MonoBehaviour
             //시야는 무한으로 
             frontVec = new Vector2(transform.position.x + stat.groundView, transform.position.y);
             groundHit = Physics2D.Raycast(frontVec, Vector3.down, stat.groundDepth, layerGround);
+            wallHit = Physics2D.Raycast(frontVec, Vector3.right, 0.1f, layerGround);
             Debug.DrawRay(frontVec, Vector3.down*stat.groundDepth, new Color(0, 1, 0));
             if (playerHit.collider!=null&&playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
             {
@@ -102,6 +109,10 @@ public class Boss_1 : MonoBehaviour
             {
                 rend.flipX = !rend.flipX;
             }
+            if(wallHit.collider!=null)
+            {
+                rend.flipX = !rend.flipX;
+            }
         }
     }
     IEnumerator CheckState()
@@ -110,11 +121,6 @@ public class Boss_1 : MonoBehaviour
         {
             MoveTime();//타이머
             dist = (playerTransform.position- transform.position).sqrMagnitude;//반원식으로 
-            isWall = Physics2D.OverlapCircle(wallCheck.position, 0.5f, wallLayers);//벽과의 거리
-            if (isWall)//벽을 마주치면 방향 전환
-            {
-                rend.flipX = !rend.flipX;
-            }
             if (dist <= stat.view*stat.view && Input.GetButtonDown("Fire1")&&walkOridle!=0)//x 좌표차가 view안에 있고 마우스 좌클릭하면 curState는 walk
             {
                 walkOridle = 0;

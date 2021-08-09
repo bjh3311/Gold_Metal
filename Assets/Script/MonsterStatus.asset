@@ -16,3 +16,5 @@ MonoBehaviour:
   view: 6
   random: 0001
   maxTime: 3
+  groundView: 0.7
+  groundDepth: 1
