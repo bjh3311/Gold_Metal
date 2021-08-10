@@ -66,25 +66,6 @@ public class Boss_1 : MonoBehaviour
             groundHit = Physics2D.Raycast(frontVec, Vector3.down, stat.groundDepth, layerGround);
             wallHit = Physics2D.Raycast(frontVec, Vector3.left, 0.1f, layerGround);
             Debug.DrawRay(frontVec, Vector3.down*stat.groundDepth, new Color(0, 1, 0));
-            if(playerHit.collider!=null&&playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
-            {
-                p.Detected();
-            }
-            if (dragonballHit.collider!=null&&dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
-            {
-                walkOridle = 0;
-                curState = CurrentState.question;
-            }
-            if(groundHit.collider==null)//절벽 체크
-            {
-                rend.flipX = !rend.flipX;
-            }
-            if(wallHit.collider!=null)//벽 체크
-            {
-                rend.flipX = !rend.flipX;//방향 전환
-            }
-
-     
         }
         else//오른쪽을 바라 보고 있을때는 오른쪽으로 ray를 쏜다
         {
@@ -96,23 +77,23 @@ public class Boss_1 : MonoBehaviour
             groundHit = Physics2D.Raycast(frontVec, Vector3.down, stat.groundDepth, layerGround);
             wallHit = Physics2D.Raycast(frontVec, Vector3.right, 0.1f, layerGround);
             Debug.DrawRay(frontVec, Vector3.down*stat.groundDepth, new Color(0, 1, 0));
-            if (playerHit.collider!=null&&playerHit.collider.CompareTag("Player")&&curState!=CurrentState.faint)//faint상태가 아닐때만
-            {
-                p.Detected();
-            }
-            if (dragonballHit.collider!=null&&dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
-            {
-                walkOridle = 0;
-                curState = CurrentState.question;
-            }
-            if(groundHit.collider==null)//절벽 체크
-            {
-                rend.flipX = !rend.flipX;
-            }
-            if(wallHit.collider!=null)
-            {
-                rend.flipX = !rend.flipX;
-            }
+        }
+        if (playerHit.collider != null && playerHit.collider.CompareTag("Player") && curState != CurrentState.faint)//faint상태가 아닐때만
+        {
+            p.Detected();
+        }
+        if (dragonballHit.collider != null && dragonballHit.collider.CompareTag("dragonBall"))//여의주가 시야에 들어오면 question상태
+        {
+            walkOridle = 0;
+            curState = CurrentState.question;
+        }
+        if (groundHit.collider == null)//절벽 체크
+        {
+            rend.flipX = !rend.flipX;
+        }
+        if (wallHit.collider != null)
+        {
+            rend.flipX = !rend.flipX;
         }
     }
     IEnumerator CheckState()
@@ -146,12 +127,7 @@ public class Boss_1 : MonoBehaviour
             {
                 case CurrentState.idle:
                     animator.SetBool("isMoving", false);
-                    if (delaytime > stat.maxTime)
-                    {
-                        delaytime = 0;//타이머 초기화
-                        walkOridle = walkOridle * -1;
-                        rend.flipX = stat.random[Random.Range(0, 2)];//idle가 끝나고 walk할때는 랜덤한 방향
-                    }
+                    Init();
                     break;
                 case CurrentState.walk:
                     MoveToWall();
@@ -168,7 +144,7 @@ public class Boss_1 : MonoBehaviour
                     {
                         rend.flipX = true;
                     }
-                    Init();
+                    Init();//타이머를 초기화하는 함수
                     break;
                 case CurrentState.faint:
                     Debug.Log("Faint상태!!");
@@ -178,7 +154,7 @@ public class Boss_1 : MonoBehaviour
                     break;
                 case CurrentState.question:
                     Debug.Log("Question상태!!");
-                    Init();
+                    Init();//타이머를 초기화하는 함수
                     break;
             }
             yield return null;
@@ -188,6 +164,10 @@ public class Boss_1 : MonoBehaviour
     {
         if(delaytime>stat.maxTime&&(walkOridle==-1||walkOridle==1))//idle나 walk일때 타이머가 만료되면
         {
+            if(walkOridle==1)//idle가 끝나고 walk로 갈때는 랜덤방향으로 나아가야 한다.
+            {
+                rend.flipX = stat.random[Random.Range(0, 2)];
+            }
             walkOridle = walkOridle*-1;
             delaytime = 0;
         }
