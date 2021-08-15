@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
         rend = gameObject.GetComponent<SpriteRenderer>();
         transform = this.gameObject.GetComponent<Transform>();
     }
-
     // Update is called once per frame
     void Update()
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
-
 public class Boss_1 : MonoBehaviour
 {
     public MonsterStatus stat;
@@ -66,6 +65,7 @@ public class Boss_1 : MonoBehaviour
             groundHit = Physics2D.Raycast(frontVec, Vector3.down, stat.groundDepth, layerGround);
             wallHit = Physics2D.Raycast(frontVec, Vector3.left, 0.1f, layerGround);
             Debug.DrawRay(frontVec, Vector3.down*stat.groundDepth, new Color(0, 1, 0));
+
         }
         else//오른쪽을 바라 보고 있을때는 오른쪽으로 ray를 쏜다
         {
@@ -176,7 +176,6 @@ public class Boss_1 : MonoBehaviour
             walkOridle = 1;
             delaytime = 0;
         }
-        
     }
     public void MoveTime()//walk와 idle
     {
