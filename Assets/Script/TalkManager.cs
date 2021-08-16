@@ -36,19 +36,21 @@ public class TalkManager : MonoBehaviour
     void Load_Character(string sJsonData)
     {
         Data pData = JsonUtility.FromJson<Data>(sJsonData);
-        Debug.Log(pData.characterData[index].id);
-    }
-    public void Action(GameObject scanObj)
-    {
-        if(isAction)//Exit Action
+        talkText.text = pData.characterData[index].id + "\n" + pData.characterData[index].text;
+        if(index+1==pData.characterData.Length)
         {
-            isAction = false;
+            talkPanel.SetActive(false);
+            return;
         }
         else
         {
-            isAction = true;
-            LoadJsonData_FromAsset(pAsset);
+            index++;
         }
+    }
+    public void Action(GameObject scanObj)
+    {
+        isAction = true;
+        LoadJsonData_FromAsset(pAsset);
         talkPanel.SetActive(isAction);
     }
 }
