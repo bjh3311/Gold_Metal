@@ -3,7 +3,11 @@ guid: a86b52b239bdc754c85fe9bda62f3394
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - talkPanel: {instanceID: 0}
+  - talkText: {instanceID: 0}
+  - scanObject: {instanceID: 0}
+  - pAsset: {fileID: 4900000, guid: 1af57d27c9ffa7a44a86d2b389140853, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
