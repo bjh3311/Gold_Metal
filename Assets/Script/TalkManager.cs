@@ -20,7 +20,6 @@ public class TalkManager : MonoBehaviour
 {
     public GameObject talkPanel;
     public Text talkText;
-    public GameObject scanObject;
     public bool isAction;
     private int index = 0;
     public TextAsset pAsset;
@@ -47,7 +46,7 @@ public class TalkManager : MonoBehaviour
             index++;
         }
     }
-    public void Action(GameObject scanObj)
+    public void Action()
     {
         isAction = true;
         LoadJsonData_FromAsset(pAsset);

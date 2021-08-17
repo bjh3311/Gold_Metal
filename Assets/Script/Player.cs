@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class Player : MonoBehaviour
         rend = gameObject.GetComponent<SpriteRenderer>();
         transform = this.gameObject.GetComponent<Transform>();
     }
+    private void OnBecameInvisible()//화면 밖으로 나가면 다음 씬으로 잠시 넘긴다
+    {
+        SceneManager.LoadScene("Test");
+    }
     // Update is called once per frame
     void Update()
     {
@@ -34,7 +39,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Z) && scanObject != null)
         {
-            manager.Action(scanObject);
+            manager.Action();
         }
     }
     public void Detected()

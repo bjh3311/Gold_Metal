@@ -11,7 +11,7 @@ public class TypingEffect : MonoBehaviour
 
     private void Start()
     {
-        originText = gameObject.GetComponent<Text>().ToString();
+        originText = this.gameObject.GetComponent<Text>().ToString();
         StartCoroutine("TypingAction");
     }
     IEnumerator TypingAction()
