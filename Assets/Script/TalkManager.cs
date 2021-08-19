@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using LitJson;
 using System.IO;
-using Newtonsoft.Json;
+
 [System.Serializable]
 class CharacterData
 {
@@ -20,9 +19,20 @@ public class TalkManager : MonoBehaviour
 {
     public GameObject talkPanel;
     public Text talkText;
-    public bool isAction;
-    private int index = 0;
+    private int index = -1;
     public TextAsset pAsset;
+
+    public Image playerPortrait;
+    public Image npcPortrait;
+
+    private void FixedUpdate()
+    {
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            index++;
+            LoadJsonData_FromAsset(pAsset);
+        }
+    }
     void LoadJsonData_FromAsset(TextAsset pAsset)//에셋 기반 json불러오기
     {
         if(pAsset==null)
@@ -35,21 +45,15 @@ public class TalkManager : MonoBehaviour
     void Load_Character(string sJsonData)
     {
         Data pData = JsonUtility.FromJson<Data>(sJsonData);
-        talkText.text = pData.characterData[index].id + "\n" + pData.characterData[index].text;
-        if(index+1==pData.characterData.Length)
+        if (index < pData.characterData.Length)
+        {
+            talkText.text = pData.characterData[index].id + "\n" + pData.characterData[index].text;
+        }
+        else
         {
             talkPanel.SetActive(false);
             return;
         }
-        else
-        {
-            index++;
-        }
-    }
-    public void Action()
-    {
-        isAction = true;
-        LoadJsonData_FromAsset(pAsset);
-        talkPanel.SetActive(isAction);
+        
     }
 }

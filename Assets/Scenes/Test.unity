@@ -533,10 +533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86b52b239bdc754c85fe9bda62f3394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkPanel: {fileID: 0}
-  talkText: {fileID: 0}
-  isAction: 0
+  talkPanel: {fileID: 477749814}
+  talkText: {fileID: 1882405231}
   pAsset: {fileID: 4900000, guid: 1af57d27c9ffa7a44a86d2b389140853, type: 3}
+  playerPortrait: {fileID: 747821775}
+  npcPortrait: {fileID: 1665120531}
 --- !u!4 &508106776
 Transform:
   m_ObjectHideFlags: 0
@@ -1108,8 +1109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 28, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 21, y: 8.7303}
+  m_SizeDelta: {x: 761.2957, y: 75.42161}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1882405231
 MonoBehaviour:
