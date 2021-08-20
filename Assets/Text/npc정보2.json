@@ -1,17 +1,33 @@
 {
-  "characterData": 
-  [
-    {
-      "id": 100,
-      "text": "새로운 scene의 첫번째 대화 내용!!!!"
-    },
-    {
-      "id": 101,
-      "text": "새로운 scene의 2번째 대화내용"
-    },
+  "characterData":
+   [
+      {
+        "id": 100,
+        "language": 
+        [
+          { "text": "한국어입니다" },
+          { "text": "english" },
+          { "text": "아리가또" }
+        ]
+      },
+      {
+       "id": 101,
+        "language":
+        [
+          { "text": "2번째 대화 한국어" },
+          { "text": "funcking second" },
+          { "text": "일본어입니다" }
+        ]
+       },
     {
       "id": 102,
-      "text": "새로운 scene의 3번째 대화내용"
+      "language": 
+      [
+        { "text": "3번째 대화" },
+        { "text": "fucking third" },
+        { "text": "세번째 일본어" }
+      ]
     }
   ]
 }
+

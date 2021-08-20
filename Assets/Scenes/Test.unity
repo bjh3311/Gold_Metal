@@ -535,7 +535,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkPanel: {fileID: 477749814}
   talkText: {fileID: 1882405231}
-  pAsset: {fileID: 4900000, guid: 1af57d27c9ffa7a44a86d2b389140853, type: 3}
+  pAsset: {fileID: 4900000, guid: 16128a12f0b262d4c865fcd73a2916d1, type: 3}
+  lanNum: 1
   playerPortrait: {fileID: 747821775}
   npcPortrait: {fileID: 1665120531}
 --- !u!4 &508106776

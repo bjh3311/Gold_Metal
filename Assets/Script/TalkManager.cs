@@ -5,10 +5,15 @@ using UnityEngine.UI;
 using System.IO;
 
 [System.Serializable]
+class Contents//언어별 대화 내용
+{
+    public string text;
+}
+[System.Serializable]
 class CharacterData
 {
     public string id;
-    public string text;
+    public Contents[] language;//언어별로 대화 내용 담기 위해서
 }
 [System.Serializable]
 class Data
@@ -22,12 +27,14 @@ public class TalkManager : MonoBehaviour
     private int index = -1;
     public TextAsset pAsset;
 
+    public int lanNum;//언어 선택
+
     public Image playerPortrait;
     public Image npcPortrait;
 
     private void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
+        if(Input.GetKeyDown(KeyCode.Z)&&gameObject.activeSelf==true)//대화창이 켜져 있을 때만
         {
             index++;
             LoadJsonData_FromAsset(pAsset);
@@ -47,7 +54,7 @@ public class TalkManager : MonoBehaviour
         Data pData = JsonUtility.FromJson<Data>(sJsonData);
         if (index < pData.characterData.Length)
         {
-            talkText.text = pData.characterData[index].id + "\n" + pData.characterData[index].text;
+            talkText.text = pData.characterData[index].id + "\n" + pData.characterData[index].language[lanNum].text;
         }
         else
         {
