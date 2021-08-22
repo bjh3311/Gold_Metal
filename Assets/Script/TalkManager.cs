@@ -54,7 +54,17 @@ public class TalkManager : MonoBehaviour
         Data pData = JsonUtility.FromJson<Data>(sJsonData);
         if (index < pData.characterData.Length)
         {
-            talkText.text = pData.characterData[index].id + "\n" + pData.characterData[index].language[lanNum].text;
+            if(pData.characterData[index].id=="0")//id가 0이라면 즉, 플레이어라면,C#에서는 부등호 비교가 빠르다.
+            {
+                playerPortrait.color = new Color(255, 255, 255);//플레이어는 밝게
+                npcPortrait.color = new Color(56, 56, 56);//npc는 어둡게
+            }
+            else//id가 0이외의 즉 NPC라면
+            {
+                playerPortrait.color = new Color(56, 56, 56);//플레이어는 어둡게
+                npcPortrait.color = new Color(255, 255, 255);//npc는 밝게
+            }
+            talkText.text = pData.characterData[index].language[lanNum].text;
         }
         else
         {
