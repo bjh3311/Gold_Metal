@@ -685,6 +685,12 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/ross2/Desktop/진환이꺼/툴스/유니티 프로젝트/Gold_Metal/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Users/ross2/Desktop/진환이꺼/툴스/유니티 프로젝트/Gold_Metal/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Users/ross2/Desktop/진환이꺼/툴스/유니티 프로젝트/Gold_Metal/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
