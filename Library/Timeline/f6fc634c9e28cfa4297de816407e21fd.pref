@@ -24,7 +24,6 @@ MonoBehaviour:
   m_Keys:
   - {fileID: -4064093251039076800, guid: f6fc634c9e28cfa4297de816407e21fd, type: 2}
   - {fileID: 5427503753062541540, guid: f6fc634c9e28cfa4297de816407e21fd, type: 2}
-  - {fileID: -6974384102714428772, guid: f6fc634c9e28cfa4297de816407e21fd, type: 2}
   m_Vals:
   - collapsed: 0
     showMarkers: 1
@@ -96,38 +95,3 @@ MonoBehaviour:
       height: 1
     m_MarkerTimeStampsKeys: 5ac1ffffd6390000
     m_MarkerTimeStampsValues: fc9105776162d9082bb7cab49a63d908
-  - collapsed: 0
-    showMarkers: 1
-    showInlineCurves: 0
-    inlineAnimationCurveHeight: 100
-    lastInlineCurveDataID: -1
-    inlineCurvesState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 
-      m_RenameOverlay:
-        m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
-        m_EditFieldRect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        m_UserData: 0
-        m_IsWaitingForDelay: 0
-        m_IsRenaming: 0
-        m_OriginalEventType: 11
-        m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
-      m_SearchString: 
-    inlineCurvesShownAreaInsideMargins:
-      serializedVersion: 2
-      x: 1
-      y: 1
-      width: 1
-      height: 1
-    m_MarkerTimeStampsKeys: 
-    m_MarkerTimeStampsValues: 
