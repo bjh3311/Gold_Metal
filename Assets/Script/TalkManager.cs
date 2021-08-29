@@ -4,22 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
-[System.Serializable]
-class Contents//언어별 대화 내용
-{
-    public string text;
-}
-[System.Serializable]
-class CharacterData
-{
-    public string id;
-    public Contents[] language;//언어별로 대화 내용 담기 위해서
-}
-[System.Serializable]
-class Data
-{
-    public CharacterData[] characterData;
-}
 public class TalkManager : MonoBehaviour
 {
     public GameObject talkPanel;
