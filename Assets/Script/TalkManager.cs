@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 public class TalkManager : MonoBehaviour
 {
@@ -16,6 +19,27 @@ public class TalkManager : MonoBehaviour
     public Image playerPortrait;
     public Image npcPortrait;
 
+    public static string Decrypt(string textToDecrypt, string key)//복호화 함수
+    {
+        RijndaelManaged rijndaelCipher = new RijndaelManaged();
+        rijndaelCipher.Mode = CipherMode.CBC;
+        rijndaelCipher.Padding = PaddingMode.PKCS7;
+        rijndaelCipher.KeySize = 128;
+        rijndaelCipher.BlockSize = 128;
+        byte[] encryptedData = Convert.FromBase64String(textToDecrypt);
+        byte[] pwdBytes = Encoding.UTF8.GetBytes(key);
+        byte[] keyBytes = new byte[16];
+        int len = pwdBytes.Length;
+        if (len > keyBytes.Length)
+        {
+              len = keyBytes.Length;
+        }
+        Array.Copy(pwdBytes, keyBytes, len);
+        rijndaelCipher.Key = keyBytes;
+        rijndaelCipher.IV = keyBytes;
+        byte[] plainText = rijndaelCipher.CreateDecryptor().TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+        return Encoding.UTF8.GetString(plainText);
+    }
     private void FixedUpdate()
     {
         if(Input.GetKeyDown(KeyCode.Z)&&gameObject.activeSelf==true)//대화창이 켜져 있을 때만
@@ -35,6 +59,7 @@ public class TalkManager : MonoBehaviour
     }
     void Load_Character(string sJsonData)
     {
+        sJsonData=Decrypt(sJsonData,"321");
         Data pData = JsonUtility.FromJson<Data>(sJsonData);
         if (index < pData.characterData.Length)
         {
