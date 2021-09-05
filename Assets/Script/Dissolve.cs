@@ -1,42 +1,41 @@
 ﻿using System.Collections;
- using System.Collections.Generic;
-  using UnityEngine;
-   public class Dissolve : MonoBehaviour 
-   { 
-       bool isUpdateDissolve; 
-       bool isUpdateUnDissolve; 
-       public SpriteRenderer Sr;
-       private float threshold; 
-        private void Start() 
-        { 
-            threshold = Sr.material.GetFloat("_Threshold");//해당 섀이더를 열어보면 해당 프로퍼티의 이름을 알 수 있다.
-        }
-        private void Update() 
-        { 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            { 
-                 isUpdateDissolve = true;
-                  isUpdateUnDissolve = false; 
-            } 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-             { 
-                 isUpdateDissolve = false; 
-                 isUpdateUnDissolve = true; 
-            } 
-                
-            if (isUpdateDissolve) 
-                 UpdateDissolve(1f);
-                  if (isUpdateUnDissolve) 
-                  UpdateUnDissolve(1f); 
-        } 
-        private void UpdateDissolve(float dissolveSpeed) 
-        {
-             threshold += Time.deltaTime / dissolveSpeed;
-              Sr.material.SetFloat("_Threshold", threshold); 
-        }
-    private void UpdateUnDissolve(float dissolveSpeed) 
+using System.Collections.Generic; 
+using UnityEngine; 
+public class Dissolve : MonoBehaviour 
+{
+    private SpriteRenderer Sr; 
+    private float threshold;
+
+    private void Start() 
     { 
-        threshold -= Time.deltaTime / dissolveSpeed; 
-        Sr.material.SetFloat("_Threshold", threshold);
-         } 
+        Sr=this.gameObject.GetComponent<SpriteRenderer>();
+        threshold = Sr.material.GetFloat("_Threshold");
+    }
+    private void UpdateDissolve(float dissolveSpeed)
+    {
+        while(true)
+        {
+            threshold -= Time.deltaTime / dissolveSpeed; 
+            Sr.material.SetFloat("_Threshold", threshold);
+            if(threshold<0)
+            {
+                this.gameObject.SetActive(false);
+                break;
+            }   
+        }
+           
+    } 
+    private void UpdateUnDissolve(float dissolveSpeed) 
+    {    
+        this.gameObject.SetActive(true);
+        while(true)
+        {
+            threshold += Time.deltaTime / dissolveSpeed; 
+            Sr.material.SetFloat("_Threshold", threshold); 
+            if(threshold>1.01)
+            {
+                break;
+            }
+        }
+    }     
 }
