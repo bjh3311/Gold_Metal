@@ -5,37 +5,47 @@ public class Dissolve : MonoBehaviour
 {
     private SpriteRenderer Sr; 
     private float threshold;
-
+    [SerializeField]
+    private float dissolveSpeed;
     private void Start() 
     { 
         Sr=this.gameObject.GetComponent<SpriteRenderer>();
         threshold = Sr.material.GetFloat("_Threshold");
     }
-    private void UpdateDissolve(float dissolveSpeed)
+    public void UpdateDissolve()
     {
         while(true)
-        {
-            threshold -= Time.deltaTime / dissolveSpeed; 
+        {      
+            StartCoroutine("ActiveDissolve");
             Sr.material.SetFloat("_Threshold", threshold);
-            if(threshold<0)
+            if(threshold>1.01)
             {
-                this.gameObject.SetActive(false);
                 break;
             }   
         }
            
     } 
-    private void UpdateUnDissolve(float dissolveSpeed) 
+    IEnumerator ActiveDissolve()
+    {
+        Debug.Log("dis");
+        threshold+=0.01f;
+        yield return new WaitForSeconds(10f);
+    }
+    public void UpdateUnDissolve() 
     {    
-        this.gameObject.SetActive(true);
         while(true)
         {
-            threshold += Time.deltaTime / dissolveSpeed; 
+            StartCoroutine("ActiveUnDissolve");
             Sr.material.SetFloat("_Threshold", threshold); 
-            if(threshold>1.01)
+            if(threshold<0)
             {
                 break;
             }
         }
-    }     
+    }   
+    IEnumerator ActiveUnDissolve()
+    {
+        threshold-=0.01f;
+        yield return new WaitForSeconds(10f);
+    }  
 }

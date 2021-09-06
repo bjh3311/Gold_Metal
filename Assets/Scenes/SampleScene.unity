@@ -1627,6 +1627,7 @@ GameObject:
   - component: {fileID: 1952409880}
   - component: {fileID: 1952409879}
   - component: {fileID: 1952409878}
+  - component: {fileID: 1952409881}
   m_Layer: 0
   m_Name: App Icon
   m_TagString: Untagged
@@ -1710,7 +1711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0751aec51cf87e043a084069c20e184f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sr: {fileID: 1952409876}
+  dissolveSpeed: 1
 --- !u!95 &1952409879
 Animator:
   serializedVersion: 3
@@ -1749,6 +1750,49 @@ PlayableDirector:
     value: {fileID: 1952409879}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &1952409881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952409875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: c45792e91fa7b5748821ac4cd9dd023e, type: 2}
+    - {fileID: 11400000, guid: cf2f5be1bc3871342bb609a827cb9b10, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1952409878}
+          m_MethodName: UpdateDissolve
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1952409878}
+          m_MethodName: UpdateUnDissolve
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1974063357
 GameObject:
   m_ObjectHideFlags: 0
