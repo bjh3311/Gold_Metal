@@ -6,7 +6,7 @@ public class Dissolve : MonoBehaviour
     private SpriteRenderer Sr; 
     private float threshold;
     [SerializeField]
-    private float dissolveSpeed;
+    private float dissolveTime;
     private void Start() 
     { 
         Sr=this.gameObject.GetComponent<SpriteRenderer>();
@@ -14,38 +14,38 @@ public class Dissolve : MonoBehaviour
     }
     public void UpdateDissolve()
     {
+        StartCoroutine("ActiveDissolve");    
+    } 
+    IEnumerator ActiveDissolve()
+    {
         while(true)
-        {      
-            StartCoroutine("ActiveDissolve");
+        {
+            threshold+=0.1f;
+            yield return new WaitForSeconds(dissolveTime);
             Sr.material.SetFloat("_Threshold", threshold);
             if(threshold>1.01)
             {
                 break;
-            }   
+            }
         }
-           
-    } 
-    IEnumerator ActiveDissolve()
-    {
-        Debug.Log("dis");
-        threshold+=0.01f;
-        yield return new WaitForSeconds(10f);
+        
     }
     public void UpdateUnDissolve() 
     {    
+        StartCoroutine("ActiveUnDissolve");
+    }   
+    IEnumerator ActiveUnDissolve()
+    {
         while(true)
         {
-            StartCoroutine("ActiveUnDissolve");
+            threshold-=0.1f;
+            yield return new WaitForSeconds(dissolveTime);
             Sr.material.SetFloat("_Threshold", threshold); 
             if(threshold<0)
             {
                 break;
             }
         }
-    }   
-    IEnumerator ActiveUnDissolve()
-    {
-        threshold-=0.01f;
-        yield return new WaitForSeconds(10f);
+        
     }  
 }
