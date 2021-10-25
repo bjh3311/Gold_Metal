@@ -36,16 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\Boss_1.cs" />
-     <Compile Include="Assets\Script\Boss_2.cs" />
-     <Compile Include="Assets\Script\Camera.cs" />
-     <Compile Include="Assets\Script\CreateJson.cs" />
-     <Compile Include="Assets\Script\Dissolve.cs" />
-     <Compile Include="Assets\Script\MonsterStatus.cs" />
-     <Compile Include="Assets\Script\Player.cs" />
-     <Compile Include="Assets\Script\TalkManager.cs" />
-     <Compile Include="Assets\Script\TypingEffect.cs" />
-     <Compile Include="Assets\Script\dragonBall.cs" />
+     <Compile Include="Assets\Script\Ninja.cs" />
      <None Include="Assets\ImageEffect\Dissolve.shader" />
      <None Include="Assets\Ninja Files\Read Me.txt" />
     <Reference Include="UnityEngine">
