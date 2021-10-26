@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 171762199}
   - component: {fileID: 171762198}
   - component: {fileID: 171762197}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Button Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,6 +683,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b7b8ec9ae3d63d44a1ee63fd653a52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  groundCheck: {fileID: 1076788183}
 --- !u!1 &1103099922
 GameObject:
   m_ObjectHideFlags: 0
