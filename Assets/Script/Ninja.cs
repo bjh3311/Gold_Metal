@@ -10,22 +10,21 @@ public class Ninja : MonoBehaviour
     private bool isGround=true;//점프제한을위한 변수
     private int jumpCount=2;//2번까지 점프
     [SerializeField]
-    LayerMask groundLayer;//땅 체크
-    [SerializeField]
-    Transform groundCheck;//땅 체크
+    private LayerMask groundLayer;//땅 체크
+    private Transform groundCheck;//땅 체크
     private void Start() 
     {
         rigid=this.gameObject.GetComponent<Rigidbody2D>();
         anim=this.gameObject.GetComponent<Animator>();
+        groundCheck=this.gameObject.GetComponent<Transform>();
     }
     public void Jump()
     {
-        if(!isGround||jumpCount<=0)//isGround가 false이면 함수 종료
+        if(jumpCount<=0)//isGround가 false이거나 jumpCount가 0이면 함수 종료
         {
             return;
         }
-        rigid.AddForce(new Vector2(0,4.0f),ForceMode2D.Impulse);//점프
-        Debug.Log("점프 버튼 눌름");
+        rigid.AddForce(new Vector2(0,8.0f),ForceMode2D.Impulse);//점프
         jumpCount--;
     }
     public void Attack()
@@ -38,8 +37,8 @@ public class Ninja : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(isGround);
-        isGround=Physics2D.OverlapCircle(groundCheck.position,0.5f,groundLayer);
+        isGround=Physics2D.OverlapCircle(groundCheck.position,1.5f,groundLayer);
+        Debug.Log(jumpCount);
         if(isGround)
         {
             jumpCount=2;
