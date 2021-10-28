@@ -35,11 +35,9 @@ public class Ninja : MonoBehaviour
     {
         Debug.Log("Crouch");
     }
-    void FixedUpdate()
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        isGround=Physics2D.OverlapCircle(groundCheck.position,1.5f,groundLayer);
-        Debug.Log(jumpCount);
-        if(isGround)
+        if(col.gameObject.layer==LayerMask.NameToLayer("Ground"))
         {
             jumpCount=2;
         }
