@@ -29,11 +29,11 @@ public class Ninja : MonoBehaviour
     }
     public void Attack()
     {
-        Debug.Log("Attack");
+        anim.SetBool("isAttack",true);
     }
     public void Crouch()
     {
-        Debug.Log("Crouch");
+        anim.SetBool("isCrouch",true);
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
