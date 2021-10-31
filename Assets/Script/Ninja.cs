@@ -24,7 +24,7 @@ public class Ninja : MonoBehaviour
         {
             return;
         }
-        rigid.AddForce(new Vector2(0,8.0f),ForceMode2D.Impulse);//점프
+        rigid.velocity=new Vector2(0,8.0f);
         jumpCount--;
     }
     public void Attack()
