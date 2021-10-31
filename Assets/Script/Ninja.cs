@@ -24,7 +24,11 @@ public class Ninja : MonoBehaviour
         {
             return;
         }
-        rigid.velocity=new Vector2(0,8.0f);
+        if(jumpCount==1)
+        {
+            anim.SetBool("isDouble",true);
+        }
+        rigid.AddForce(new Vector2(0,8.0f),ForceMode2D.Impulse);
         jumpCount--;
     }
     public void Attack()
