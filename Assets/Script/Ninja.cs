@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Ninja : MonoBehaviour
 {
     Rigidbody2D rigid;
+    BoxCollider2D box;
     Animator anim;
     private bool isGround=true;//점프제한을위한 변수
     private int jumpCount=2;//2번까지 점프
@@ -17,6 +18,7 @@ public class Ninja : MonoBehaviour
         rigid=this.gameObject.GetComponent<Rigidbody2D>();
         anim=this.gameObject.GetComponent<Animator>();
         groundCheck=this.gameObject.GetComponent<Transform>();
+        box=this.gameObject.GetComponent<BoxCollider2D>();
     }
     public void Jump()
     {
@@ -34,13 +36,27 @@ public class Ninja : MonoBehaviour
     public void Attack()
     {
         anim.SetBool("isAttack",true);
+        
     }
-    public void Crouch()
+    public void AttackEnd()
+    {
+        anim.SetBool("isAttack",false);
+    }
+    public void CrouchStart()//Crouch 누르는 동안 crouch
     {
         anim.SetBool("isCrouch",true);
+        box.size=new Vector2(1.5f,1f);
+        box.offset=new Vector2(0,-0.5f);
+    }
+    public void CrouchEnd()//Crouch떼면 바로 Run
+    {
+        anim.SetBool("isCrouch",false);
+        box.size=new Vector2(1.5f,2f);
+        box.offset=new Vector2(0,0);
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
+        anim.SetBool("isDouble",false);
         if(col.gameObject.layer==LayerMask.NameToLayer("Ground"))
         {
             jumpCount=2;
