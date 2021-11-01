@@ -36,8 +36,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\LoadScore.cs" />
      <Compile Include="Assets\Script\Ninja.cs" />
-     <Compile Include="Assets\Script\Score.cs" />
+     <Compile Include="Assets\Script\SaveScore.cs" />
      <None Include="Assets\ImageEffect\Dissolve.shader" />
      <None Include="Assets\Ninja Files\Read Me.txt" />
     <Reference Include="UnityEngine">
