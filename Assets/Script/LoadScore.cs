@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 
 public class LoadScore : MonoBehaviour
 {
-    private Text text;
+    Text text;
     public GameObject nowScore;
     private void Start() 
     {
