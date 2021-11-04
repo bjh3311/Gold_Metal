@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\BetterJump.cs" />
      <Compile Include="Assets\Script\LoadScore.cs" />
      <Compile Include="Assets\Script\Ninja.cs" />
      <Compile Include="Assets\Script\SaveScore.cs" />

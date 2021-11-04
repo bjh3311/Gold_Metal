@@ -1,24 +1,24 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System;
 using System.Text;
-using System.Security.Cryptography;
-
 public class LoadScore : MonoBehaviour
 {
-    Text text;
+    Text contents;
     public GameObject nowScore;
+    private SaveScore script; 
     private void Start() 
     {
-        text=this.gameObject.GetComponent<Text>();
+        contents=this.gameObject.GetComponent<Text>();
+        script=nowScore.GetComponent<SaveScore>();
     }
-    int now;
+    int now=0;
     private void Update()
     {
-        now=nowScore.GetComponent<SaveScore>().score;
-        text.text="현재점수: "+now;
+        now=script.score;
+        contents.text="현재점수: "+now;
     }
 }
