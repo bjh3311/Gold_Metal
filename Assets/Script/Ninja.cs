@@ -30,13 +30,12 @@ public class Ninja : MonoBehaviour
         {
             anim.SetBool("isDouble",true);
         }
-        rigid.velocity=new Vector2(0,8.0f);
+        rigid.velocity=new Vector2(0,10.0f);
         jumpCount--;
     }
     public void Attack()
     {
         anim.SetBool("isAttack",true);
-        
     }
     public void AttackEnd()
     {

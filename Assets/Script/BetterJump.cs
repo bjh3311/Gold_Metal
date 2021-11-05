@@ -16,7 +16,7 @@ public class BetterJump : MonoBehaviour
     {
         if(rb.velocity.y<0)
         {
-            rb.velocity+=Vector2.up*Physics2D.gravity.y*1.5f*Time.deltaTime;
+            rb.velocity+=Vector2.up*Physics2D.gravity.y*2.0f*Time.deltaTime;
         }
         else if(rb.velocity.y>0)
         {
