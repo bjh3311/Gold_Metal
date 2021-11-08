@@ -36,10 +36,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\BetterJump.cs" />
-     <Compile Include="Assets\Script\LoadScore.cs" />
-     <Compile Include="Assets\Script\Ninja.cs" />
-     <Compile Include="Assets\Script\SaveScore.cs" />
+     <Compile Include="Assets\Script\Main\Main.cs" />
+     <Compile Include="Assets\Script\Ninja\BetterJump.cs" />
+     <Compile Include="Assets\Script\Ninja\Ninja.cs" />
+     <Compile Include="Assets\Script\UI\LoadScore.cs" />
+     <Compile Include="Assets\Script\UI\Pause.cs" />
+     <Compile Include="Assets\Script\UI\SaveScore.cs" />
      <None Include="Assets\ImageEffect\Dissolve.shader" />
      <None Include="Assets\Ninja Files\Read Me.txt" />
     <Reference Include="UnityEngine">
