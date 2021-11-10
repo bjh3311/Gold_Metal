@@ -12,6 +12,9 @@ public class CameraShake : MonoBehaviour
 
     public void Shake()
     {
+        #if UNITY_ANDROID
+        Handheld.Vibrate();//휴대폰 진동
+        #endif
         cameraPos=mainCamera.transform.position;//초기 카메라 위치를 저장해준다
         InvokeRepeating("StartShake",0f,0.005f);
         Invoke("StopShake",duration);
