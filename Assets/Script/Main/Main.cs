@@ -9,7 +9,6 @@ public class Main : MonoBehaviour
 {
     public void Play()//시작 버튼
     {
-        Debug.Log("시작버튼");
         SceneManager.LoadScene("Game");
     }
     public void Exit()//나가기 버튼

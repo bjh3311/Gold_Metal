@@ -14,6 +14,7 @@ class Score
 
 public class SaveScore : MonoBehaviour
 {
+
     Text contents;
     public int score=0;
     private int bestScore;//현재 최고점수
@@ -24,7 +25,7 @@ public class SaveScore : MonoBehaviour
         bestScore=LoadJsonData_FromAsset();//Json에서 최고점수를 받아온다.
         contents.text="최고점수: "+bestScore;
     }
-    public void Save()//저장하는 함수
+    public void Save()//저장하는 함수, 플레이어가 죽으면 자동으로 실행된다.
     {
         if(score<bestScore)//현재 점수가 최고점수보다 작다면 저장하지 않는다.
         {
@@ -38,7 +39,6 @@ public class SaveScore : MonoBehaviour
         {
             File.WriteAllText(Application.dataPath+"/Json"+"/Score.json",temp);//제이슨 저장
         }
-        Debug.Log("저장됨");
     }
     private static int LoadJsonData_FromAsset()//경로 기반 json불러오기
     {
@@ -61,7 +61,10 @@ public class SaveScore : MonoBehaviour
         while(true)
         {
             yield return new WaitForSecondsRealtime(0.1f);
-            score++;
+            if(Time.timeScale!=0)
+            {
+                score++;
+            }   
         }
     }
     public static string Encrypt(string textToEncrypt, string key)//암호화 함수

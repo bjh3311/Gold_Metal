@@ -43,6 +43,10 @@ public class Ninja : MonoBehaviour
     }
     public void CrouchStart()//Crouch 누르는 동안 crouch
     {
+        if(Time.timeScale==0)//멈춰있으면
+        {
+            return;
+        }
         anim.SetBool("isCrouch",true);
         box.size=new Vector2(1.5f,1f);
         box.offset=new Vector2(0,-0.5f);
