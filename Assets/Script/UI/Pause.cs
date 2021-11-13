@@ -20,6 +20,10 @@ public class Pause : MonoBehaviour
          Buttons[i].interactable=false;
       }
    }
+   public void Restart()//처음부터 다시하기 버튼
+   {
+      SceneManager.LoadScene("Game");
+   }
    public void Resume()//다시하기 버튼
    {
       Time.timeScale=1;

@@ -26,10 +26,6 @@ public class Ninja : MonoBehaviour
         {
             return;
         }
-        if(jumpCount==1)
-        {
-            anim.SetBool("isDouble",true);
-        }
         rigid.velocity=new Vector2(0,10.0f);
         jumpCount--;
     }
@@ -47,6 +43,10 @@ public class Ninja : MonoBehaviour
         {
             return;
         }
+        if(Mathf.Abs(rigid.velocity.y)>0.1f)//공중에 떠 있는동안은 Crouch가 안되게 한다.
+        {
+            return;
+        }
         anim.SetBool("isCrouch",true);
         box.size=new Vector2(1.5f,1f);
         box.offset=new Vector2(0,-0.5f);
@@ -59,7 +59,6 @@ public class Ninja : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        anim.SetBool("isDouble",false);
         if(col.gameObject.layer==LayerMask.NameToLayer("Ground"))
         {
             jumpCount=2;
