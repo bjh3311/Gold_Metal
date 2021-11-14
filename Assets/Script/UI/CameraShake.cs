@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraShake : MonoBehaviour
 {
     public Camera mainCamera;
+    
+    public GameObject GameOverScreen;//게임오버화면
+    public Button[] Buttons;//버튼들
     Vector3 cameraPos;//초기 카메라 위치
 
     [SerializeField] [Range(0.01f,0.1f)] float shakeRange=0.05f;
@@ -32,5 +36,15 @@ public class CameraShake : MonoBehaviour
     {
         CancelInvoke("StartShake");
         mainCamera.transform.position=cameraPos;//카메라를 다시 초기위치로 이동시켜준다.
+        Invoke("GameOver",0.3f);//카메라 흔들기가 끝난 후 게임오버 시킨다.
+    }
+    void GameOver()
+    {
+        GameOverScreen.SetActive(true);
+        Time.timeScale=0;//정지 시킨다.
+        for(int i=0;i<Buttons.Length;i++)
+        {
+            Buttons[i].interactable=false;
+        }
     }
 }
