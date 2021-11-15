@@ -16,6 +16,7 @@ public class CameraShake : MonoBehaviour
 
     public void Shake()
     {
+        
         #if UNITY_ANDROID
         Handheld.Vibrate();//휴대폰 진동
         #endif
@@ -40,8 +41,8 @@ public class CameraShake : MonoBehaviour
     }
     void GameOver()
     {
-        GameOverScreen.SetActive(true);
         Time.timeScale=0;//정지 시킨다.
+        GameOverScreen.SetActive(true);
         for(int i=0;i<Buttons.Length;i++)
         {
             Buttons[i].interactable=false;

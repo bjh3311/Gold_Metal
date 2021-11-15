@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\Main\Main.cs" />
+     <Compile Include="Assets\Script\Map\MapMove.cs" />
      <Compile Include="Assets\Script\Ninja\BetterJump.cs" />
      <Compile Include="Assets\Script\Ninja\Ninja.cs" />
      <Compile Include="Assets\Script\UI\CameraShake.cs" />

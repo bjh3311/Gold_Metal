@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Ninja : MonoBehaviour
 {
+
+    public GameObject GameManager;
+    private CameraShake cameraShake;
+    public GameObject BestScore;
+    private SaveScore saveScript;
     Rigidbody2D rigid;
     BoxCollider2D box;
     Animator anim;
@@ -19,6 +24,8 @@ public class Ninja : MonoBehaviour
         anim=this.gameObject.GetComponent<Animator>();
         groundCheck=this.gameObject.GetComponent<Transform>();
         box=this.gameObject.GetComponent<BoxCollider2D>();
+        cameraShake=GameManager.GetComponent<CameraShake>();
+        saveScript=BestScore.GetComponent<SaveScore>();
     }
     public void Jump()
     {
@@ -63,5 +70,10 @@ public class Ninja : MonoBehaviour
         {
             jumpCount=2;
         }
+    }
+    void OnBecameInvisible()//화면에서 안보이면 SaveScore후 카메라 쉐이크 진행
+    {
+        saveScript.Save();
+        cameraShake.Shake();        
     }
 }
