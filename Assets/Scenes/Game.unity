@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 171762197}
   m_Layer: 8
   m_Name: Button Down
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1173,7 +1173,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1076788186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1845,7 +1845,7 @@ GameObject:
   - component: {fileID: 1473652793}
   m_Layer: 0
   m_Name: obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -76,4 +76,14 @@ public class Ninja : MonoBehaviour
         saveScript.Save();
         cameraShake.Shake();        
     }
+    private void OnCollisionEnter2D(Collision col)
+    {
+        Debug.Log("부딪혔다!!");
+        if(col.collider.CompareTag("Obstacle"))//장애물에 부딪히면
+        {
+            Debug.Log("ㅇㅁㄻㅇㄻㄹ");
+            saveScript.Save();
+            cameraShake.Shake();
+        }
+    }
 }
