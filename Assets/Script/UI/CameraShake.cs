@@ -21,14 +21,8 @@ public class CameraShake : MonoBehaviour
         Handheld.Vibrate();//휴대폰 진동
         #endif
         cameraPos=mainCamera.transform.position;//초기 카메라 위치를 저장해준다
-        for(int i=0;i<100;i++)
-        {
-            StartShake();
-            if(i==99)
-            {
-                StopShake();
-            }
-        }
+        InvokeRepeating("StartShake",0f,0.005f);
+        Invoke("StopShake",duration);
     }
     void StartShake()
     {
@@ -37,11 +31,11 @@ public class CameraShake : MonoBehaviour
         Vector3 temp=mainCamera.transform.position;
         temp.x+=cameraPosX;
         temp.y+=cameraPosy;
-        Debug.Log(temp);
         mainCamera.transform.position=temp;
     }
     void StopShake()
     {
+        CancelInvoke("StartShake");
         mainCamera.transform.position=cameraPos;//카메라를 다시 초기위치로 이동시켜준다.
         Invoke("GameOver",0.3f);//카메라 흔들기가 끝난 후 게임오버 시킨다.
     }
