@@ -70,20 +70,17 @@ public class Ninja : MonoBehaviour
         {
             jumpCount=2;
         }
+        if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
+        {
+            rigid.velocity=new Vector2(0,10.0f);
+            box.isTrigger=true;
+            saveScript.Save();
+            cameraShake.Shake();
+        }
     }
     void OnBecameInvisible()//화면에서 안보이면 SaveScore후 카메라 쉐이크 진행
     {
         saveScript.Save();
         cameraShake.Shake();        
-    }
-    private void OnCollisionEnter2D(Collision col)
-    {
-        Debug.Log("부딪혔다!!");
-        if(col.collider.CompareTag("Obstacle"))//장애물에 부딪히면
-        {
-            Debug.Log("ㅇㅁㄻㅇㄻㄹ");
-            saveScript.Save();
-            cameraShake.Shake();
-        }
     }
 }
