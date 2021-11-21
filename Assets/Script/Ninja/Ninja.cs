@@ -9,7 +9,9 @@ public class Ninja : MonoBehaviour
     public GameObject GameManager;
     private CameraShake cameraShake;
     public GameObject BestScore;
+    public GameObject NowScore;
     private SaveScore saveScript;
+    private LoadScore scoreScript;
     Rigidbody2D rigid;
     BoxCollider2D box;
     Animator anim;
@@ -26,6 +28,7 @@ public class Ninja : MonoBehaviour
         box=this.gameObject.GetComponent<BoxCollider2D>();
         cameraShake=GameManager.GetComponent<CameraShake>();
         saveScript=BestScore.GetComponent<SaveScore>();
+        scoreScript=NowScore.GetComponent<LoadScore>();
     }
     public void Jump()
     {
@@ -76,6 +79,12 @@ public class Ninja : MonoBehaviour
             box.isTrigger=true;
             saveScript.Save();
             cameraShake.Shake();
+        }
+        if(col.gameObject.CompareTag("Item"))
+        {
+            Debug.Log("ㅁㅇㄹ");
+            scoreScript.now++;
+            col.gameObject.SetActive(false);
         }
     }
     void OnBecameInvisible()//화면에서 안보이면 SaveScore후 카메라 쉐이크 진행

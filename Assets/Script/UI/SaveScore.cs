@@ -20,7 +20,6 @@ public class SaveScore : MonoBehaviour
     private int bestScore;//현재 최고점수
     private void Start() 
     {
-        StartCoroutine("plus");
         contents=this.gameObject.GetComponent<Text>();
         bestScore=LoadJsonData_FromAsset();//Json에서 최고점수를 받아온다.
         contents.text="최고점수: "+bestScore;
@@ -55,17 +54,6 @@ public class SaveScore : MonoBehaviour
         sJsonData=Decrypt(sJsonData,"321");//복호화
         Score pData = JsonUtility.FromJson<Score>(sJsonData);
         return pData.value;
-    }
-    IEnumerator plus()
-    {
-        while(true)
-        {
-            yield return new WaitForSecondsRealtime(0.1f);
-            if(Time.timeScale!=0)
-            {
-                score++;
-            }   
-        }
     }
     public static string Encrypt(string textToEncrypt, string key)//암호화 함수
     {

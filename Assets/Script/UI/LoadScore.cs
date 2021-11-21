@@ -13,12 +13,10 @@ public class LoadScore : MonoBehaviour
     private void Start() 
     {
         contents=this.gameObject.GetComponent<Text>();
-        script=nowScore.GetComponent<SaveScore>();
     }
-    int now=0;
+    public int now=0;
     private void Update()
     {
-        now=script.score;
         contents.text="현재점수: "+now;
     }
 }
