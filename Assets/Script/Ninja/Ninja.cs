@@ -82,7 +82,6 @@ public class Ninja : MonoBehaviour
         }
         if(col.gameObject.CompareTag("Item"))
         {
-            Debug.Log("ㅁㅇㄹ");
             scoreScript.now++;
             col.gameObject.SetActive(false);
         }
