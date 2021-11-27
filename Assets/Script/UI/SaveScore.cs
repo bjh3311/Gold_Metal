@@ -15,14 +15,18 @@ class Score
 public class SaveScore : MonoBehaviour
 {
 
-    Text contents;
-    public int score=0;
-    private int bestScore;//현재 최고점수
+    Text bestText;
+    Text nowText;//현재 점수 텍스트
+    public GameObject nowObject;
+    public int score=0;//현재 점수
+    private int bestScore;//최고점수
     private void Start() 
     {
-        contents=this.gameObject.GetComponent<Text>();
+        StartCoroutine("plus");//점수 저절로 오르게
+        bestText=this.gameObject.GetComponent<Text>();
         bestScore=LoadJsonData_FromAsset();//Json에서 최고점수를 받아온다.
-        contents.text="최고점수: "+bestScore;
+        bestText.text="최고점수: "+bestScore;
+        nowText=nowObject.gameObject.GetComponent<Text>();
     }
     public void Save()//저장하는 함수, 플레이어가 죽으면 자동으로 실행된다.
     {
@@ -96,5 +100,14 @@ public class SaveScore : MonoBehaviour
         rijndaelCipher.IV = keyBytes;
         byte[] plainText = rijndaelCipher.CreateDecryptor().TransformFinalBlock(encryptedData, 0, encryptedData.Length);
         return Encoding.UTF8.GetString(plainText);
+    }
+    IEnumerator plus()
+    {
+        while(true)
+        {   
+            nowText.text="현재점수: "+score;//현재점수를 계속 score로 갱신시켜준다
+            yield return new WaitForSecondsRealtime(0.1f);
+            score++;
+        }
     }
 }

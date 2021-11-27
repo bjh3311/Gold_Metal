@@ -38,8 +38,8 @@
   <ItemGroup>
      <Compile Include="Assets\Script\Main\Main.cs" />
      <Compile Include="Assets\Script\Map\MapMove.cs" />
-     <Compile Include="Assets\Script\Ninja\BetterJump.cs" />
-     <Compile Include="Assets\Script\Ninja\Ninja.cs" />
+     <Compile Include="Assets\Script\Player\BetterJump.cs" />
+     <Compile Include="Assets\Script\Player\Player.cs" />
      <Compile Include="Assets\Script\UI\CameraShake.cs" />
      <Compile Include="Assets\Script\UI\LoadScore.cs" />
      <Compile Include="Assets\Script\UI\Pause.cs" />
