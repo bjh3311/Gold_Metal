@@ -66,7 +66,6 @@ public class Player : MonoBehaviour
     }
     void OnBecameInvisible()//화면에서 안보이면 SaveScore후 카메라 쉐이크 진행
     {
-        saveScript.Save();
-        cameraShake.Shake();        
+        Debug.Log("Restart도 화면에서 안보인걸로 치나??");
     }
 }

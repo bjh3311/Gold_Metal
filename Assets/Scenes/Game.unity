@@ -382,7 +382,6 @@ GameObject:
   - component: {fileID: 330678873}
   - component: {fileID: 330678876}
   - component: {fileID: 330678875}
-  - component: {fileID: 330678874}
   m_Layer: 5
   m_Name: NowScore
   m_TagString: Untagged
@@ -409,20 +408,6 @@ RectTransform:
   m_AnchoredPosition: {x: 248.15, y: 285.25}
   m_SizeDelta: {x: 261.63037, y: 30.001709}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &330678874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330678872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c31b12b6fc4a37c4f99af6303e5f6fb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nowScore: {fileID: 625000856}
-  now: 0
 --- !u!114 &330678875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,7 +1221,6 @@ MonoBehaviour:
   Buttons:
   - {fileID: 367087051}
   - {fileID: 1220480819}
-  - {fileID: 0}
   - {fileID: 1590640399}
   PauseScreen: {fileID: 2071972400}
 --- !u!4 &1024783322

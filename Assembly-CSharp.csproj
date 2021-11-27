@@ -41,7 +41,6 @@
      <Compile Include="Assets\Script\Player\BetterJump.cs" />
      <Compile Include="Assets\Script\Player\Player.cs" />
      <Compile Include="Assets\Script\UI\CameraShake.cs" />
-     <Compile Include="Assets\Script\UI\LoadScore.cs" />
      <Compile Include="Assets\Script\UI\Pause.cs" />
      <Compile Include="Assets\Script\UI\SaveScore.cs" />
      <None Include="Assets\ImageEffect\Dissolve.shader" />

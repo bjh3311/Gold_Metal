@@ -27,6 +27,7 @@ public class SaveScore : MonoBehaviour
         bestScore=LoadJsonData_FromAsset();//Json에서 최고점수를 받아온다.
         bestText.text="최고점수: "+bestScore;
         nowText=nowObject.gameObject.GetComponent<Text>();
+        nowText.text="현재점수: "+score;
     }
     public void Save()//저장하는 함수, 플레이어가 죽으면 자동으로 실행된다.
     {
@@ -45,13 +46,17 @@ public class SaveScore : MonoBehaviour
     }
     private static int LoadJsonData_FromAsset()//경로 기반 json불러오기
     {
-        string pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/Score.json");
-        if(pAsset==null)//경로에 파일이없을시, 즉 처음시작한거면 0점으로 설정
+        string pAsset;
+        try
         {
-            Debug.LogError("파일 없음");
+            pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/Score.json");
+        }
+        catch(FileNotFoundException)//처음실행되었다면 파일이없다.그러므로 0을 반환
+        {
+            Debug.Log("파일 없음");
             return 0;
         }
-        return Load_Integer(pAsset);//pAsset에서 정수를 불러온다.
+        return Load_Integer(pAsset);//catch문이 실행이안되면, 즉 파일이 존재하면 실행된다.
     }
     private static int Load_Integer(string sJsonData)
     {
@@ -105,9 +110,16 @@ public class SaveScore : MonoBehaviour
     {
         while(true)
         {   
-            nowText.text="현재점수: "+score;//현재점수를 계속 score로 갱신시켜준다
             yield return new WaitForSecondsRealtime(0.1f);
-            score++;
+            if(Time.timeScale==1)//진행중인 상황일 때만 점수를 증가시킨다.
+            {
+                score++;
+            }
         }
+    
+    }
+    private void Update() 
+    {
+        nowText.text="현재점수: "+score;
     }
 }

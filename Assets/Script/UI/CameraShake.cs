@@ -16,7 +16,6 @@ public class CameraShake : MonoBehaviour
 
     public void Shake()
     {
-        
         #if UNITY_ANDROID
         Handheld.Vibrate();//휴대폰 진동
         #endif
