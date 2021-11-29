@@ -53,19 +53,15 @@ public class Player : MonoBehaviour
         }
         if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
         {
-            rigid.velocity=new Vector2(0,10.0f);
             box.isTrigger=true;
             saveScript.Save();
             cameraShake.Shake();
+            saveScript.StopCoroutine("plus");
         }
         if(col.gameObject.CompareTag("Item"))
         {
             saveScript.score++;
             col.gameObject.SetActive(false);
         }
-    }
-    void OnBecameInvisible()//화면에서 안보이면 SaveScore후 카메라 쉐이크 진행
-    {
-        Debug.Log("Restart도 화면에서 안보인걸로 치나??");
     }
 }
