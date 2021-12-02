@@ -51,17 +51,20 @@ public class Player : MonoBehaviour
         {
             jumpCount=2;
         }
+        if(col.gameObject.CompareTag("Item"))
+        {
+            saveScript.score++;
+            col.gameObject.SetActive(false);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
         if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
         {
             box.isTrigger=true;
             saveScript.Save();
             cameraShake.Shake();
             saveScript.StopCoroutine("plus");
-        }
-        if(col.gameObject.CompareTag("Item"))
-        {
-            saveScript.score++;
-            col.gameObject.SetActive(false);
         }
     }
 }
