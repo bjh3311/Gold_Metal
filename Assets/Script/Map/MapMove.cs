@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MapMove : MonoBehaviour
 {
-    [SerializeField]
-    float mapSpeed=10f;
+    public float mapSpeed=0f;
 
     private void Update() 
     {
