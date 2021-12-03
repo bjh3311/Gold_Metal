@@ -1495,6 +1495,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -5434303214053368601, guid: 0023f5b7e42f1114b8d33d4ccb962602, type: 2}
     value: {fileID: 1024783327}
+  - key: {fileID: -5922070148595995370, guid: 0023f5b7e42f1114b8d33d4ccb962602, type: 2}
+    value: {fileID: 1950532937}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1024783326
@@ -1513,11 +1515,12 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: cdbaddbb12c5ff043846ef4ed1e8c8b2, type: 2}
     - {fileID: 11400000, guid: 7fe27aefe5a5d7f48852bae70390ecc4, type: 2}
+    - {fileID: 11400000, guid: de8948e882f043a41a0575f2531dcc6b, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1024783324}
-          m_MethodName: EndTimeLine
+        - m_Target: {fileID: 0}
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1539,6 +1542,19 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1024783324}
+          m_MethodName: EndTimeLine
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
           m_CallState: 2
 --- !u!95 &1024783327
 Animator:
@@ -4495,6 +4511,7 @@ GameObject:
   - component: {fileID: 1950532934}
   - component: {fileID: 1950532936}
   - component: {fileID: 1950532935}
+  - component: {fileID: 1950532937}
   m_Layer: 5
   m_Name: Ready
   m_TagString: Untagged
@@ -4559,6 +4576,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950532933}
   m_CullTransparentMesh: 0
+--- !u!95 &1950532937
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950532933}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1964829648
 GameObject:
   m_ObjectHideFlags: 0
