@@ -8,9 +8,6 @@ public class Pause : MonoBehaviour
 {
    public Button[] Buttons;
    public GameObject PauseScreen;
-   private void Awake() {
-      Time.timeScale=1;
-   }
    public void Stop()//Stop버튼
    {
       Time.timeScale=0;

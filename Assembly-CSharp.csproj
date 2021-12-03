@@ -43,6 +43,7 @@
      <Compile Include="Assets\Script\UI\CameraShake.cs" />
      <Compile Include="Assets\Script\UI\Pause.cs" />
      <Compile Include="Assets\Script\UI\SaveScore.cs" />
+     <Compile Include="Assets\Script\UI\TimeLine.cs" />
      <None Include="Assets\ImageEffect\Dissolve.shader" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
