@@ -22,7 +22,6 @@ public class SaveScore : MonoBehaviour
     private int bestScore;//최고점수
     private void Start() 
     {
-        StartCoroutine("plus");//점수 저절로 오르게
         bestText=this.gameObject.GetComponent<Text>();
         bestScore=LoadJsonData_FromAsset();//Json에서 최고점수를 받아온다.
         bestText.text="최고점수: "+bestScore;
@@ -106,7 +105,7 @@ public class SaveScore : MonoBehaviour
         byte[] plainText = rijndaelCipher.CreateDecryptor().TransformFinalBlock(encryptedData, 0, encryptedData.Length);
         return Encoding.UTF8.GetString(plainText);
     }
-    IEnumerator plus()
+    public IEnumerator plus()
     {
         while(true)
         {   

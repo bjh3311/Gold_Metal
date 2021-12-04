@@ -10,11 +10,14 @@ public class TimeLine : MonoBehaviour
     public Button[] Buttons;//버튼들
     public GameObject StartScreen;//Start스크린
     public GameObject Ground;//Ground Object
-    private MapMove script;//Ground에 붙어있는 MapMove Script
+    private MapMove MapMove;//Ground에 붙어있는 MapMove Script
+    public GameObject BestScore;
+    private SaveScore SaveScore;
     private void Awake()//처음에는 다 꺼져있어야 한다.
     {
         Time.timeScale=1;
-        script=Ground.gameObject.GetComponent<MapMove>();
+        MapMove=Ground.gameObject.GetComponent<MapMove>();
+        SaveScore=BestScore.gameObject.GetComponent<SaveScore>();
     }
     public void EndTimeLine()//타임라인 마지막
     {
@@ -24,7 +27,7 @@ public class TimeLine : MonoBehaviour
         }
         StartScreen.SetActive(false);//Start스크린을 꺼준다
         Time.timeScale=1;
-        script.mapSpeed=10f;
-        
+        MapMove.mapSpeed=10f;
+        SaveScore.StartCoroutine("plus");//점수 상승 시작
     }
 }

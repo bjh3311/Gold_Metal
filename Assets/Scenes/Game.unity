@@ -716,7 +716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490448574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.05, y: -0.27, z: 0}
+  m_LocalPosition: {x: -9.48, y: 0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1105733579}
@@ -1263,7 +1263,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1371,7 +1371,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1478,6 +1478,7 @@ MonoBehaviour:
   - {fileID: 1590640399}
   StartScreen: {fileID: 1744670588}
   Ground: {fileID: 1172376423}
+  BestScore: {fileID: 625000856}
 --- !u!320 &1024783325
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -2521,6 +2522,15 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 5, y: -3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 8
@@ -2529,6 +2539,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 67e9ace906c21fb4ab336381396ead27, type: 2}
   - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: 7cee705604fed3c4c8f33c87d6af3278, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 106a40cd02caea84d8d131382f18f9a1, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 8
     m_Data: {fileID: 21300260, guid: 2c06fc137f4d6824aa6eaaf5fc8ec5ad, type: 3}
@@ -2536,8 +2548,10 @@ Tilemap:
     m_Data: {fileID: 21300272, guid: 2c06fc137f4d6824aa6eaaf5fc8ec5ad, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300264, guid: 2c06fc137f4d6824aa6eaaf5fc8ec5ad, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300270, guid: 2c06fc137f4d6824aa6eaaf5fc8ec5ad, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 39
+  - m_RefCount: 40
     m_Data:
       e00: 1
       e01: 0
@@ -2556,7 +2570,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 39
+  - m_RefCount: 40
     m_Data: {r: 0.50980395, g: 0.47058824, b: 0.3137255, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -2887,7 +2901,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3442,7 +3456,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3653,6 +3667,8 @@ MonoBehaviour:
   GameManager: {fileID: 1024783320}
   BestScore: {fileID: 625000856}
   NowScore: {fileID: 330678872}
+  Ground: {fileID: 1172376423}
+  weapon: {fileID: 2109178602}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -5047,8 +5063,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109178602}
   m_LocalRotation: {x: 9.295898e-11, y: 0.0000000013938876, z: 0.6157889, w: 0.78791124}
-  m_LocalPosition: {x: -0.338, y: 0.652, z: 6.5134664e-12}
-  m_LocalScale: {x: 0.72983426, y: 0.77023035, z: 1.06}
+  m_LocalPosition: {x: -0.33799982, y: 0.65199995, z: 0}
+  m_LocalScale: {x: 0.7298344, y: 0.77023035, z: 1.06}
   m_Children: []
   m_Father: {fileID: 1579182840}
   m_RootOrder: 0
@@ -5110,13 +5126,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109178602}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.39053714, y: 0.5466383}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5127,5 +5143,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.56, y: 1.7}
+  m_Size: {x: 0.77892566, y: 0.60672337}
   m_EdgeRadius: 0
