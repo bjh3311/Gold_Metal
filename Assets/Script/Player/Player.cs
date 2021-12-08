@@ -77,6 +77,14 @@ public class Player : MonoBehaviour
             saveScript.StopCoroutine("plus");
             MapMove.mapSpeed=0;
         }
+        if(col.gameObject.CompareTag("Bone"))//부술수 있는 뼈들과 부딪히면
+        {
+            box.isTrigger=true;
+            saveScript.Save();
+            cameraShake.Shake();
+            saveScript.StopCoroutine("plus");
+            MapMove.mapSpeed=0;
+        }
         if(col.gameObject.CompareTag("Item"))
         {
             saveScript.score++;

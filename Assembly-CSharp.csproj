@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\Bone.cs" />
      <Compile Include="Assets\Script\Main\Main.cs" />
      <Compile Include="Assets\Script\Map\MapMove.cs" />
      <Compile Include="Assets\Script\Player\BetterJump.cs" />
