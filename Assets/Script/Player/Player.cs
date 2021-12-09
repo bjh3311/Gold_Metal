@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayer;//땅 체크
     private Transform groundCheck;//땅 체크
+
+    private int layerBone;//뼈장애물들을 체크하기위한 layer변수
+    private RaycastHit2D boneHit;//뼈에 맞았는지 감지하기 위한 변수
     private void Start() 
     {
         rigid=this.gameObject.GetComponent<Rigidbody2D>();
@@ -32,6 +35,20 @@ public class Player : MonoBehaviour
         saveScript=BestScore.GetComponent<SaveScore>();
         MapMove=Ground.GetComponent<MapMove>();
         weaponBox=weapon.GetComponent<BoxCollider2D>();
+    }
+    private void FixedUpdate() 
+    {
+        layerBone=1<<LayerMask.NameToLayer("Bone");
+        boneHit=Physics2D.Raycast(transform.position+new Vector3(0.5f,0,0),new Vector3(1.0f,0,0),0.1f,layerBone);
+        if(boneHit.collider!=null)//뼈에 맞는다면 탈락
+        {
+            box.isTrigger=true;
+            saveScript.Save();
+            cameraShake.Shake();
+            saveScript.StopCoroutine("plus");
+            MapMove.mapSpeed=0;
+        }
+        Debug.DrawRay(transform.position+new Vector3(0.5f,0,0),new Vector3(1.0f,0,0)*0.1f,new Color(0,1,0));
     }
     public void Jump()
     {
@@ -53,12 +70,10 @@ public class Player : MonoBehaviour
     public void WeaponBoxOn()//boxcollider 켜기, 무기를 휘드를때만 boxCollider가 켜져 있게 한다.
     {
         weaponBox.enabled=true;
-        Debug.Log("무기 박스 켜기");
     }
     public void WeaponBoxOff()//boxcollider 끄기
     {
         weaponBox.enabled=false;
-        Debug.Log("무기 박스 끄기");
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -70,15 +85,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
-        {
-            box.isTrigger=true;
-            saveScript.Save();
-            cameraShake.Shake();
-            saveScript.StopCoroutine("plus");
-            MapMove.mapSpeed=0;
-        }
-        if(col.gameObject.CompareTag("Bone"))//부술수 있는 뼈들과 부딪히면
-        {
+        {       
             box.isTrigger=true;
             saveScript.Save();
             cameraShake.Shake();

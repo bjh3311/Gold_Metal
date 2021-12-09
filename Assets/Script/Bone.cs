@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Bone : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    BoxCollider2D box;
+    private void Awake() 
     {
-        
+        box=this.gameObject.GetComponent<BoxCollider2D>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   private void OnTriggerEnter2D(Collider2D col)
+   {
+       if(col.gameObject.CompareTag("Weapon"))
+       {
+           box.enabled=false;//박스를 끈다
+       }
+   }
 }

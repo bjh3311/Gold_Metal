@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Obstacle
   - Item
-  - Bone
   - Weapon
   layers:
   - Default
@@ -18,7 +17,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Bone
   - 
   - 
   - 
