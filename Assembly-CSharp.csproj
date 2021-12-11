@@ -43,6 +43,7 @@
      <Compile Include="Assets\Script\Player\Player.cs" />
      <Compile Include="Assets\Script\Player\Weapon.cs" />
      <Compile Include="Assets\Script\UI\CameraShake.cs" />
+     <Compile Include="Assets\Script\UI\HowLong.cs" />
      <Compile Include="Assets\Script\UI\Pause.cs" />
      <Compile Include="Assets\Script\UI\SaveScore.cs" />
      <Compile Include="Assets\Script\UI\TimeLine.cs" />
