@@ -13,11 +13,15 @@ public class TimeLine : MonoBehaviour
     private MapMove MapMove;//Ground에 붙어있는 MapMove Script
     public GameObject BestScore;
     private SaveScore SaveScore;
+
+    HowLong HowLong;
+    public GameObject NowDis;
     private void Awake()//처음에는 다 꺼져있어야 한다.
     {
         Time.timeScale=1;
         MapMove=Ground.gameObject.GetComponent<MapMove>();
         SaveScore=BestScore.gameObject.GetComponent<SaveScore>();
+        HowLong=NowDis.gameObject.GetComponent<HowLong>();
     }
     public void EndTimeLine()//타임라인 마지막
     {
@@ -29,5 +33,6 @@ public class TimeLine : MonoBehaviour
         Time.timeScale=1;
         MapMove.mapSpeed=10f;
         SaveScore.StartCoroutine("plus");//점수 상승 시작
+        HowLong.StartPlus();// 얼마나 왔는지 확인해주는 게이지 상승 시작
     }
 }
