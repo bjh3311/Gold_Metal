@@ -9,6 +9,9 @@ public class HowLong : MonoBehaviour
     Image nowWhere;
     private float dis=0;
 
+    private bool first=false;//1단계
+    private bool second=false;//2단계
+
     MapMove mapScript;
     public GameObject Ground;
     void Start()
@@ -31,15 +34,17 @@ public class HowLong : MonoBehaviour
         {
             if(Time.timeScale!=0)
             {
-                dis=dis+0.1f;
+                dis=dis+0.87f;
             }
-            if(dis>66.0f)
+            if(dis>66.0f&&!second)
             {
-                mapScript.mapSpeed=14f;
+                mapScript.mapSpeed=13f;
+                second=true;
             }
-            else if(dis>33.0f)
+            else if(dis>33.0f&&!first)
             {
-                mapScript.mapSpeed=12f;
+                mapScript.mapSpeed=11.5f;
+                first=true;
             }
             yield return new WaitForSecondsRealtime(0.1f);
         }
