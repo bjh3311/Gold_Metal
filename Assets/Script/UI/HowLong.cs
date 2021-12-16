@@ -9,9 +9,9 @@ public class HowLong : MonoBehaviour
     Image nowWhere;
     private float dis=0;
 
-    private bool first=false;//1단계
-    private bool second=false;//2단계
 
+    private bool firstup=false;//첫번째 속도 up
+    private bool secondup=false;//두번째 속도 up
     MapMove mapScript;
     public GameObject Ground;
     void Start()
@@ -34,19 +34,26 @@ public class HowLong : MonoBehaviour
         {
             if(Time.timeScale!=0)
             {
-                dis=dis+0.87f;
+                dis=dis+0.19f;
             }
-            if(dis>66.0f&&!second)
+            if(dis>66.0f&&!secondup)
             {
                 mapScript.mapSpeed=13f;
-                second=true;
+                secondup=true;
+                SpeedUp();
             }
-            else if(dis>33.0f&&!first)
+            else if(dis>33.0f&&!firstup)
             {
                 mapScript.mapSpeed=11.5f;
-                first=true;
+                firstup=true;
+                SpeedUp();
             }
+            Debug.Log(dis);
             yield return new WaitForSecondsRealtime(0.1f);
         }
+    }
+    private void SpeedUp()//Speed Up 할 때 나타나는 효과
+    {
+
     }
 }
