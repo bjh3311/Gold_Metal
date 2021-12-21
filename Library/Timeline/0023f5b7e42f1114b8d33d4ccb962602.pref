@@ -58,8 +58,8 @@ MonoBehaviour:
       y: 1
       width: 1
       height: 1
-    m_MarkerTimeStampsKeys: 12f3ffff923c0000943c000092faffff243d0000263d0000
-    m_MarkerTimeStampsValues: 2ba8ee1b3eb6d90817f2016642b6d9084f86335543b6d908962f334942b6d908bb1009228ebdd9087eb6af4f8ebdd908
+    m_MarkerTimeStampsKeys: 12f3ffff923c0000943c000092faffff243d0000263d0000363d0000343d0000
+    m_MarkerTimeStampsValues: 2ba8ee1b3eb6d90817f2016642b6d9084f86335543b6d908962f334942b6d908bb1009228ebdd9087eb6af4f8ebdd9083d0c969093c4d90865c9f69293c4d908
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
