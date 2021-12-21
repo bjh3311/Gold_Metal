@@ -36,13 +36,13 @@ public class HowLong : MonoBehaviour
             {
                 dis=dis+0.19f;
             }
-            if(dis>66.0f&&!secondup)
+            if(dis>66.0f&&!secondup)//한번만 실행하기 위해 secondup bool변수 사용
             {
                 mapScript.mapSpeed=13f;
                 secondup=true;
                 SpeedUp();
             }
-            else if(dis>33.0f&&!firstup)
+            else if(dis>33.0f&&!firstup)//한번만 실행하기 위해 firstup bool변수 사용
             {
                 mapScript.mapSpeed=11.5f;
                 firstup=true;
