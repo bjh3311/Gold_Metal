@@ -12,6 +12,8 @@ public class HowLong : MonoBehaviour
     public GameObject Speed;//SpeedUp 화면
     private bool firstup=false;//첫번째 속도 up
     private bool secondup=false;//두번째 속도 up
+
+    private bool end=false;//끝나는 변수
     MapMove mapScript;
     public GameObject Ground;
     void Start()
@@ -36,17 +38,23 @@ public class HowLong : MonoBehaviour
             {
                 dis=dis+0.19f;
             }
-            if(dis>20.0f&&!secondup)//한번만 실행하기 위해 secondup bool변수 사용
+            if(dis>66.0f&&!secondup)//한번만 실행하기 위해 secondup bool변수 사용
             {
                 mapScript.mapSpeed=13f;
                 secondup=true;
                 SpeedUp();
             }
-            else if(dis>10.0f&&!firstup)//한번만 실행하기 위해 firstup bool변수 사용
+            else if(dis>33.0f&&!firstup)//한번만 실행하기 위해 firstup bool변수 사용
             {
                 mapScript.mapSpeed=11.5f;
                 firstup=true;
                 SpeedUp();
+            }
+            else if(dis>35.0f&&!end)
+            {
+                mapScript.mapSpeed=0f;
+                end=true;
+                
             }
             Debug.Log(dis);
             yield return new WaitForSecondsRealtime(0.1f);
