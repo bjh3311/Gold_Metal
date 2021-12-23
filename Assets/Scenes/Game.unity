@@ -1169,6 +1169,76 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &624315138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 624315141}
+  - component: {fileID: 624315140}
+  - component: {fileID: 624315139}
+  m_Layer: 0
+  m_Name: EndManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &624315139
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624315138}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!320 &624315140
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624315138}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: a753dcb5349925d44bc28126890befd7, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 7399235235712618904, guid: a753dcb5349925d44bc28126890befd7, type: 2}
+    value: {fileID: 624315139}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &624315141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624315138}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 172.68962, y: -2.385407, z: -63.572266}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &625000856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,6 +2949,7 @@ GameObject:
   - component: {fileID: 1024783326}
   - component: {fileID: 1024783324}
   - component: {fileID: 1024783327}
+  - component: {fileID: 1024783328}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2898,10 +2969,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3eb35a0baadc8f4eab60e5ed105e8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Buttons:
-  - {fileID: 367087051}
-  - {fileID: 1220480819}
-  - {fileID: 1590640399}
   PauseScreen: {fileID: 2071972400}
 --- !u!4 &1024783322
 Transform:
@@ -2931,10 +2998,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1216596188}
   GameOverScreen: {fileID: 296519708}
-  Buttons:
-  - {fileID: 367087051}
-  - {fileID: 1220480819}
-  - {fileID: 1590640399}
   shakeRange: 0.05
   duration: 0.5
 --- !u!114 &1024783324
@@ -2949,14 +3012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d162597c717c80b47b0cdad917a2497f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Buttons:
-  - {fileID: 367087051}
-  - {fileID: 1220480819}
-  - {fileID: 1590640399}
-  StartScreen: {fileID: 1744670588}
-  Ground: {fileID: 1172376423}
-  BestScore: {fileID: 625000856}
-  NowDis: {fileID: 1604801192}
 --- !u!320 &1024783325
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -3054,6 +3109,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1024783328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024783320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78560c3fe86eb1c4f8dcdecca8d064f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Buttons:
+  - {fileID: 367087051}
+  - {fileID: 1220480819}
+  - {fileID: 1590640399}
+  StartScreen: {fileID: 1744670588}
+  Ground: {fileID: 1172376423}
+  MapMove: {fileID: 1172376426}
+  BestScore: {fileID: 625000856}
+  SaveScore: {fileID: 625000860}
+  Player: {fileID: 1579182837}
+  HowLong: {fileID: 1604801196}
+  NowDis: {fileID: 1604801192}
 --- !u!1 &1081035003
 GameObject:
   m_ObjectHideFlags: 0
@@ -5128,6 +5207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec51e16f5b0e3f742829d11e90b0d21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pDirector: {fileID: 1024783325}
   Speed: {fileID: 1478811742}
   Ground: {fileID: 1172376423}
 --- !u!1 &1712117610

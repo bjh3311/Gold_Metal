@@ -8,7 +8,6 @@ public class CameraShake : MonoBehaviour
     public Camera mainCamera;
     
     public GameObject GameOverScreen;//게임오버화면
-    public Button[] Buttons;//버튼들
     Vector3 cameraPos;//초기 카메라 위치
 
     [SerializeField] [Range(0.01f,0.1f)] float shakeRange=0.05f;
@@ -42,9 +41,9 @@ public class CameraShake : MonoBehaviour
     {
         Time.timeScale=0;//정지 시킨다.
         GameOverScreen.SetActive(true);
-        for(int i=0;i<Buttons.Length;i++)
+        for(int i=0;i<GameManager.instance.Buttons.Length;i++)
         {
-            Buttons[i].interactable=false;
+            GameManager.instance.Buttons[i].interactable=false;
         }
     }
 }

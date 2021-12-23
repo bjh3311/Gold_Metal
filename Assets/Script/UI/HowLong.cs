@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class HowLong : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public PlayableDirector pDirector;
     Image nowWhere;
     private float dis=0;
 
@@ -54,9 +56,8 @@ public class HowLong : MonoBehaviour
             {
                 mapScript.mapSpeed=0f;
                 end=true;
-                
+                pDirector.Play();//끝날때 타임라인 실행
             }
-            Debug.Log(dis);
             yield return new WaitForSecondsRealtime(0.1f);
         }
     }
