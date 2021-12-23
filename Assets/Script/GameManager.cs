@@ -14,11 +14,11 @@ public class GameManager : MonoBehaviour
     public MapMove MapMove;//Ground에 붙어있는 MapMove Script
     public GameObject BestScore;
     public SaveScore SaveScore;
-
-    public GameObject Player;
-
     public HowLong HowLong;
     public GameObject NowDis;
+
+    public GameObject player;
+    public Rigidbody2D rigid;
 
     private void Awake()
     {
@@ -27,5 +27,6 @@ public class GameManager : MonoBehaviour
         MapMove=Ground.gameObject.GetComponent<MapMove>();
         SaveScore=BestScore.gameObject.GetComponent<SaveScore>();
         HowLong=NowDis.gameObject.GetComponent<HowLong>();
+        rigid=player.gameObject.GetComponent<Rigidbody2D>();
     }
 }

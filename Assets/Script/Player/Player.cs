@@ -23,8 +23,6 @@ public class Player : MonoBehaviour
     private LayerMask groundLayer;//땅 체크
     private Transform groundCheck;//땅 체크
 
-    private HowLong HowLong;
-    public GameObject NowDis;
 
     private int layerBone;//뼈장애물들을 체크하기위한 layer변수
     private RaycastHit2D boneHit;//뼈에 맞았는지 감지하기 위한 변수
@@ -38,7 +36,6 @@ public class Player : MonoBehaviour
         saveScript=BestScore.GetComponent<SaveScore>();
         MapMove=Ground.GetComponent<MapMove>();
         weaponBox=weapon.GetComponent<BoxCollider2D>();
-        HowLong=NowDis.GetComponent<HowLong>();
     }
     private void FixedUpdate() 
     {
@@ -94,8 +91,8 @@ public class Player : MonoBehaviour
             saveScript.Save();
             cameraShake.Shake();
             saveScript.StopCoroutine("plus");
-            HowLong.StopCoroutine("plus");
             MapMove.mapSpeed=0;
+            Debug.Log("장애물에 부딪힘");
         }
         if(col.gameObject.CompareTag("Item"))
         {

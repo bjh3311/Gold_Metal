@@ -23,10 +23,6 @@ public class HowLong : MonoBehaviour
         nowWhere=this.gameObject.GetComponent<Image>();
         mapScript=Ground.gameObject.GetComponent<MapMove>();
     }
-    public void StartPlus()//타임라인에서 이걸 참조할것
-    {
-        StartCoroutine("plus");
-    }
     // Update is called once per frame
     void Update()
     {
@@ -36,7 +32,7 @@ public class HowLong : MonoBehaviour
     {
         while(true)
         {
-            if(Time.timeScale!=0)
+            if(Time.timeScale!=0&&!end)
             {
                 dis=dis+0.19f;
             }
@@ -56,7 +52,12 @@ public class HowLong : MonoBehaviour
             {
                 mapScript.mapSpeed=0f;
                 end=true;
-                pDirector.Play();//끝날때 타임라인 실행
+                for(int i=0;i<GameManager.instance.Buttons.Length;i++)
+                {
+                    GameManager.instance.Buttons[i].interactable=false;
+                }
+                GameManager.instance.rigid.velocity=new Vector2(13.0f,0);
+                pDirector.Play();
             }
             yield return new WaitForSecondsRealtime(0.1f);
         }
