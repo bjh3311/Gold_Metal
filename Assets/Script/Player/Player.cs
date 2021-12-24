@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate() 
     {
         layerBone=1<<LayerMask.NameToLayer("Bone");
-        boneHit=Physics2D.Raycast(transform.position+new Vector3(0.5f,0,0),new Vector3(1.0f,0,0),0.1f,layerBone);
+        boneHit=Physics2D.Raycast(transform.position+new Vector3(-0.5f,0,0),new Vector3(1.0f,0,0),1.0f,layerBone);
         if(boneHit.collider!=null)//뼈에 맞는다면 탈락
         {
             box.isTrigger=true;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
             GameManager.instance.SaveScore.StopCoroutine("plus");
             GameManager.instance.MapMove.mapSpeed=0;
         }
-        Debug.DrawRay(transform.position+new Vector3(0.5f,0,0),new Vector3(1.0f,0,0)*0.1f,new Color(0,1,0));
+        Debug.DrawRay(transform.position+new Vector3(-0.5f,0,0),new Vector3(1.0f,0,0)*1.0f,new Color(0,1,0));
     }
     public void Jump()
     {
