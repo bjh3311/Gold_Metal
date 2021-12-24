@@ -17,9 +17,6 @@ public class GameManager : MonoBehaviour
     public HowLong HowLong;
     public GameObject NowDis;
 
-    public GameObject player;
-    public Rigidbody2D rigid;
-
     private void Awake()
     {
         instance=this;
@@ -27,6 +24,5 @@ public class GameManager : MonoBehaviour
         MapMove=Ground.gameObject.GetComponent<MapMove>();
         SaveScore=BestScore.gameObject.GetComponent<SaveScore>();
         HowLong=NowDis.gameObject.GetComponent<HowLong>();
-        rigid=player.gameObject.GetComponent<Rigidbody2D>();
     }
 }

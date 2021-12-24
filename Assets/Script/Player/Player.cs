@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
+
 
 public class Player : MonoBehaviour
 {
-    public GameObject GameManager;
+    public GameObject GM;
     private CameraShake cameraShake;
-    public GameObject BestScore;
     public GameObject NowScore;
-    private SaveScore saveScript;
-    public GameObject Ground;
-    private MapMove MapMove;
     Rigidbody2D rigid;
     BoxCollider2D box;//Player boxCollider
     BoxCollider2D weaponBox;//무기 boxCollider
@@ -19,7 +17,6 @@ public class Player : MonoBehaviour
     Animator anim;
     private bool isGround=true;//점프제한을위한 변수
     private int jumpCount=2;//2번까지 점프
-    [SerializeField]
     private LayerMask groundLayer;//땅 체크
     private Transform groundCheck;//땅 체크
 
@@ -32,9 +29,7 @@ public class Player : MonoBehaviour
         anim=this.gameObject.GetComponent<Animator>();
         groundCheck=this.gameObject.GetComponent<Transform>();
         box=this.gameObject.GetComponent<BoxCollider2D>();
-        cameraShake=GameManager.GetComponent<CameraShake>();
-        saveScript=BestScore.GetComponent<SaveScore>();
-        MapMove=Ground.GetComponent<MapMove>();
+        cameraShake=GM.GetComponent<CameraShake>();
         weaponBox=weapon.GetComponent<BoxCollider2D>();
     }
     private void FixedUpdate() 
@@ -44,10 +39,10 @@ public class Player : MonoBehaviour
         if(boneHit.collider!=null)//뼈에 맞는다면 탈락
         {
             box.isTrigger=true;
-            saveScript.Save();
+            GameManager.instance.SaveScore.Save();
             cameraShake.Shake();
-            saveScript.StopCoroutine("plus");
-            MapMove.mapSpeed=0;
+            GameManager.instance.SaveScore.StopCoroutine("plus");
+            GameManager.instance.MapMove.mapSpeed=0;
         }
         Debug.DrawRay(transform.position+new Vector3(0.5f,0,0),new Vector3(1.0f,0,0)*0.1f,new Color(0,1,0));
     }
@@ -88,15 +83,15 @@ public class Player : MonoBehaviour
         if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
         {       
             box.isTrigger=true;
-            saveScript.Save();
+            GameManager.instance.SaveScore.Save();
             cameraShake.Shake();
-            saveScript.StopCoroutine("plus");
-            MapMove.mapSpeed=0;
-            Debug.Log("장애물에 부딪힘");
+            GameManager.instance.SaveScore.StopCoroutine("plus");
+            GameManager.instance.MapMove.mapSpeed=0;
+            
         }
         if(col.gameObject.CompareTag("Item"))
         {
-            saveScript.score++;
+            GameManager.instance.SaveScore.score++;
             col.gameObject.SetActive(false);
         }
     }
