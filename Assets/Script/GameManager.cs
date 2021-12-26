@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     public SaveScore SaveScore;
     public HowLong HowLong;
     public GameObject NowDis;
+    
+    public GameObject player;
+
+    public BoxCollider2D box;
 
     private void Awake()
     {
@@ -24,5 +28,6 @@ public class GameManager : MonoBehaviour
         MapMove=Ground.gameObject.GetComponent<MapMove>();
         SaveScore=BestScore.gameObject.GetComponent<SaveScore>();
         HowLong=NowDis.gameObject.GetComponent<HowLong>();
+        box=player.gameObject.GetComponent<BoxCollider2D>();
     }
 }

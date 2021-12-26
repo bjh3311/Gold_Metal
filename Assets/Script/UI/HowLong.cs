@@ -45,9 +45,12 @@ public class HowLong : MonoBehaviour
                 GameManager.instance.MapMove.mapSpeed=11.5f;
                 firstup=true;
                 SpeedUp();
+                
             }
             else if(dis>35.0f&&!end)
             {
+                GameManager.instance.box.enabled=false;//알수없는 오류로 계속 타임라인을 이용해서 player를 옮기면
+                //bottom과 충돌해서 걍 완주하면 player box collider를 꺼준다
                 GameManager.instance.MapMove.mapSpeed=0f;
                 end=true;
                 for(int i=0;i<GameManager.instance.Buttons.Length;i++)
