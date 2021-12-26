@@ -16,9 +16,9 @@ public class Pause : MonoBehaviour
          GameManager.instance.Buttons[i].interactable=false;
       }
    }
-   public void Restart()//처음부터 다시하기 버튼
+   public void Restart()//처음부터 현재 씬을 다시하는 버튼
    {
-      SceneManager.LoadScene("Game");
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
    }
    public void Resume()//다시하기 버튼
    {

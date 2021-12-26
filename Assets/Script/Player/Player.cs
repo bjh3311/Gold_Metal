@@ -87,6 +87,7 @@ public class Player : MonoBehaviour
             cameraShake.Shake();
             GameManager.instance.SaveScore.StopCoroutine("plus");
             GameManager.instance.MapMove.mapSpeed=0;
+            GameManager.instance.HowLong.end=true;//끝났다
         }
         if(col.gameObject.CompareTag("Item"))
         {

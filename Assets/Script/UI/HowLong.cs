@@ -15,7 +15,7 @@ public class HowLong : MonoBehaviour
     private bool firstup=false;//첫번째 속도 up
     private bool secondup=false;//두번째 속도 up
 
-    private bool end=false;//끝나는 변수
+    public bool end=false;//끝나는 변수
 
     void Start()
     {
