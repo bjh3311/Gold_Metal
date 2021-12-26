@@ -47,7 +47,7 @@ public class HowLong : MonoBehaviour
                 SpeedUp();
                 
             }
-            else if(dis>35.0f&&!end)
+            else if(dis>100.0f&&!end)
             {
                 GameManager.instance.box.enabled=false;//알수없는 오류로 계속 타임라인을 이용해서 player를 옮기면
                 //bottom의 box collider와 충돌해서 걍 완주하면 player box collider를 꺼준다
