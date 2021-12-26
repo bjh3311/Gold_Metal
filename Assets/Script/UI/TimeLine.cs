@@ -9,10 +9,7 @@ public class TimeLine : MonoBehaviour
 {
     public void EndTimeLine()//타임라인 마지막
     {
-        for(int i=0;i<GameManager.instance.Buttons.Length;i++)
-        {
-          GameManager.instance.Buttons[i].interactable=true;
-        }
+        GameManager.instance.ButtonEnabled();//Button들을 활성화시켜준다
         GameManager.instance.StartScreen.SetActive(false);//Start스크린을 꺼준다
         Time.timeScale=1;
         GameManager.instance.MapMove.mapSpeed=10f;

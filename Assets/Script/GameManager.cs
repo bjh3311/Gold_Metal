@@ -30,4 +30,18 @@ public class GameManager : MonoBehaviour
         HowLong=NowDis.gameObject.GetComponent<HowLong>();
         box=player.gameObject.GetComponent<BoxCollider2D>();
     }
+    public void ButtonDisabled()//버튼 비활성화 시키는 함수
+    {
+        for(int i=0;i<Buttons.Length;i++)
+        {
+            Buttons[i].interactable=false;
+        }
+    }
+    public void ButtonEnabled()//버튼 활성화 시키는 함수
+    {
+        for(int i=0;i<Buttons.Length;i++)
+        {
+            Buttons[i].interactable=true;
+        }
+    }
 }

@@ -11,10 +11,7 @@ public class Pause : MonoBehaviour
    {
       Time.timeScale=0;
       PauseScreen.gameObject.SetActive(true);
-      for(int i=0;i<GameManager.instance.Buttons.Length;i++)
-      {
-         GameManager.instance.Buttons[i].interactable=false;
-      }
+      GameManager.instance.ButtonDisabled();
    }
    public void Restart()//처음부터 현재 씬을 다시하는 버튼
    {
@@ -24,10 +21,7 @@ public class Pause : MonoBehaviour
    {
       Time.timeScale=1;
       PauseScreen.gameObject.SetActive(false);
-      for(int i=0;i<GameManager.instance.Buttons.Length;i++)
-      {
-         GameManager.instance.Buttons[i].interactable=true;
-      }
+      GameManager.instance.ButtonEnabled();
    }
    public void Menu()//메뉴로 가는 버튼
    {  

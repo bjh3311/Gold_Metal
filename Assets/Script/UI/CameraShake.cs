@@ -41,9 +41,6 @@ public class CameraShake : MonoBehaviour
     {
         Time.timeScale=0;//정지 시킨다.
         GameOverScreen.SetActive(true);
-        for(int i=0;i<GameManager.instance.Buttons.Length;i++)
-        {
-            GameManager.instance.Buttons[i].interactable=false;
-        }
+        GameManager.instance.ButtonDisabled();//버튼들 비활성화시키는 함수
     }
 }
