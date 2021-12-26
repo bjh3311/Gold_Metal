@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveTex:
-        m_Texture: {fileID: 2800000, guid: 556a7c1f70dd7cf4f8ab33c22602c9b0, type: 3}
+        m_Texture: {fileID: 2800000, guid: e807113075d23254b81e744075ab607c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -74,7 +74,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Threshold: 0
+    - _Threshold: 0.009999886
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

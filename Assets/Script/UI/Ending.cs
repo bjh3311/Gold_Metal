@@ -1,29 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic; 
 using UnityEngine; 
+using UnityEngine.UI;
 public class Ending : MonoBehaviour 
 {
-    private SpriteRenderer Sr; 
-    private float threshold;
+    private Image Im; 
+    private float threshold=1.01f;
     [SerializeField]
     private float dissolveTime;
     private void Start() 
-    { 
-        Sr=this.gameObject.GetComponent<SpriteRenderer>();
-        threshold = Sr.material.GetFloat("_Threshold");
-    }
-    public void UpdateDissolve()
     {
-        StartCoroutine("ActiveDissolve");    
+        Im=this.gameObject.GetComponent<Image>();
+        Im.material.SetFloat("_Threshold", 1.01f);
+    }
+    public void UpdateUnDissolve()
+    {
+        StartCoroutine("ActiveUnDissolve");    
     } 
-    IEnumerator ActiveDissolve()
+    IEnumerator ActiveUnDissolve()
     {
         while(true)
         {
-            threshold+=0.1f;
-            yield return new WaitForSeconds(dissolveTime);
-            Sr.material.SetFloat("_Threshold", threshold);
-            if(threshold>1.01)
+            Im.material.SetFloat("_Threshold", threshold);
+            threshold-=0.1f;
+            yield return new WaitForSeconds(dissolveTime);    
+            if(threshold<=0.0f)
             {
                 break;
             }
