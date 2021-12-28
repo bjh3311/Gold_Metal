@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8514722585381278937}
   - component: {fileID: 8514722585381278936}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Bone_Body_Mammut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,9 +93,9 @@ GameObject:
   - component: {fileID: 8514722585483122132}
   - component: {fileID: 5120308240633173468}
   - component: {fileID: 6110837496882760014}
-  m_Layer: 9
-  m_Name: Mammut 1
-  m_TagString: Untagged
+  m_Layer: 0
+  m_Name: Mammut
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8514722586813934199}
   - component: {fileID: 8514722586813934198}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Bone_Head_Mammut
   m_TagString: Untagged
   m_Icon: {fileID: 0}

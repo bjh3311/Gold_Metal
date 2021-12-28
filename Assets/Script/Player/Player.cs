@@ -17,36 +17,15 @@ public class Player : MonoBehaviour
     Animator anim;
     private bool isGround=true;//점프제한을위한 변수
     private int jumpCount=2;//2번까지 점프
-    private LayerMask groundLayer;//땅 체크
-    private Transform groundCheck;//땅 체크
-
-
-    private int layerBone;//뼈장애물들을 체크하기위한 layer변수
-    private RaycastHit2D boneHit;//뼈에 맞았는지 감지하기 위한 변수
     private void Start() 
     {
         rigid=this.gameObject.GetComponent<Rigidbody2D>();
         anim=this.gameObject.GetComponent<Animator>();
-        groundCheck=this.gameObject.GetComponent<Transform>();
         box=this.gameObject.GetComponent<BoxCollider2D>();
         cameraShake=GM.GetComponent<CameraShake>();
         weaponBox=weapon.GetComponent<BoxCollider2D>();
     }
-    private void FixedUpdate() 
-    {
-        layerBone=1<<LayerMask.NameToLayer("Bone");
-        boneHit=Physics2D.Raycast(transform.position+new Vector3(-0.5f,0,0),new Vector3(1.0f,0,0),1.0f,layerBone);
-        if(boneHit.collider!=null)//뼈에 맞는다면 탈락
-        {
-            box.isTrigger=true;
-            GameManager.instance.SaveScore.Save();
-            cameraShake.Shake();
-            GameManager.instance.SaveScore.StopCoroutine("plus");
-            GameManager.instance.MapMove.mapSpeed=0;
-        }
-        Debug.DrawRay(transform.position+new Vector3(-0.5f,0,0),new Vector3(1.0f,0,0)*1.0f,new Color(0,1,0));
-    }
-    public void Jump()
+     public void Jump()
     {
         if(jumpCount<=0)//isGround가 false이거나 jumpCount가 0이면 함수 종료
         {
