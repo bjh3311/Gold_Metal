@@ -15,6 +15,7 @@ public class Bone : MonoBehaviour
    {
        if(col.gameObject.CompareTag("Weapon"))
        {
+           
            box.enabled=false;//박스를 끈다
            anim.SetBool("isBreak",true);
        }

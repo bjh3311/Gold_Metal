@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.layer==LayerMask.NameToLayer("Ground"))
+        if(col.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
         {
             jumpCount=2;
         }
