@@ -7,6 +7,7 @@ TagManager:
   - Obstacle
   - Item
   - Weapon
+  - Board
   layers:
   - Default
   - TransparentFX

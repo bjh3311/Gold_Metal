@@ -9,13 +9,11 @@ public class Player : MonoBehaviour
 {
     public GameObject GM;
     private CameraShake cameraShake;
-    public GameObject NowScore;
     Rigidbody2D rigid;
     BoxCollider2D box;//Player boxCollider
     BoxCollider2D weaponBox;//무기 boxCollider
     public GameObject weapon;//무기
     Animator anim;
-    private bool isGround=true;//점프제한을위한 변수
     private int jumpCount=2;//2번까지 점프
     private void Start() 
     {
@@ -56,10 +54,19 @@ public class Player : MonoBehaviour
         {
             jumpCount=2;
         }
+        if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
+        {       
+            box.isTrigger=true;
+            GameManager.instance.SaveScore.Save();
+            cameraShake.Shake();
+            GameManager.instance.SaveScore.StopCoroutine("plus");
+            GameManager.instance.MapMove.mapSpeed=0;
+            GameManager.instance.HowLong.end=true;//끝났다
+        }
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
+        if(col.gameObject.CompareTag("Board"))//하단 경계선에 부딪히면
         {       
             box.isTrigger=true;
             GameManager.instance.SaveScore.Save();

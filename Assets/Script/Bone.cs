@@ -11,7 +11,7 @@ public class Bone : MonoBehaviour
         box=this.gameObject.GetComponent<BoxCollider2D>();
         anim=this.gameObject.GetComponent<Animator>();
     }
-   private void OnTriggerEnter2D(Collider2D col)
+   private void OnCollisionEnter2D(Collision2D col) 
    {
        if(col.gameObject.CompareTag("Weapon"))
        {
