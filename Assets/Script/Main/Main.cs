@@ -9,14 +9,22 @@ public class Main : MonoBehaviour
 {
 
     public Button[] MainButton;
+    public Image[] MainImage;
+
+
     public Button[] StageButton;
+    public Image[] StageImage;
     public void Play()//Play 버튼
     {
-        StartCoroutine("MainToSelect");
+        ButtonDisabled(MainButton);
+        StartCoroutine("ButtonTrans",MainImage);
+        StartCoroutine("ButtonUnTrans",StageImage);  
     }
     public void SelectToMainButton()
     {
-        StartCoroutine("SelectToMain");
+        ButtonDisabled(StageButton);
+        StartCoroutine("ButtonTrans",StageImage);
+        StartCoroutine("ButtonUnTrans",MainImage);
     }
     public void Exit()//나가기 버튼
     {
@@ -26,15 +34,39 @@ public class Main : MonoBehaviour
             Application.Quit();
         #endif
     }
-    IEnumerator MainToSelect()//Main에서 Select로
+    IEnumerator ButtonTrans(Image[] buttons)//버튼들 투명하게
     {
-        ButtonDisabled(MainButton);
-        yield return null;
+        byte maxTrans=255;
+        while(true)
+        {
+            maxTrans=(byte)(maxTrans-5);
+            yield return new WaitForSeconds(0.01f);
+            for(int i=0;i<buttons.Length;i++)
+            {
+                buttons[i].color=new Color32(255,255,255,maxTrans);
+            }
+            if(maxTrans<=0)
+            {
+                break;
+            }
+        }
     }
-    IEnumerator SelectToMain()//Select에서 Main으로
+    IEnumerator ButtonUnTrans(Image[] buttons)//버튼들 드러나게
     {
-        ButtonDisabled(StageButton);
-        yield return null;
+        byte minTrans=255;
+        while(true)
+        {
+            minTrans=(byte)(minTrans+5);
+            yield return new WaitForSeconds(0.01f);
+            for(int i=0;i<buttons.Length;i++)
+            {
+                buttons[i].color=new Color32(255,255,255,minTrans);
+            }
+            if(minTrans>=255)
+            {
+                break;
+            } 
+        }
     }
     private void ButtonDisabled(Button[] button)//버튼 비활성화
     {
