@@ -7,6 +7,9 @@ using System.IO;
 using TMPro;
 public class Main : MonoBehaviour
 {
+
+    public Button[] MainButton;
+    public Button[] StageButton;
     public void Play()//Play 버튼
     {
         StartCoroutine("MainToSelect");
@@ -25,10 +28,12 @@ public class Main : MonoBehaviour
     }
     IEnumerator MainToSelect()//Main에서 Select로
     {
+        ButtonDisabled(MainButton);
         yield return null;
     }
     IEnumerator SelectToMain()//Select에서 Main으로
     {
+        ButtonDisabled(StageButton);
         yield return null;
     }
     private void ButtonDisabled(Button[] button)//버튼 비활성화
