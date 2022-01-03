@@ -16,6 +16,8 @@ public class Main : MonoBehaviour
     public Image[] StageImage;
 
     public Text[] Texts;
+
+    public GameObject Black;
     public void Play()//Play 버튼
     {
         for(int i=0;i<StageImage.Length;i++)
@@ -140,18 +142,19 @@ public class Main : MonoBehaviour
     }
     public void Stage1()//스테이지 1
     {
-
+        ButtonDisabled(StageButton);
+        Black.gameObject.SetActive(true);
     }
     public void Stage2()//스테이지 2
     {
-
+        
     }
     public void Stage3()//스테이지 3
     {
-
+        
     }
     public void Stage4()//스테이지 4
     {
-
+        
     }
 }
