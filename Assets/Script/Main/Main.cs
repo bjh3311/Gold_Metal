@@ -20,6 +20,8 @@ public class Main : MonoBehaviour
     public GameObject Black;
 
     public Text Loading;
+    
+    public Image Bar;
     public void Play()//Play 버튼
     {
         for(int i=0;i<StageImage.Length;i++)
@@ -90,7 +92,6 @@ public class Main : MonoBehaviour
             } 
         }
     }
-
     IEnumerator TextTrans(Text[] text)
     {
         byte maxTrans=255;
@@ -125,7 +126,6 @@ public class Main : MonoBehaviour
                 break;
             } 
         }
-
     }
     private void ButtonDisabled(Button[] button)//버튼 비활성화, 즉각적으로
     {
@@ -144,14 +144,11 @@ public class Main : MonoBehaviour
     }
     public void Stage1()//스테이지 1
     {
-        ButtonDisabled(StageButton);
-        Black.gameObject.SetActive(true);
-        StartCoroutine("TypingEffect","......");
-        
+        LoadScene("Stage1");
     }
     public void Stage2()//스테이지 2
     {
-        
+
     }
     public void Stage3()//스테이지 3
     {
@@ -173,6 +170,45 @@ public class Main : MonoBehaviour
             }
             Loading.text="Loading";
             yield return new WaitForSeconds(0.5f);
+        }
+    }
+    public void LoadScene(string sceneName)
+    {
+        ButtonDisabled(StageButton);
+        Black.gameObject.SetActive(true);
+        StartCoroutine("TypingEffect","......");
+        StartCoroutine("Load",sceneName);
+    }
+    private IEnumerator Load(string sceneName)
+    {
+        AsyncOperation op=SceneManager.LoadSceneAsync(sceneName);
+        //비동기 방식으로 씬을 불러오는 도중에도 다른 작업을 할 수  LoadSceneAsync 함수
+        //로딩의 진행정도는 AsyncOperation Class로 반환된다
+        op.allowSceneActivation=false;//로딩이 끝나면 씬을 바로 시작 못하게 한다
+        float timer=0.0f;
+        while(!op.isDone)//isDone이 false일 때 동안, 즉 Load가 진행중을 의미한다
+        {
+            yield return null;
+            timer+=Time.unscaledDeltaTime;
+            if(op.progress<0.9f)//씬 로딩이 90% 미만이라면
+            {
+                Bar.fillAmount=Mathf.Lerp(Bar.fillAmount,op.progress,timer);
+                if(Bar.fillAmount>=op.progress)
+                {
+                    timer=0f;
+                }
+            }
+            else//씬 로딩이 90% 이상이라면
+            {
+                Bar.fillAmount=Mathf.Lerp(Bar.fillAmount,1f,timer);
+                if(Bar.fillAmount==1.0f)//fillAmount가 다 차면
+                {
+                    yield return new WaitForSeconds(4.0f);
+                    op.allowSceneActivation=true;
+                    break;
+                }
+            }
+
         }
     }
 }
