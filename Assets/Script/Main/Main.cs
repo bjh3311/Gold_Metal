@@ -18,6 +18,8 @@ public class Main : MonoBehaviour
     public Text[] Texts;
 
     public GameObject Black;
+
+    public Text Loading;
     public void Play()//Play 버튼
     {
         for(int i=0;i<StageImage.Length;i++)
@@ -144,6 +146,8 @@ public class Main : MonoBehaviour
     {
         ButtonDisabled(StageButton);
         Black.gameObject.SetActive(true);
+        StartCoroutine("TypingEffect","......");
+        
     }
     public void Stage2()//스테이지 2
     {
@@ -156,5 +160,19 @@ public class Main : MonoBehaviour
     public void Stage4()//스테이지 4
     {
         
+    }
+    IEnumerator TypingEffect(string dot)//Loading.... 에서 . 을 타이핑되는듯이 계속
+    {   
+        int i=0;
+        while(true)
+        {
+            for(i=0;i<dot.Length;i++)
+            {
+                Loading.text="Loading"+dot.Substring(0,i+1);
+                yield return new WaitForSeconds(0.5f);
+            }
+            Loading.text="Loading";
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

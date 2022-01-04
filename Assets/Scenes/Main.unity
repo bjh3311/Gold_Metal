@@ -2216,6 +2216,7 @@ MonoBehaviour:
   - {fileID: 1966587314}
   - {fileID: 681991087}
   Black: {fileID: 1782178103}
+  Loading: {fileID: 511321090}
 --- !u!1 &1487489799
 GameObject:
   m_ObjectHideFlags: 0
