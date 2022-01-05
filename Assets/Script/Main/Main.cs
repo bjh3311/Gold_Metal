@@ -142,22 +142,6 @@ public class Main : MonoBehaviour
             button[i].interactable=true;
         }
     }
-    public void Stage1()//스테이지 1
-    {
-        LoadScene("Stage1");
-    }
-    public void Stage2()//스테이지 2
-    {
-
-    }
-    public void Stage3()//스테이지 3
-    {
-        
-    }
-    public void Stage4()//스테이지 4
-    {
-        
-    }
     IEnumerator TypingEffect(string dot)//Loading.... 에서 . 을 타이핑되는듯이 계속
     {   
         int i=0;
@@ -190,25 +174,13 @@ public class Main : MonoBehaviour
         {
             yield return null;
             timer+=Time.unscaledDeltaTime;
-            if(op.progress<0.9f)//씬 로딩이 90% 미만이라면
+            Bar.fillAmount=Mathf.Lerp(0,1f,timer);
+            if(Bar.fillAmount==1.0f)//fillAmount가 다 차면
             {
-                Bar.fillAmount=Mathf.Lerp(Bar.fillAmount,op.progress,timer);
-                if(Bar.fillAmount>=op.progress)
-                {
-                    timer=0f;
-                }
+                yield return new WaitForSeconds(4.0f);
+                op.allowSceneActivation=true;
+                break;
             }
-            else//씬 로딩이 90% 이상이라면
-            {
-                Bar.fillAmount=Mathf.Lerp(Bar.fillAmount,1f,timer);
-                if(Bar.fillAmount==1.0f)//fillAmount가 다 차면
-                {
-                    yield return new WaitForSeconds(4.0f);
-                    op.allowSceneActivation=true;
-                    break;
-                }
-            }
-
-        }
+        }    
     }
 }
