@@ -2252,6 +2252,14 @@ MonoBehaviour:
   Main: {fileID: 706821787}
   Sign: {fileID: 1814255145}
   Password: {fileID: 668641709}
+  ID_Login: {fileID: 908718744}
+  Pass_Login: {fileID: 1808420731}
+  ID_Find: {fileID: 159371321}
+  Email_Find: {fileID: 1470006187}
+  ID_Sign: {fileID: 1020038938}
+  Pass_Sign: {fileID: 682807846}
+  PassCheck_Sign: {fileID: 153484204}
+  Email_Sign: {fileID: 1227044874}
 --- !u!4 &915483627
 Transform:
   m_ObjectHideFlags: 0
