@@ -24,6 +24,12 @@ public class Login : MonoBehaviour
     public InputField Pass_Sign;
     public InputField PassCheck_Sign;
     public InputField Email_Sign;
+
+    public string LoginUrl;
+    private void Awake()
+    {
+        LoginUrl="bjh3311.cafe24.com/dbeditor/Login.php";
+    }
     public void GoToSignUp()
     {
         Main.SetActive(false);
@@ -39,9 +45,21 @@ public class Login : MonoBehaviour
     {
 
     }
+    IEnumerator LoginCo()
+    {
+        Debug.Log(ID_Login.text);
+        Debug.Log(Pass_Login.text);
+        WWWForm form=new WWWForm();
+        form.AddField("Input_user",ID_Login.text);
+        form.AddField("Input_pass",Pass_Login.text);
+
+        WWW webRequest=new WWW(LoginUrl,form);
+
+        yield return webRequest;
+    }
     public void LogIn()
     {       
-
+        StartCoroutine("LoginCo");
     }
     public void PasswordScene()
     {
