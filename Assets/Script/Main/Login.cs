@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Login : MonoBehaviour
 {
@@ -52,8 +53,18 @@ public class Login : MonoBehaviour
         form.AddField("Input_pass",Pass_Login.text);
 
         WWW webRequest=new WWW(LoginUrl,form);
-        Debug.Log("df");
         yield return webRequest;
+
+        if(webRequest.error==null)
+        {
+            Debug.Log("통신성공!!!");
+        }
+        else
+        {
+            Debug.Log("실패했다.");
+            Debug.Log(webRequest.error);
+        }
+        Debug.Log(webRequest.text);
     }
     public void LogIn()
     {       
