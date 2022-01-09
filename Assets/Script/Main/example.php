@@ -8,13 +8,14 @@ $dbname="bjh3311";
 //unity import
 $user=$_POST['Input_user'];
 $pass=$_POST['Input_pass'];
-
-
 $con=new mysqli($servername,$username,$password,$dbname);
-echo("Connection 성공!!");
 if(!$con)
 {
-    die(mysqli_connection_error());
+    die("Connection Failed.".mysqli_connection_error());
+}
+else
+{
+    echo("Connection Success");
 }
 
 ?>
