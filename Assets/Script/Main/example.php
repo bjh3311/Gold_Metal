@@ -8,14 +8,15 @@ $dbname="bjh3311";
 //unity import
 $user=$_POST['Input_user'];
 $pass=$_POST['Input_pass'];
-$con=new mysqli($servername,$username,$password,$dbname);
-if(!$con)
+$con=new mysqli($servername,$ID,$Pa,$dbname);
+$query="SELECT * FROM Info ";
+$result=mysqli_query($con,$query);
+if($result)
 {
-    die("Connection Failed.".mysqli_connection_error());
+    echo("디비연동 성공!!!");
 }
 else
 {
-    echo("Connection Success");
+    echo("디비 쿼리 실패 ㅠㅠ");
 }
-
 ?>
