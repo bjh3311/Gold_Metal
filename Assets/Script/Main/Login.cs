@@ -29,7 +29,7 @@ public class Login : MonoBehaviour
     public string LoginUrl;
     private void Awake()
     {
-        LoginUrl="bjh3311.cafe24.com/Login.php";
+        LoginUrl="bjh3311.cafe24.com/example.php";
     }
     public void GoToSignUp()
     {
@@ -44,7 +44,7 @@ public class Login : MonoBehaviour
     }
     public void SignUp()
     {
-
+        StartCoroutine("SignUpCo");
     }
     IEnumerator LoginCo()
     {
@@ -65,6 +65,12 @@ public class Login : MonoBehaviour
             Debug.Log(webRequest.error);
         }
         Debug.Log(webRequest.text);
+    }
+    IEnumerator SignUpCo()
+    {
+        WWWForm form=new WWWForm();
+        WWW webRequest=new WWW(LoginUrl,form);
+        yield return webRequest;
     }
     public void LogIn()
     {       
