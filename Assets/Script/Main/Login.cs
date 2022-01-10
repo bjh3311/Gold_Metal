@@ -11,7 +11,10 @@ public class Login : MonoBehaviour
     public GameObject Main;
     public GameObject Main_Notif;
     public Text Main_Notif_text;
+
     public GameObject Sign;
+    public GameObject Sign_Notif;
+    public Text Sign_Notif_text;
 
     public GameObject Password;
 
@@ -35,6 +38,8 @@ public class Login : MonoBehaviour
     private void Awake()
     {
         LoginUrl="bjh3311.cafe24.com/Login.php";
+        SignUpUrl="bjh3311.cafe24.com/SignUp.php";
+        FindUrl="bjh3311.cafe24.com/Find.php";
     }
     public void GoToSignUp()
     {
@@ -58,7 +63,7 @@ public class Login : MonoBehaviour
         form.AddField("Input_pass",Pass_Login.text);
 
         UnityWebRequest webRequest=UnityWebRequest.Post(LoginUrl,form);
-        yield return webRequest.SendWebRequest();
+        yield return webRequest.SendWebRequest();//webRequset가 완료될때까지 기다린다
         //www클래스는 안쓰는걸 권장해서 UnityWebRequest 클래스를 사용한다
         if(webRequest.error==null)
         {
@@ -84,8 +89,25 @@ public class Login : MonoBehaviour
     IEnumerator SignUpCo()
     {
         WWWForm form=new WWWForm();
-        WWW webRequest=new WWW(LoginUrl,form);
-        yield return webRequest;
+        form.AddField("Sign_user",ID_Sign.text);
+        form.AddField("Sign_pass",Pass_Sign.text);
+        form.AddField("Sign_check",PassCheck_Sign.text);
+        form.AddField("Sign_email",Email_Sign.text);
+
+        UnityWebRequest webRequest=UnityWebRequest.Post(SignUpUrl,form);
+        yield return webRequest.SendWebRequest();
+        if(webRequest.error==null)
+        {
+            Debug.Log("통신성공!!");
+        }
+        else
+        {
+            Debug.Log(webRequest.error);
+        }
+        Sign_Notif.SetActive(true);
+        Sign_Notif_text.text=webRequest.downloadHandler.text;
+        yield return new WaitForSecondsRealtime(2.5f);
+        Sign_Notif.SetActive(false);
     }
     public void LogIn()
     {       
