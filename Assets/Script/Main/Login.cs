@@ -8,6 +8,8 @@ public class Login : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject Main;
+    public GameObject Main_Notif;
+    public Text Main_Notif_text;
     public GameObject Sign;
 
     public GameObject Password;
@@ -26,7 +28,7 @@ public class Login : MonoBehaviour
     public InputField PassCheck_Sign;
     public InputField Email_Sign;
 
-    public string LoginUrl;
+    private string LoginUrl;
     private void Awake()
     {
         LoginUrl="bjh3311.cafe24.com/example.php";
@@ -52,19 +54,19 @@ public class Login : MonoBehaviour
         form.AddField("Input_user",ID_Login.text);
         form.AddField("Input_pass",Pass_Login.text);
 
-        WWW webRequest=new WWW(LoginUrl,form);
-        yield return webRequest;
-
+        UnityWebRequest webRequest=UnityWebRequest.Post(LoginUrl,form);
+        yield return webRequest.SendWebRequest();
+        //www클래스는 안쓰는걸 권장해서 UnityWebRequest 클래스를 사용한다
         if(webRequest.error==null)
         {
             Debug.Log("통신성공!!!");
         }
         else
         {
-            Debug.Log("실패했다.");
             Debug.Log(webRequest.error);
         }
-        Debug.Log(webRequest.text);
+        Main_Notif.SetActive(true);
+        Main_Notif_text.text=webRequest.downloadHandler.text;
     }
     IEnumerator SignUpCo()
     {
