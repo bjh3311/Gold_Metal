@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {
@@ -29,9 +30,11 @@ public class Login : MonoBehaviour
     public InputField Email_Sign;
 
     private string LoginUrl;
+    private string SignUpUrl;
+    private string FindUrl;
     private void Awake()
     {
-        LoginUrl="bjh3311.cafe24.com/example.php";
+        LoginUrl="bjh3311.cafe24.com/Login.php";
     }
     public void GoToSignUp()
     {
@@ -67,6 +70,16 @@ public class Login : MonoBehaviour
         }
         Main_Notif.SetActive(true);
         Main_Notif_text.text=webRequest.downloadHandler.text;
+        if(webRequest.downloadHandler.text=="로그인 성공!!")
+        {
+            yield return new WaitForSecondsRealtime(2.5f);
+            SceneManager.LoadScene("Main");
+        }
+        else
+        {
+            yield return new WaitForSecondsRealtime(2.5f);
+            Main_Notif.SetActive(false);
+        }
     }
     IEnumerator SignUpCo()
     {
