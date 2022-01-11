@@ -57,4 +57,8 @@ if($valid[0]== false)
     echo $valid[1];
     exit(0);
 }
+if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+{
+    die("올바른 이메일 형식이 아닙니다");
+}
 ?>
