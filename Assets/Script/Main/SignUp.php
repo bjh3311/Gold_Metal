@@ -18,7 +18,6 @@ function passwordCheck($_str)//비밀번호 유효성 검사
         return array(false, "비밀번호는 공백없이 입력해주세요.");
         exit;
     }
- 
     if( $num == 0 || $eng == 0 || $spe == 0)//영문,숫자,특수문자가 다 있어야 한다
     {
         return array(false, "영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
@@ -61,4 +60,12 @@ if(!filter_var($email,FILTER_VALIDATE_EMAIL))
 {
     die("올바른 이메일 형식이 아닙니다");
 }
+//모든 조건을 통과했으니 DB에 INSERT한다
+$sql="SELECT * FROM Info";//일단 현재 사이즈를 구한다
+$result=mysqli_query($con,$sql);
+$size=mysqli_num_rows($result);//사이즈
+$sql="INSERT INTO Info ( ID,Password,E-mail,UserNo,Stage) VALUES('$user','$pass','$email','$size',1)";
+//유저가 입력한 아이디,비밀번호,이메일 그리고 UserNo는 테이블 사이즈에 따라서, 그리고 Stage는 무조건 1부터 시작
+mysqli_query($con,$sql);
+echo("Insert 성공!");
 ?>
