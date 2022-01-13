@@ -16,6 +16,9 @@ public class Login : MonoBehaviour
     public GameObject Sign_Notif;
     public Text Sign_Notif_text;
 
+    public GameObject Find_Notif;
+    public Text Find_Notif_text;
+
     public GameObject Password;
 
     [Header("LoginPanel")]
@@ -113,13 +116,34 @@ public class Login : MonoBehaviour
     {       
         StartCoroutine("LoginCo");
     }
+    public void Find()
+    {
+        StartCoroutine("FindCo");
+    }
+    IEnumerator FindCo()
+    {
+        WWWForm form=new WWWForm();
+        form.AddField("Find_user",ID_Find.text);
+        form.AddField("Find_email",Email_Find.text);
+
+        UnityWebRequest webRequest=UnityWebRequest.Post(FindUrl,form);
+        yield return webRequest.SendWebRequest();
+        if(webRequest.error==null)
+        {
+            Debug.Log("통신성공!!");
+        }
+        else
+        {
+            Debug.Log(webRequest.error);
+        }
+        Find_Notif.SetActive(true);
+        Find_Notif_text.text=webRequest.downloadHandler.text;
+        yield return new WaitForSeconds(2.5f);
+        Find_Notif.SetActive(false);
+    }
     public void PasswordScene()
     {
         Main.SetActive(false);
         Password.SetActive(true);
-    }
-    public void Submit()
-    {
-
     }
 }
