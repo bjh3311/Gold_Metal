@@ -46,6 +46,10 @@ if(mysqli_num_rows($result)>0)//입력한 ID와 동일한 ID가 DB에 존재할�
 {
     die("ID가 이미 존재합니다");
 }
+if(strlen($user)>12)
+{
+    die("ID는 최대 12자입니다");
+}
 if($pass!=$check)//두 비밀번호가 다르다면
 {
     die("두 비밀번호가 일치하지 않습니다");
@@ -61,11 +65,9 @@ if(!filter_var($email,FILTER_VALIDATE_EMAIL))
     die("올바른 이메일 형식이 아닙니다");
 }
 //모든 조건을 통과했으니 DB에 INSERT한다
-$sql="SELECT * FROM Info";//일단 현재 사이즈를 구한다
-$result=mysqli_query($con,$sql);
-$size=mysqli_num_rows($result);//사이즈
-$sql="INSERT INTO Info ( ID,Password,E-mail,UserNo,Stage) VALUES('$user','$pass','$email','$size',1)";
-//유저가 입력한 아이디,비밀번호,이메일 그리고 UserNo는 테이블 사이즈에 따라서, 그리고 Stage는 무조건 1부터 시작
+
+$sql="TRUNCATE TABLE Info";
+//유저가 입력한 아이디,비밀번호,이메일 그리고 Stage는 무조건 1부터 시작
 mysqli_query($con,$sql);
-echo("Insert 성공!");
+echo(mysqli_error($con));
 ?>
