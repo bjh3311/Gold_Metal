@@ -34,6 +34,11 @@ public class Main : MonoBehaviour
         StartCoroutine("ButtonEnabled",StageButton);
         StartCoroutine("TextUnTrans",Texts);
     }
+    private void Awake() 
+    {
+        Time.timeScale=1;//게임을 플레이하다가 정지하고 나오면 Time.timescale이 0으로 설정되기 때문에
+        //Main이 Scene이 불러질 때 마다 Time.timescale을 1로 해준다    
+    }
     public void SelectToMainButton()//Stage 선택창에서 Main으로 돌아가는 버튼
     {
         for(int i=0;i<MainButton.Length;i++)
@@ -108,7 +113,6 @@ public class Main : MonoBehaviour
                 break;
             } 
         }
-
     }
     IEnumerator TextUnTrans(Text[] text)
     {
