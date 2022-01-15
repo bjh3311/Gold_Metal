@@ -4,7 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-
+using System.Security.Cryptography;
+using System.IO;
+using System;
+using System.Text;
+class User
+{
+    string ID;
+    string Stage;
+    public User(string ID,string Stage)
+    {
+        this.ID=ID;
+        this.Stage=Stage;
+    }
+}
 public class Login : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -77,9 +90,20 @@ public class Login : MonoBehaviour
             Debug.Log(webRequest.error);
         }
         Main_Notif.SetActive(true);
-        Main_Notif_text.text=webRequest.downloadHandler.text;
-        if(webRequest.downloadHandler.text=="로그인 성공!!")
+        string[] Info=webRequest.downloadHandler.text.Split('^');
+        Main_Notif_text.text=Info[0];
+        if(Info[0]=="로그인 성공!!")
         {
+            User u=new User(Info[1],Info[2]);//아이디와 Stage정보를 DB에서 얻어온다
+            string temp=JsonUtility.ToJson(u);//data를 json으로 바꿔줌
+            Debug.Log(Info[1]);
+            Debug.Log(Info[2]);
+            //temp=Encrypt(temp,"321");//암호는 321
+            if(temp!=null)
+            {
+                Debug.Log("저장성공!!");
+                File.WriteAllText(Application.dataPath+"/Json"+"/User.json",temp);//제이슨 저장
+            }    
             yield return new WaitForSecondsRealtime(2.5f);
             SceneManager.LoadScene("Main");
         }
@@ -145,5 +169,26 @@ public class Login : MonoBehaviour
     {
         Main.SetActive(false);
         Password.SetActive(true);
+    }
+    public static string Encrypt(string textToEncrypt, string key)//암호화 함수
+    {
+        RijndaelManaged rijndaelCipher = new RijndaelManaged();
+        rijndaelCipher.Mode = CipherMode.CBC;
+        rijndaelCipher.Padding = PaddingMode.PKCS7;
+        rijndaelCipher.KeySize = 128;
+        rijndaelCipher.BlockSize = 128;
+        byte[] pwdBytes = Encoding.UTF8.GetBytes(key);
+        byte[] keyBytes = new byte[16];
+        int len = pwdBytes.Length;
+        if (len > keyBytes.Length)
+        {
+            len = keyBytes.Length;
+        }
+        Array.Copy(pwdBytes, keyBytes, len);
+        rijndaelCipher.Key = keyBytes;
+        rijndaelCipher.IV = keyBytes;
+        ICryptoTransform transform = rijndaelCipher.CreateEncryptor();
+        byte[] plainText = Encoding.UTF8.GetBytes(textToEncrypt);
+        return Convert.ToBase64String(transform.TransformFinalBlock(plainText, 0, plainText.Length));
     }
 }
