@@ -100,7 +100,7 @@ public class Login : MonoBehaviour
             if(temp!=null)
             {
                 Debug.Log("저장성공!!");
-                File.WriteAllText(Application.dataPath+"/Json"+"/User.json",temp);//제이슨 저장
+                File.WriteAllText(Application.dataPath+"/Json"+"/User.json",temp);//json 저장
             }    
             yield return new WaitForSecondsRealtime(2.5f);
             SceneManager.LoadScene("Main");
