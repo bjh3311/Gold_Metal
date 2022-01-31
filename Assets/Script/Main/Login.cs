@@ -48,6 +48,8 @@ public class Login : MonoBehaviour
     public InputField PassCheck_Sign;
     public InputField Email_Sign;
 
+    public GameObject Final;
+
     private string LoginUrl;
     private string SignUpUrl;
     private string FindUrl;
@@ -94,6 +96,8 @@ public class Login : MonoBehaviour
         Main_Notif_text.text=Info[0];
         if(Info[0]=="로그인 성공!!")
         {
+            Main.SetActive(false);
+            Final.SetActive(true);
             User u=new User(Info[1],Info[2]);//아이디와 Stage정보를 DB에서 얻어온다
             string temp=JsonUtility.ToJson(u);//data를 json으로 바꿔줌
             //temp=Encrypt(temp,"321");//암호는 321

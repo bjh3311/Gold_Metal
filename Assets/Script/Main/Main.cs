@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using TMPro;
+
 public class Main : MonoBehaviour
 {
 
@@ -22,6 +23,8 @@ public class Main : MonoBehaviour
     public Text Loading;
     
     public Image Bar;
+
+    private int Stage;//몇 스테이지까지 클리어했는지 뜻한다. Awake에서 json정보로 받아온다
     public void Play()//Play 버튼
     {
         for(int i=0;i<StageImage.Length;i++)
@@ -37,7 +40,9 @@ public class Main : MonoBehaviour
     private void Awake() 
     {
         Time.timeScale=1;//게임을 플레이하다가 정지하고 나오면 Time.timescale이 0으로 설정되기 때문에
-        //Main이 Scene이 불러질 때 마다 Time.timescale을 1로 해준다    
+        //Main이 Scene이 불러질 때 마다 Time.timescale을 1로 해준다
+        Stage=LoadJsonData_FromAsset();
+        Debug.Log(Stage);
     }
     public void SelectToMainButton()//Stage 선택창에서 Main으로 돌아가는 버튼
     {
@@ -167,7 +172,7 @@ public class Main : MonoBehaviour
         StartCoroutine("TypingEffect","......");
         StartCoroutine("Load",sceneName);
     }
-    private IEnumerator Load(string sceneName)
+    private IEnumerator Load(string sceneName)//씬 불러오기
     {
         AsyncOperation op=SceneManager.LoadSceneAsync(sceneName);
         //비동기 방식으로 씬을 불러오는 도중에도 다른 작업을 할 수  LoadSceneAsync 함수
@@ -186,5 +191,12 @@ public class Main : MonoBehaviour
                 break;
             }
         }    
+    }
+    private static int LoadJsonData_FromAsset()//경로 기반 json 불러오기
+    {
+        string pAsset;
+        pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");
+        User temp=JsonUtility.FromJson<User>(pAsset);
+        return int.Parse(temp.Stage);//catch문이 실행이안되면, 즉 파일이 존재하면 실행된다.
     }
 }
