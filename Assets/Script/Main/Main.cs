@@ -12,9 +12,13 @@ public class Main : MonoBehaviour
     public Button[] MainButton;
     public Image[] MainImage;
 
+    private Image[] Active_Main;
+    private Image[] Dis_Main;
 
     public Button[] StageButton;
     public Image[] StageImage;
+    private Image[] Active_Stage;
+    private Image[] Dis_Stage;
 
     public Text[] Texts;
 
@@ -42,7 +46,10 @@ public class Main : MonoBehaviour
         Time.timeScale=1;//게임을 플레이하다가 정지하고 나오면 Time.timescale이 0으로 설정되기 때문에
         //Main이 Scene이 불러질 때 마다 Time.timescale을 1로 해준다
         Stage=LoadJsonData_FromAsset();
-        Debug.Log(Stage);
+        for(int i=0;i<Stage;i++)
+        {
+            
+        }
     }
     public void SelectToMainButton()//Stage 선택창에서 Main으로 돌아가는 버튼
     {
