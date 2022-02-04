@@ -12,9 +12,6 @@ public class Main : MonoBehaviour
     public Button[] MainButton;
     public Image[] MainImage;
 
-    private Image[] Active_Main;
-    private Image[] Dis_Main;
-
     public Button[] StageButton;
     public Image[] StageImage;
     private Image[] Active_Stage;
@@ -48,7 +45,9 @@ public class Main : MonoBehaviour
         Stage=LoadJsonData_FromAsset();
         for(int i=0;i<Stage;i++)
         {
-            
+            StageImage[i].color=new Color32(255,255,255,0);
+            StageButton[i].image.color=new Color32(255,255,255,0);
+            Debug.Log("ㅁㅇㄹ");
         }
     }
     public void SelectToMainButton()//Stage 선택창에서 Main으로 돌아가는 버튼
@@ -74,6 +73,9 @@ public class Main : MonoBehaviour
     IEnumerator ButtonTrans(Image[] buttons)//버튼들 투명하게
     {
         byte maxTrans=255;
+        byte r;
+        byte g;
+        byte b;
         while(true)
         {
             maxTrans=(byte)(maxTrans-5);
