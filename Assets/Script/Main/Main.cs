@@ -14,8 +14,6 @@ public class Main : MonoBehaviour
 
     public Button[] StageButton;
     public Image[] StageImage;
-    private Image[] Active_Stage;
-    private Image[] Dis_Stage;
 
     public Text[] Texts;
 
@@ -43,12 +41,12 @@ public class Main : MonoBehaviour
         Time.timeScale=1;//게임을 플레이하다가 정지하고 나오면 Time.timescale이 0으로 설정되기 때문에
         //Main이 Scene이 불러질 때 마다 Time.timescale을 1로 해준다
         Stage=LoadJsonData_FromAsset();
-        for(int i=0;i<Stage;i++)
+        for(int i=1;i<=Stage;i++)
         {
             StageImage[i].color=new Color32(255,255,255,0);
-            StageButton[i].image.color=new Color32(255,255,255,0);
-            Debug.Log("ㅁㅇㄹ");
+            StageImage[i+4].color=new Color32(255,255,255,0);
         }
+        
     }
     public void SelectToMainButton()//Stage 선택창에서 Main으로 돌아가는 버튼
     {
@@ -82,7 +80,10 @@ public class Main : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             for(int i=0;i<buttons.Length;i++)
             {
-                buttons[i].color=new Color32(255,255,255,maxTrans);
+                r=(byte)(buttons[i].color.r*255);
+                g=(byte)(buttons[i].color.g*255);
+                b=(byte)(buttons[i].color.b*255);
+                buttons[i].color=new Color32(r,g,b,maxTrans);
             }
             if(maxTrans<=0)
             {
@@ -97,13 +98,19 @@ public class Main : MonoBehaviour
     IEnumerator ButtonUnTrans(Image[] buttons)//버튼들 드러나게
     {
         byte minTrans=0;
+        byte r;
+        byte g;
+        byte b;
         while(true)
         {
             minTrans=(byte)(minTrans+5);
             yield return new WaitForSeconds(0.01f);
             for(int i=0;i<buttons.Length;i++)
             {
-                buttons[i].color=new Color32(255,255,255,minTrans);
+                r=(byte)(buttons[i].color.r*255);
+                g=(byte)(buttons[i].color.g*255);
+                b=(byte)(buttons[i].color.b*255);
+                buttons[i].color=new Color32(r,g,b,minTrans);
             }
             if(minTrans>=255)
             {
