@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using System.IO;
 
 public class HowLong : MonoBehaviour
 {
@@ -17,9 +20,16 @@ public class HowLong : MonoBehaviour
 
     public bool end=false;//끝나는 변수
 
+    private int Stage;
+    private string ID;
+    private string StageUrl;
+
     void Start()
     {
         nowWhere=this.gameObject.GetComponent<Image>();
+        Stage=LoadJsonData_FromAsset_Stage();
+        ID=LoadJsonData_FromAsset_ID();
+        StageUrl="bjh3311.cafe24.com/Stage.php";
     }
     // Update is called once per frame
     void Update()
@@ -45,7 +55,6 @@ public class HowLong : MonoBehaviour
                 GameManager.instance.MapMove.mapSpeed=11.5f;
                 firstup=true;
                 SpeedUp();
-                
             }
             else if(dis>100.0f&&!end)
             {
@@ -55,6 +64,10 @@ public class HowLong : MonoBehaviour
                 end=true;
                 GameManager.instance.ButtonDisabled();//버튼들 비활성화시키는 함수
                 pDirector.Play();
+                if(SceneManager.GetActiveScene().buildIndex-1==Stage)
+                {
+                    StartCoroutine("NewStageCo");
+                }//최대 Stage를 깻다면 새로운 Stage를 열어준다
             }
             yield return new WaitForSecondsRealtime(0.1f);
         }
@@ -67,5 +80,37 @@ public class HowLong : MonoBehaviour
     private void SpeedUpOff()
     {
         Speed.SetActive(false);
+    }
+    private static int LoadJsonData_FromAsset_Stage()//경로 기반 json 불러오기
+    {
+        string pAsset;
+        pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");
+        User temp=JsonUtility.FromJson<User>(pAsset);
+        return int.Parse(temp.Stage);
+    }
+    private static string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
+    {
+        string pAsset;
+        pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");
+        User temp=JsonUtility.FromJson<User>(pAsset);
+        return temp.ID;
+    }
+    IEnumerator NewStageCo()
+    {
+         WWWForm form=new WWWForm();
+        form.AddField("Input_ID",ID);
+        form.AddField("Input_Stage",Stage+1);
+
+        UnityWebRequest webRequest=UnityWebRequest.Post(StageUrl,form);
+        yield return webRequest.SendWebRequest();//webRequset가 완료될때까지 기다린다
+        //www클래스는 안쓰는걸 권장해서 UnityWebRequest 클래스를 사용한다
+        if(webRequest.error==null)
+        {
+            Debug.Log("새로운 스테이지 활성화 완료!!!");
+        }
+        else
+        {
+            Debug.Log(webRequest.error);
+        }
     }
 }
