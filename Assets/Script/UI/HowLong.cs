@@ -99,8 +99,6 @@ public class HowLong : MonoBehaviour
     {
          WWWForm form=new WWWForm();
         form.AddField("Input_ID",ID);
-        form.AddField("Input_Stage",Stage+1);
-
         UnityWebRequest webRequest=UnityWebRequest.Post(StageUrl,form);
         yield return webRequest.SendWebRequest();//webRequset가 완료될때까지 기다린다
         //www클래스는 안쓰는걸 권장해서 UnityWebRequest 클래스를 사용한다
