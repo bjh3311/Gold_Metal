@@ -52,13 +52,6 @@ public class Main : MonoBehaviour
         StageUrl="bjh3311.cafe24.com/NowStage.php";
         ID=LoadJsonData_FromAsset_ID();//ID를 JSON에서 꺼내온다
         StartCoroutine("LoadStage_FromDB");
-        for(int i=1;i<=Stage;i++)//클리어한 Stage까지만 활성화
-        {
-            StageImage[i].color=new Color32(255,255,255,0);
-            StageImage[i+4].color=new Color32(255,255,255,0);
-        }
-        Active_StageButton=new Button[Stage+1];
-        Array.Copy(StageButton,0,Active_StageButton,0,Stage+1);
     }
     public void SelectToMainButton()//Stage 선택창에서 Main으로 돌아가는 버튼
     {
@@ -228,6 +221,13 @@ public class Main : MonoBehaviour
         yield return webRequest.SendWebRequest();
         string temp=webRequest.downloadHandler.text;
         Stage=int.Parse(temp);
+        for(int i=1;i<=Stage;i++)//클리어한 Stage까지만 활성화
+        {
+            StageImage[i].color=new Color32(255,255,255,0);
+            StageImage[i+4].color=new Color32(255,255,255,0);
+        }
+        Active_StageButton=new Button[Stage+1];
+        Array.Copy(StageButton,0,Active_StageButton,0,Stage+1);
     }
     private string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
     {
