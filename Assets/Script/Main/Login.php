@@ -19,8 +19,6 @@ if(mysqli_num_rows($result)>0)//입력한 ID와 동일한 ID가 DB에 존재할�
         {
             echo("로그인 성공!!^");
             echo($user);
-            echo("^");
-            echo($row['Stage']);
         }
         else
         {

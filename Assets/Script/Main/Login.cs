@@ -8,14 +8,12 @@ using System.Security.Cryptography;
 using System.IO;
 using System;
 using System.Text;
-class User
+public class User
 {
     public string ID;
-    public string Stage;
-    public User(string ID,string Stage)
+    public User(string ID)
     {
         this.ID=ID;
-        this.Stage=Stage;
     }
 }
 public class Login : MonoBehaviour
@@ -98,8 +96,8 @@ public class Login : MonoBehaviour
         {
             Main.SetActive(false);
             Final.SetActive(true);
-            User u=new User(Info[1],Info[2]);//아이디와 Stage정보를 DB에서 얻어온다
-            string temp=JsonUtility.ToJson(u);//data를 json으로 바꿔줌
+            User u=new User(Info[1]);
+            string temp=JsonUtility.ToJson(u);//ID를 json으로 바꿔줌
             //temp=Encrypt(temp,"321");//암호는 321
             if(temp!=null)
             {

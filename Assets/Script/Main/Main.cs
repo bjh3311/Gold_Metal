@@ -45,7 +45,7 @@ public class Main : MonoBehaviour
     {
         Time.timeScale=1;//게임을 플레이하다가 정지하고 나오면 Time.timescale이 0으로 설정되기 때문에
         //Main이 Scene이 불러질 때 마다 Time.timescale을 1로 해준다
-        Stage=LoadJsonData_FromAsset();
+        Stage=LoadStage_FroMDB();//DB에서 Stage를 불러온다
         for(int i=1;i<=Stage;i++)//클리어한 Stage까지만 활성화
         {
             StageImage[i].color=new Color32(255,255,255,0);
@@ -216,7 +216,7 @@ public class Main : MonoBehaviour
             }
         }    
     }
-    private static int LoadJsonData_FromAsset()//경로 기반 json 불러오기
+    private static int LoadStage_FroMDB()//DB에서  Stage값 불러오기
     {
         string pAsset;
         pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");

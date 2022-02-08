@@ -27,7 +27,6 @@ public class HowLong : MonoBehaviour
     void Start()
     {
         nowWhere=this.gameObject.GetComponent<Image>();
-        Stage=LoadJsonData_FromAsset_Stage();
         ID=LoadJsonData_FromAsset_ID();
         StageUrl="bjh3311.cafe24.com/Stage.php";
     }
@@ -81,13 +80,6 @@ public class HowLong : MonoBehaviour
     {
         Speed.SetActive(false);
     }
-    private static int LoadJsonData_FromAsset_Stage()//경로 기반 json 불러오기
-    {
-        string pAsset;
-        pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");
-        User temp=JsonUtility.FromJson<User>(pAsset);
-        return int.Parse(temp.Stage);
-    }
     private static string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
     {
         string pAsset;
@@ -99,6 +91,7 @@ public class HowLong : MonoBehaviour
     {
          WWWForm form=new WWWForm();
         form.AddField("Input_ID",ID);
+        form.AddField("Input_Stage",Stage+1);
         UnityWebRequest webRequest=UnityWebRequest.Post(StageUrl,form);
         yield return webRequest.SendWebRequest();//webRequset가 완료될때까지 기다린다
         //www클래스는 안쓰는걸 권장해서 UnityWebRequest 클래스를 사용한다
