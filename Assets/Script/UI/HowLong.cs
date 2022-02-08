@@ -22,13 +22,16 @@ public class HowLong : MonoBehaviour
 
     private int Stage;
     private string ID;
-    private string StageUrl;
+    private string NewStageUrl;
+    private string NowStageUrl;
 
-    void Start()
+    void Awake()
     {
         nowWhere=this.gameObject.GetComponent<Image>();
         ID=LoadJsonData_FromAsset_ID();
-        StageUrl="bjh3311.cafe24.com/Stage.php";
+        NewStageUrl="bjh3311.cafe24.com/NewStage.php";
+        NowStageUrl="bjh3311.cafe24.com/NowStage.php";
+        StartCoroutine("LoadStage_FromDB");
     }
     // Update is called once per frame
     void Update()
@@ -80,19 +83,28 @@ public class HowLong : MonoBehaviour
     {
         Speed.SetActive(false);
     }
-    private static string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
+    private string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
     {
         string pAsset;
         pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");
         User temp=JsonUtility.FromJson<User>(pAsset);
         return temp.ID;
     }
+    private IEnumerator LoadStage_FromDB()//DB에서  Stage값 불러오기
+    {
+        WWWForm form=new WWWForm();
+        form.AddField("Find_user",ID);
+        UnityWebRequest webRequest=UnityWebRequest.Post(NowStageUrl,form);
+        yield return webRequest.SendWebRequest();
+        string temp=webRequest.downloadHandler.text;
+        Stage=int.Parse(temp);
+    }
     IEnumerator NewStageCo()
     {
-         WWWForm form=new WWWForm();
+        WWWForm form=new WWWForm();
         form.AddField("Input_ID",ID);
         form.AddField("Input_Stage",Stage+1);
-        UnityWebRequest webRequest=UnityWebRequest.Post(StageUrl,form);
+        UnityWebRequest webRequest=UnityWebRequest.Post(NewStageUrl,form);
         yield return webRequest.SendWebRequest();//webRequset가 완료될때까지 기다린다
         //www클래스는 안쓰는걸 권장해서 UnityWebRequest 클래스를 사용한다
         if(webRequest.error==null)

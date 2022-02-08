@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using TMPro;
+using UnityEngine.Networking;
 
 
 public class Main : MonoBehaviour
@@ -28,7 +29,10 @@ public class Main : MonoBehaviour
     
     public Image Bar;
 
-    private static int Stage;//몇 스테이지까지 클리어했는지 뜻한다. Awake에서 json정보로 받아온다
+    private int Stage;//몇 스테이지까지 클리어했는지 뜻한다. Awake에서 DB에서 받아온다
+
+    private string StageUrl;
+    private string ID;
     public void Play()//Play 버튼
     {
         for(int i=0;i<StageImage.Length;i++)
@@ -45,7 +49,9 @@ public class Main : MonoBehaviour
     {
         Time.timeScale=1;//게임을 플레이하다가 정지하고 나오면 Time.timescale이 0으로 설정되기 때문에
         //Main이 Scene이 불러질 때 마다 Time.timescale을 1로 해준다
-        Stage=LoadStage_FroMDB();//DB에서 Stage를 불러온다
+        StageUrl="bjh3311.cafe24.com/NowStage.php";
+        ID=LoadJsonData_FromAsset_ID();//ID를 JSON에서 꺼내온다
+        StartCoroutine("LoadStage_FromDB");
         for(int i=1;i<=Stage;i++)//클리어한 Stage까지만 활성화
         {
             StageImage[i].color=new Color32(255,255,255,0);
@@ -53,8 +59,6 @@ public class Main : MonoBehaviour
         }
         Active_StageButton=new Button[Stage+1];
         Array.Copy(StageButton,0,Active_StageButton,0,Stage+1);
-        
-        
     }
     public void SelectToMainButton()//Stage 선택창에서 Main으로 돌아가는 버튼
     {
@@ -216,11 +220,20 @@ public class Main : MonoBehaviour
             }
         }    
     }
-    private static int LoadStage_FroMDB()//DB에서  Stage값 불러오기
+    private IEnumerator LoadStage_FromDB()//DB에서  Stage값 불러오기
+    {
+        WWWForm form=new WWWForm();
+        form.AddField("Find_user",ID);
+        UnityWebRequest webRequest=UnityWebRequest.Post(StageUrl,form);
+        yield return webRequest.SendWebRequest();
+        string temp=webRequest.downloadHandler.text;
+        Stage=int.Parse(temp);
+    }
+    private string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
     {
         string pAsset;
         pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");
         User temp=JsonUtility.FromJson<User>(pAsset);
-        return int.Parse(temp.Stage);
+        return temp.ID;
     }
 }
