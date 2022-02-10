@@ -57,9 +57,7 @@ public class Player : MonoBehaviour
         if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
         {       
             box.isTrigger=true;
-            GameManager.instance.SaveScore.Save();
             cameraShake.Shake();
-            GameManager.instance.SaveScore.StopCoroutine("plus");
             GameManager.instance.MapMove.mapSpeed=0;
             GameManager.instance.HowLong.end=true;//끝났다
         }
@@ -69,16 +67,9 @@ public class Player : MonoBehaviour
         if(col.gameObject.CompareTag("Board"))//하단 경계선에 부딪히면
         {       
             box.isTrigger=true;
-            GameManager.instance.SaveScore.Save();
             cameraShake.Shake();
-            GameManager.instance.SaveScore.StopCoroutine("plus");
             GameManager.instance.MapMove.mapSpeed=0;
             GameManager.instance.HowLong.end=true;//끝났다
-        }
-        if(col.gameObject.CompareTag("Item"))
-        {
-            GameManager.instance.SaveScore.score++;
-            col.gameObject.SetActive(false);
         }
     }
 }

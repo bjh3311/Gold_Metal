@@ -12,11 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject StartScreen;//Start스크린
     public GameObject Ground;//Ground Object
     public MapMove MapMove;//Ground에 붙어있는 MapMove Script
-    public GameObject BestScore;
-    public SaveScore SaveScore;
     public HowLong HowLong;
     public GameObject NowDis;
-    
     public GameObject player;
 
     public BoxCollider2D box;
@@ -25,8 +22,7 @@ public class GameManager : MonoBehaviour
     {
         instance=this;
         Time.timeScale=1;//ReStart할떄를 위해 계속 Time.timeScale은 1로 해준다
-        MapMove=Ground.gameObject.GetComponent<MapMove>();
-        SaveScore=BestScore.gameObject.GetComponent<SaveScore>();
+        MapMove=Ground.gameObject.GetComponent<MapMove>();  
         HowLong=NowDis.gameObject.GetComponent<HowLong>();
         box=player.gameObject.GetComponent<BoxCollider2D>();
     }
