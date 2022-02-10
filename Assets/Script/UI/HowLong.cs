@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +24,8 @@ public class HowLong : MonoBehaviour
     private string ID;
     private string NewStageUrl;
     private string NowStageUrl;
+    public GameObject NewStageOpen;
+    private bool isOpen;
 
     void Awake()
     {
@@ -32,6 +34,7 @@ public class HowLong : MonoBehaviour
         NewStageUrl="bjh3311.cafe24.com/NewStage.php";
         NowStageUrl="bjh3311.cafe24.com/NowStage.php";
         StartCoroutine("LoadStage_FromDB");
+        isOpen=false;
     }
     // Update is called once per frame
     void Update()
@@ -69,6 +72,7 @@ public class HowLong : MonoBehaviour
                 if(SceneManager.GetActiveScene().buildIndex-1==Stage)
                 {
                     StartCoroutine("NewStageCo");
+                    isOpen=true;
                 }//최대 Stage를 깻다면 새로운 Stage를 열어준다
             }
             yield return new WaitForSecondsRealtime(0.1f);
@@ -114,6 +118,13 @@ public class HowLong : MonoBehaviour
         else
         {
             Debug.Log(webRequest.error);
+        }
+    }
+    public void OpenStage()//새로운 스테이지를 연다는 메세지를 띄운다
+    {
+        if(isOpen)
+        {
+            NewStageOpen.SetActive(true);
         }
     }
 }
