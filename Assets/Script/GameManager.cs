@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
 
     public BoxCollider2D box;
+    public AudioSource Audio;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         MapMove=Ground.gameObject.GetComponent<MapMove>();  
         HowLong=NowDis.gameObject.GetComponent<HowLong>();
         box=player.gameObject.GetComponent<BoxCollider2D>();
+        Audio=this.gameObject.GetComponent<AudioSource>();
     }
     public void ButtonDisabled()//버튼 비활성화 시키는 함수
     {

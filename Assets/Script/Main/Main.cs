@@ -33,6 +33,8 @@ public class Main : MonoBehaviour
 
     private string StageUrl;
     private string ID;
+
+    private AudioSource Audio;
     public void Play()//Play 버튼
     {
         for(int i=0;i<StageImage.Length;i++)
@@ -52,6 +54,15 @@ public class Main : MonoBehaviour
         StageUrl="bjh3311.cafe24.com/NowStage.php";
         ID=LoadJsonData_FromAsset_ID();//ID를 JSON에서 꺼내온다
         StartCoroutine("LoadStage_FromDB");
+        Audio=this.gameObject.GetComponent<AudioSource>();
+    }
+    public void BgmOn()
+    {
+        Audio.mute=false;
+    }
+    public void BgmOff()
+    {
+        Audio.mute=true;
     }
     public void SelectToMainButton()//Stage 선택창에서 Main으로 돌아가는 버튼
     {

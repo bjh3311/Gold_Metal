@@ -69,6 +69,7 @@ public class HowLong : MonoBehaviour
                 end=true;
                 GameManager.instance.ButtonDisabled();//버튼들 비활성화시키는 함수
                 pDirector.Play();
+                StartCoroutine("BgmOff");
                 if(SceneManager.GetActiveScene().buildIndex-1==Stage)
                 {
                     StartCoroutine("NewStageCo");
@@ -77,6 +78,16 @@ public class HowLong : MonoBehaviour
             }
             yield return new WaitForSecondsRealtime(0.1f);
         }
+    }
+    IEnumerator BgmOff()
+    {
+
+        while(GameManager.instance.Audio.volume>0)
+        {
+            GameManager.instance.Audio.volume-=Time.deltaTime*0.2f;
+            yield return null;
+        }
+        
     }
     private void SpeedUp()//Speed Up 할 때 나타나는 효과
     {
