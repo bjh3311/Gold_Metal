@@ -35,6 +35,11 @@ public class Main : MonoBehaviour
     private string ID;
 
     private AudioSource Audio;
+
+    public GameObject LS1;
+    public GameObject LS2;
+    public GameObject LS3;
+    public GameObject LS4;
     public void Play()//Play 버튼
     {
         for(int i=0;i<StageImage.Length;i++)
@@ -201,6 +206,22 @@ public class Main : MonoBehaviour
     {
         ButtonDisabled(StageButton);
         Black.gameObject.SetActive(true);
+        if(sceneName=="Stage1")
+        {
+            LS1.SetActive(true);
+        }
+        else if(sceneName=="Stage2")
+        {
+            LS2.SetActive(true);
+        }
+        else if(sceneName=="Stage3")
+        {
+            LS3.SetActive(true);
+        }
+        else if(sceneName=="Stage4")
+        {
+            LS4.SetActive(true);
+        }
         StartCoroutine("TypingEffect","......");
         StartCoroutine("Load",sceneName);
     }
