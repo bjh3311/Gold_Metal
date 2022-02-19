@@ -15,17 +15,6 @@ public class Player : MonoBehaviour
     public GameObject weapon;//무기
     Animator anim;
     private int jumpCount=2;//2번까지 점프
-    private void FixedUpdate()
-    {
-        if(Input.GetButtonDown("Jump"))
-        {
-            Jump();
-        }
-        if(Input.GetButtonDown("Fire1"))
-        {
-            Attack();
-        }
-    }
     private void Start() 
     {
         rigid=this.gameObject.GetComponent<Rigidbody2D>();
