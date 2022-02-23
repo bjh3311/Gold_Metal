@@ -21,10 +21,6 @@ public class Player : MonoBehaviour
         {
             Jump();
         }  
-        if(Input.GetButtonDown("Fire1"))
-        {
-            Attack();
-        }
     }
     private void Start() 
     {
