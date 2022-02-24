@@ -41,6 +41,7 @@
      <Compile Include="Assets\Script\Main\Login.cs" />
      <Compile Include="Assets\Script\Main\Main.cs" />
      <Compile Include="Assets\Script\Main\Map\MapMove.cs" />
+     <Compile Include="Assets\Script\Main\Ranking.cs" />
      <Compile Include="Assets\Script\Player\BetterJump.cs" />
      <Compile Include="Assets\Script\Player\Player.cs" />
      <Compile Include="Assets\Script\Player\Weapon.cs" />

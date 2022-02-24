@@ -40,6 +40,7 @@ public class Main : MonoBehaviour
     public GameObject LS2;
     public GameObject LS3;
     public GameObject LS4;
+    public GameObject Ranking;
     public void Play()//Play 버튼
     {
         for(int i=0;i<StageImage.Length;i++)
@@ -221,6 +222,10 @@ public class Main : MonoBehaviour
         else if(sceneName=="Stage4")
         {
             LS4.SetActive(true);
+        }
+        else if(sceneName=="Ranking")
+        {
+            Ranking.SetActive(true);
         }
         StartCoroutine("TypingEffect","......");
         StartCoroutine("Load",sceneName);
