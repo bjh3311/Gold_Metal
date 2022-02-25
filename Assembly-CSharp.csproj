@@ -41,10 +41,10 @@
      <Compile Include="Assets\Script\Main\Login.cs" />
      <Compile Include="Assets\Script\Main\Main.cs" />
      <Compile Include="Assets\Script\Main\Map\MapMove.cs" />
-     <Compile Include="Assets\Script\Main\Ranking.cs" />
      <Compile Include="Assets\Script\Player\BetterJump.cs" />
      <Compile Include="Assets\Script\Player\Player.cs" />
      <Compile Include="Assets\Script\Player\Weapon.cs" />
+     <Compile Include="Assets\Script\Ranking\Ranking.cs" />
      <Compile Include="Assets\Script\UI\CameraShake.cs" />
      <Compile Include="Assets\Script\UI\Ending.cs" />
      <Compile Include="Assets\Script\UI\HowLong.cs" />
