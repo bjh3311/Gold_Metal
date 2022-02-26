@@ -45,6 +45,7 @@
      <Compile Include="Assets\Script\Player\Player.cs" />
      <Compile Include="Assets\Script\Player\Weapon.cs" />
      <Compile Include="Assets\Script\Ranking\Ranking.cs" />
+     <Compile Include="Assets\Script\Ranking\SwitchButton.cs" />
      <Compile Include="Assets\Script\UI\CameraShake.cs" />
      <Compile Include="Assets\Script\UI\Ending.cs" />
      <Compile Include="Assets\Script\UI\HowLong.cs" />
