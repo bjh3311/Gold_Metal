@@ -12,6 +12,8 @@ public class Ranking : MonoBehaviour
     // Start is called before the first frame update
     private string RankingUrl;
     private string num;//몇번 스테이지를 골랐는지
+    public GameObject sentence;//몇등,ID,죽은횟수
+    public GameObject Content;
     private void Awake()
     {
         RankingUrl="bjh3311.cafe24.com/Ranking.php";
@@ -52,6 +54,19 @@ public class Ranking : MonoBehaviour
         form.AddField("Stage",num);
         UnityWebRequest webRequest=UnityWebRequest.Post(RankingUrl,form);
         yield return webRequest.SendWebRequest();
-        string temp=webRequest.downloadHandler.text;
+        string[] temp=webRequest.downloadHandler.text.Split('^');
+        int index=1;
+        var item=Instantiate(sentence,new Vector3(0,0,0),Quaternion.identity);
+        item.transform.SetParent(Content.transform);
+        foreach(string i in temp)
+        {
+            if(i.Length!=0)
+            {
+                Debug.Log(i);
+                index++;
+            }
+
+            
+        }
     }
 }
