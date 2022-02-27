@@ -244,7 +244,7 @@ public class Main : MonoBehaviour
             Bar.fillAmount=Mathf.Lerp(0,1f,timer);
             if(Bar.fillAmount==1.0f)//fillAmount가 다 차면
             {
-                yield return new WaitForSeconds(4.0f);
+                yield return new WaitForSeconds(4.5f);
                 op.allowSceneActivation=true;
                 break;
             }

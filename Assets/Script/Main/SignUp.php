@@ -66,7 +66,7 @@ if(!filter_var($email,FILTER_VALIDATE_EMAIL))
 }
 //모든 조건을 통과했으니 DB에 INSERT한다
 
-$sql="INSERT INTO Info VALUES('$user','$pass','$email',1)";
+$sql="INSERT INTO Info VALUES('$user','$pass','$email',1,null,null,null,null,null)";
 //유저가 입력한 아이디,비밀번호,이메일 그리고 Stage는 무조건 1부터 시작
 mysqli_query($con,$sql);
 echo("회원가입 성공!!");

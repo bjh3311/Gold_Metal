@@ -18,7 +18,7 @@ public class Ranking : MonoBehaviour
     private void Awake()
     {
         RankingUrl="bjh3311.cafe24.com/Ranking.php";
-        for(int i=0;i<=4;i++)
+        for(int i=0;i<=4;i++)//시작할때 랭킹정보 다 불러오기
         {
             StartCoroutine("Load",i);
         }
@@ -67,7 +67,7 @@ public class Ranking : MonoBehaviour
         {
             if(i.Length!=0)
             {
-                sentence.GetComponent<Text>().text=index+"    "+i;
+                sentence.GetComponent<Text>().text="    "+index+"     "+i;
                 var item=Instantiate(sentence,new Vector3(0,0,0),Quaternion.identity);
                 item.transform.SetParent(Content[num].transform);
                 index++;
