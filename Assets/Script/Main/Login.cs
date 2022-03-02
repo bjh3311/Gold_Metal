@@ -20,7 +20,7 @@ public class Login : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public Image Bar;
+    public Text final_text;
     public GameObject Main;
     public GameObject Main_Notif;
     public Text Main_Notif_text;
@@ -104,8 +104,16 @@ public class Login : MonoBehaviour
             {
                 File.WriteAllText(Application.dataPath+"/Json"+"/User.json",temp);//json 저장
             }    
-            StartCoroutine("Load");
-            yield return null;
+            yield return new WaitForSecondsRealtime(2.5f);
+            try
+            {
+                SceneManager.LoadScene("Main");
+            }
+            catch(Exception ex)
+            {
+                final_text.text=ex.Message;
+            }
+           
         }
         else
         {
@@ -190,32 +198,5 @@ public class Login : MonoBehaviour
         ICryptoTransform transform = rijndaelCipher.CreateEncryptor();
         byte[] plainText = Encoding.UTF8.GetBytes(textToEncrypt);
         return Convert.ToBase64String(transform.TransformFinalBlock(plainText, 0, plainText.Length));
-    }
-    private string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
-    {
-        string pAsset;
-        pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");
-        User temp=JsonUtility.FromJson<User>(pAsset);
-        return temp.ID;
-    }
-    private IEnumerator Load()//씬 불러오기
-    {
-        AsyncOperation op=SceneManager.LoadSceneAsync("Main");
-        //비동기 방식으로 씬을 불러오는 도중에도 다른 작업을 할 수  LoadSceneAsync 함수
-        //로딩의 진행정도는 AsyncOperation Class로 반환된다
-        op.allowSceneActivation=false;//로딩이 끝나면 씬을 바로 시작 못하게 한다
-        float timer=0.0f;
-        while(!op.isDone)//isDone이 false일 때 동안, 즉 Load가 진행중을 의미한다
-        {
-            yield return null;
-            timer+=Time.unscaledDeltaTime;
-            Bar.fillAmount=Mathf.Lerp(0,1f,timer);
-            if(Bar.fillAmount==1.0f)//fillAmount가 다 차면
-            {
-                yield return new WaitForSeconds(4.5f);
-                op.allowSceneActivation=true;
-                break;
-            }
-        }    
     }
 }
