@@ -68,7 +68,7 @@ public class Ranking : MonoBehaviour
             if(i.Length!=0)
             {
                 string[] re=i.Split(' ');//앞에 인덱스가 아이디 뒤의 인덱스가 죽은횟수
-                sentence.GetComponent<Text>().text="    "+index+"     "+re[0]+"("+re[1]+")";
+                sentence.GetComponent<Text>().text="      "+index+"        "+re[0]+"("+re[1]+")";
                 var item=Instantiate(sentence,new Vector3(0,0,0),Quaternion.identity);
                 item.transform.SetParent(Content[num].transform);
                 index++;
