@@ -107,13 +107,12 @@ public class Login : MonoBehaviour
             yield return new WaitForSecondsRealtime(2.5f);
             try
             {
-                SceneManager.LoadScene("Main");
+                SceneManager.LoadScene(1);
             }
             catch(Exception ex)
             {
                 final_text.text=ex.Message;
             }
-           
         }
         else
         {
