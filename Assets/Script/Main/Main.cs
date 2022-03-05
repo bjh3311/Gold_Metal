@@ -269,7 +269,7 @@ public class Main : MonoBehaviour
     private string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
     {
         string pAsset;
-        pAsset=File.ReadAllText(Application.dataPath+"/Json"+"/User.json");
+        pAsset=File.ReadAllText(Application.persistentDataPath+"/User.json");
         User temp=JsonUtility.FromJson<User>(pAsset);
         return temp.ID;
     }

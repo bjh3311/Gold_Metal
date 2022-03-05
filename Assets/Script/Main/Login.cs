@@ -102,16 +102,16 @@ public class Login : MonoBehaviour
             string temp=JsonUtility.ToJson(u);//ID를 json으로 바꿔줌
             if(temp!=null)
             {
-                File.WriteAllText(Application.dataPath+"/Json"+"/User.json",temp);//json 저장
+                File.WriteAllText(Application.persistentDataPath+"/User.json",temp);//json 저장
             }    
             yield return new WaitForSecondsRealtime(2.5f);
             try
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(1);          
             }
             catch(Exception ex)
             {
-                final_text.text=ex.Message;
+                final_text.text=ex.Message+"catch문입니다";
             }
         }
         else
