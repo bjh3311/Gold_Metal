@@ -47,7 +47,6 @@
      <Compile Include="Assets\Script\Ranking\Ranking.cs" />
      <Compile Include="Assets\Script\Ranking\SwitchButton.cs" />
      <Compile Include="Assets\Script\UI\CameraShake.cs" />
-     <Compile Include="Assets\Script\UI\Canvas.cs" />
      <Compile Include="Assets\Script\UI\Ending.cs" />
      <Compile Include="Assets\Script\UI\HowLong.cs" />
      <Compile Include="Assets\Script\UI\Pause.cs" />
@@ -634,6 +633,9 @@
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
         <HintPath>C:\Users\ross2\Desktop\JinHwan\TOOLS\Unity_Project\Gold_Metal\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mobile.AndroidLogcat.Editor">
+        <HintPath>C:\Users\ross2\Desktop\JinHwan\TOOLS\Unity_Project\Gold_Metal\Library\ScriptAssemblies\Unity.Mobile.AndroidLogcat.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
         <HintPath>C:\Users\ross2\Desktop\JinHwan\TOOLS\Unity_Project\Gold_Metal\Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
