@@ -9,7 +9,7 @@ $num=$_POST['Stage'];
 $con= new mysqli($servername,$ID,$Pa,$dbname);
 if($num==="0")
 {
-    $sql="SELECT ID,EVERY FROM Info ORDER BY EVERY ASC";//Info에 들어있는 모든 아이디를 불러온다
+    $sql="SELECT ID,EVERY FROM Info WHERE Stage>4 AND EVERY>-1 ORDER BY EVERY ASC";//Info에 들어있는 모든 아이디를 불러온다
     $result=mysqli_query($con,$sql);
     while($row=mysqli_fetch_assoc($result))
     {
@@ -21,7 +21,7 @@ if($num==="0")
 }
 else if($num==="1")
 {
-    $sql="SELECT ID,ONE FROM Info ORDER BY ONE ASC";//Info에 들어있는 모든 아이디를 불러온다
+    $sql="SELECT ID,ONE FROM Info WHERE Stage>1 AND ONE>-1 ORDER BY ONE ASC";//Info에 들어있는 모든 아이디를 불러온다
     $result=mysqli_query($con,$sql);
     while($row=mysqli_fetch_assoc($result))
     {
@@ -33,7 +33,7 @@ else if($num==="1")
 }
 else if($num==="2")
 {
-    $sql="SELECT ID,TWO FROM Info ORDER BY TWO ASC";//Info에 들어있는 모든 아이디를 불러온다
+    $sql="SELECT ID,TWO FROM Info WHERE Stage>2 AND TWO>-1 ORDER BY TWO ASC";//Info에 들어있는 모든 아이디를 불러온다
     $result=mysqli_query($con,$sql);
     while($row=mysqli_fetch_assoc($result))
     {
@@ -45,7 +45,7 @@ else if($num==="2")
 }
 else if($num==="3")
 {
-    $sql="SELECT ID,THREE FROM Info ORDER BY THREE ASC";//Info에 들어있는 모든 아이디를 불러온다
+    $sql="SELECT ID,THREE FROM Info WHERE Stage>3 AND THREE>-1 ORDER BY THREE ASC";//Info에 들어있는 모든 아이디를 불러온다
     $result=mysqli_query($con,$sql);
     while($row=mysqli_fetch_assoc($result))
     {
@@ -57,7 +57,7 @@ else if($num==="3")
 }
 else if($num==="4")
 {
-    $sql="SELECT ID,FOUR FROM Info ORDER BY FOUR ASC";//Info에 들어있는 모든 아이디를 불러온다
+    $sql="SELECT ID,FOUR FROM Info WHERE Stage>4 AND FOUR>-1 ORDER BY FOUR ASC";//Info에 들어있는 모든 아이디를 불러온다
     $result=mysqli_query($con,$sql);
     while($row=mysqli_fetch_assoc($result))
     {
