@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -15,6 +17,8 @@ public class Player : MonoBehaviour
     public GameObject weapon;//무기
     Animator anim;
     private int jumpCount=2;//2번까지 점프
+
+    private string PlusUrl;
     private void FixedUpdate() 
     {
         if(Input.GetButtonDown("Jump"))
@@ -29,6 +33,7 @@ public class Player : MonoBehaviour
         box=this.gameObject.GetComponent<BoxCollider2D>();
         cameraShake=GM.GetComponent<CameraShake>();
         weaponBox=weapon.GetComponent<BoxCollider2D>();
+        PlusUrl="bjh3311.cafe24.com/PlusDeath.php";
     }
     public void Jump()
     {
@@ -63,20 +68,36 @@ public class Player : MonoBehaviour
         }
         if(col.gameObject.CompareTag("Obstacle"))//장애물에 부딪히면
         {       
-            box.isTrigger=true;
+            box.enabled=false;
             cameraShake.Shake();
             GameManager.instance.MapMove.mapSpeed=0;
             GameManager.instance.HowLong.end=true;//끝났다
+            if(GameManager.instance.Stage==SceneManager.GetActiveScene().buildIndex-1)
+            {
+                StartCoroutine("PlusDeath");//죽은 횟수를 늘려준다
+            }//깬 적 없는 스테이지일 때 만 죽은 횟수를 늘려준다
         }
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.CompareTag("Board"))//하단 경계선에 부딪히면
         {       
-            box.isTrigger=true;
+            box.enabled=false;
             cameraShake.Shake();
             GameManager.instance.MapMove.mapSpeed=0;
             GameManager.instance.HowLong.end=true;//끝났다
+            if(GameManager.instance.Stage==SceneManager.GetActiveScene().buildIndex-1)
+            {
+                StartCoroutine("PlusDeath");//죽은 횟수를 늘려준다
+            }//깬 적 없는 스테이지일 때 만 죽은 횟수를 늘려준다
         }
+    }
+    private IEnumerator PlusDeath()//현재 스테이지의 죽은 횟수를 늘려준다
+    {
+        WWWForm form=new WWWForm();
+        form.AddField("Input_ID",GameManager.instance.ID);
+        form.AddField("Input_Stage",SceneManager.GetActiveScene().buildIndex-1);//현재 몇 단계인지
+        UnityWebRequest webRequest=UnityWebRequest.Post(PlusUrl,form);
+        yield return webRequest.SendWebRequest();
     }
 }

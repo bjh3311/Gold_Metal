@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     public BoxCollider2D box;
     public AudioSource Audio;
-    public int Stage;
+    public int Stage;//user가 몇 스테이지 까지 깻는지를 나타낸다. 2이면 1은 이미 깨고 2는 아직.
     public string ID;
     private string NowStageUrl;
 
