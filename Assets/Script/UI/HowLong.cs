@@ -20,20 +20,15 @@ public class HowLong : MonoBehaviour
 
     public bool end=false;//끝나는 변수
 
-    private int Stage;
-    private string ID;
     private string NewStageUrl;
-    private string NowStageUrl;
+    
     public GameObject NewStageOpen;
     private bool isOpen;
 
     void Awake()
     {
         nowWhere=this.gameObject.GetComponent<Image>();
-        ID=LoadJsonData_FromAsset_ID();
         NewStageUrl="bjh3311.cafe24.com/NewStage.php";
-        NowStageUrl="bjh3311.cafe24.com/NowStage.php";
-        StartCoroutine("LoadStage_FromDB");
         isOpen=false;
     }
     // Update is called once per frame
@@ -70,7 +65,7 @@ public class HowLong : MonoBehaviour
                 GameManager.instance.ButtonDisabled();//버튼들 비활성화시키는 함수
                 pDirector.Play();
                 StartCoroutine("BgmOff");
-                if(SceneManager.GetActiveScene().buildIndex-1==Stage)
+                if(SceneManager.GetActiveScene().buildIndex-1==GameManager.instance.Stage)
                 {
                     StartCoroutine("NewStageCo");
                     isOpen=true;
@@ -81,13 +76,11 @@ public class HowLong : MonoBehaviour
     }
     IEnumerator BgmOff()
     {
-
         while(GameManager.instance.Audio.volume>0)
         {
             GameManager.instance.Audio.volume-=Time.deltaTime*0.2f;
             yield return null;
-        }
-        
+        }    
     }
     private void SpeedUp()//Speed Up 할 때 나타나는 효과
     {
@@ -98,27 +91,11 @@ public class HowLong : MonoBehaviour
     {
         Speed.SetActive(false);
     }
-    private string LoadJsonData_FromAsset_ID()//경로 기반 json 불러오기
-    {
-        string pAsset;
-        pAsset=File.ReadAllText(Application.persistentDataPath+"/User.json");
-        User temp=JsonUtility.FromJson<User>(pAsset);
-        return temp.ID;
-    }
-    private IEnumerator LoadStage_FromDB()//DB에서  Stage값 불러오기
-    {
-        WWWForm form=new WWWForm();
-        form.AddField("Find_user",ID);
-        UnityWebRequest webRequest=UnityWebRequest.Post(NowStageUrl,form);
-        yield return webRequest.SendWebRequest();
-        string temp=webRequest.downloadHandler.text;
-        Stage=int.Parse(temp);
-    }
     IEnumerator NewStageCo()
     {
         WWWForm form=new WWWForm();
-        form.AddField("Input_ID",ID);
-        form.AddField("Input_Stage",Stage+1);
+        form.AddField("Input_ID",GameManager.instance.ID);
+        form.AddField("Input_Stage",(GameManager.instance.Stage)+1);
         UnityWebRequest webRequest=UnityWebRequest.Post(NewStageUrl,form);
         yield return webRequest.SendWebRequest();//webRequset가 완료될때까지 기다린다
         //www클래스는 안쓰는걸 권장해서 UnityWebRequest 클래스를 사용한다
