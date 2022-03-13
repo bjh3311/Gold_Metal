@@ -258,6 +258,10 @@ public class Main : MonoBehaviour
         yield return webRequest.SendWebRequest();
         string temp=webRequest.downloadHandler.text;
         Stage=int.Parse(temp);
+        if(Stage==5)//다 클리어했을때 오류 방지용
+        {
+            Stage=4;
+        }
         for(int i=1;i<=Stage;i++)//클리어한 Stage까지만 활성화
         {
             StageImage[i].color=new Color32(255,255,255,0);

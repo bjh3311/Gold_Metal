@@ -110,7 +110,11 @@ public class HowLong : MonoBehaviour
     }
     public void OpenStage()//새로운 스테이지를 연다는 메세지를 띄운다
     {
-        if(isOpen)
+        if(SceneManager.GetActiveScene().buildIndex-1==4)//마지막 스테이지일시 newstage Open은 안띄운다
+        {
+            return;
+        }
+        else if(isOpen)
         {
             NewStageOpen.SetActive(true);
         }
