@@ -50,6 +50,7 @@
      <Compile Include="Assets\Script\UI\Ending.cs" />
      <Compile Include="Assets\Script\UI\HowLong.cs" />
      <Compile Include="Assets\Script\UI\Pause.cs" />
+     <Compile Include="Assets\Script\UI\RepeatBG.cs" />
      <Compile Include="Assets\Script\UI\TimeLine.cs" />
      <None Include="Assets\ImageEffect\Dissolve.shader" />
     <Reference Include="UnityEngine">
