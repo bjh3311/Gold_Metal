@@ -6,12 +6,12 @@ using UnityEngine.Networking;
 public class NetworkManager : MonoBehaviour
 {
     private string NetworkUrl;
-    private Canvas canvas;
+    private GameObject canvas;
     private void Awake() 
     {
         DontDestroyOnLoad(this.gameObject);
         NetworkUrl="bjh3311.cafe24.com/Network.php";
-        canvas=this.gameObject.GetComponent<Canvas>();
+        canvas=this.transform.GetChild(0).gameObject;
     }
     void Update()
     {
@@ -23,7 +23,7 @@ public class NetworkManager : MonoBehaviour
         yield return webRequest.SendWebRequest();
         if(webRequest.error!=null)//통신에 실패했다
         {
-            canvas.gameObject.SetActive(true);
+            canvas.SetActive(true);
             yield return new WaitForSecondsRealtime(2.5f);
             Application.Quit();
         }

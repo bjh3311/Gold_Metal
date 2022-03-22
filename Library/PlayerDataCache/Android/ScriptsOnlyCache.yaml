@@ -10,6 +10,7 @@ ScriptsOnlyBuild:
     - Login
     - Main
     - MapMove
+    - NetworkManager
     - Pause
     - Player
     - Ranking
@@ -97,7 +98,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14106}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14348}
+    - Class: 114
+      Script: {instanceID: 14800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -158,7 +161,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14106}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -223,9 +226,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14184}
     - Class: 114
-      Script: {instanceID: 14664}
+      Script: {instanceID: 14666}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -310,17 +313,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14274}
     - Class: 114
-      Script: {instanceID: 14376}
+      Script: {instanceID: 14378}
     - Class: 114
-      Script: {instanceID: 14482}
+      Script: {instanceID: 14484}
     - Class: 114
-      Script: {instanceID: 14784}
+      Script: {instanceID: 14786}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14800}
     - Class: 114
-      Script: {instanceID: 14820}
+      Script: {instanceID: 14822}
     - Class: 114
-      Script: {instanceID: 14828}
+      Script: {instanceID: 14830}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -417,17 +420,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14274}
     - Class: 114
-      Script: {instanceID: 14376}
+      Script: {instanceID: 14378}
     - Class: 114
-      Script: {instanceID: 14482}
+      Script: {instanceID: 14484}
     - Class: 114
-      Script: {instanceID: 14784}
+      Script: {instanceID: 14786}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14800}
     - Class: 114
-      Script: {instanceID: 14820}
+      Script: {instanceID: 14822}
     - Class: 114
-      Script: {instanceID: 14828}
+      Script: {instanceID: 14830}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -524,17 +527,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14274}
     - Class: 114
-      Script: {instanceID: 14376}
+      Script: {instanceID: 14378}
     - Class: 114
-      Script: {instanceID: 14482}
+      Script: {instanceID: 14484}
     - Class: 114
-      Script: {instanceID: 14784}
+      Script: {instanceID: 14786}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14800}
     - Class: 114
-      Script: {instanceID: 14820}
+      Script: {instanceID: 14822}
     - Class: 114
-      Script: {instanceID: 14828}
+      Script: {instanceID: 14830}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -631,17 +634,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14274}
     - Class: 114
-      Script: {instanceID: 14376}
+      Script: {instanceID: 14378}
     - Class: 114
-      Script: {instanceID: 14482}
+      Script: {instanceID: 14484}
     - Class: 114
-      Script: {instanceID: 14784}
+      Script: {instanceID: 14786}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14800}
     - Class: 114
-      Script: {instanceID: 14820}
+      Script: {instanceID: 14822}
     - Class: 114
-      Script: {instanceID: 14828}
+      Script: {instanceID: 14830}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1375,6 +1378,12 @@ ScriptsOnlyBuild:
     className: Cinemachine3rdPersonAim
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NetworkManager
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1550,4 +1559,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Stage3.unity
   - Assets/Scenes/Stage4.unity
   - Assets/Scenes/Ranking.unity
-  playerPath: C:/Users/ross2/Desktop/FInal.aab
+  playerPath: C:/Users/ross2/Desktop/Final.apk

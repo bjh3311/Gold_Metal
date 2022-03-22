@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "LMG900N6e5d62e2",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "LMG900N6e5d62e2",
+        "name": "com.Redtiger.Stone_Run",
+        "processId": 25196,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -19,6 +19,12 @@
             "name": "com.skt.prod.dialer",
             "processId": 30302,
             "exited": true
+        },
+        {
+            "deviceId": "LMG900N6e5d62e2",
+            "name": "com.Redtiger.Stone_Run",
+            "processId": 25196,
+            "exited": false
         }
     ],
     "m_Tags": {
